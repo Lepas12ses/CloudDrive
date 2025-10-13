@@ -1,6 +1,8 @@
 import { Sequelize } from "sequelize";
 import { config } from "dotenv";
 
+import models from "../models/index.js";
+
 config();
 
 class DatabaseService {
@@ -44,7 +46,7 @@ class DatabaseService {
 	}
 
 	private initModels() {
-		//...
+		models.forEach(initModel => initModel(this.sequelize));
 	}
 }
 
