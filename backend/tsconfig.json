@@ -5,7 +5,7 @@
 		"target": "es2020",
 		"sourceMap": false,
 		"outDir": "dist",
-		"types": ["cookie-parser", "cors", "jsonwebtoken"]
+		"types": ["cookie-parser", "cors", "jsonwebtoken", "bcrypt"]
 	},
 	"include": ["src/**/*"]
 }
