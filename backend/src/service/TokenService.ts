@@ -3,6 +3,13 @@ import Token from "../models/Token.js";
 import UserDto from "../dto/UserDto.js";
 
 class TokenService {
+	async refreshTokens(userDto: UserDto) {
+		const tokens = this.generateTokens({ ...userDto });
+		await this.saveToken(userDto.id, tokens.refreshToken);
+
+		return tokens;
+	}
+
 	generateTokens(payload: object) {
 		const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
 			expiresIn: "15m",

@@ -4,6 +4,7 @@ import UserDto from "../dto/UserDto.js";
 import ApiError from "../exceptions/ApiError.js";
 import User from "../models/User.js";
 import tokenService from "./TokenService.js";
+import Token from "../models/Token.js";
 
 class UserService {
 	async login(login: string, password: string) {
@@ -21,8 +22,7 @@ class UserService {
 		}
 
 		const userDto = new UserDto(user);
-		const tokens = tokenService.generateTokens({ ...userDto });
-		tokenService.saveToken(userDto.id, tokens.refreshToken);
+		const tokens = await tokenService.refreshTokens(userDto);
 
 		return tokens;
 	}
@@ -42,17 +42,26 @@ class UserService {
 		const hashedPassword = await bcrypt.hash(password, 3);
 		const user = await User.create({ login, email, password: hashedPassword });
 		const userDto = new UserDto(user);
-
-		const tokens = tokenService.generateTokens({ ...userDto });
-		await tokenService.saveToken(userDto.id, tokens.refreshToken);
+		const tokens = await tokenService.refreshTokens(userDto);
 
 		return tokens;
 	}
 	async logout(refreshToken: string) {
-		//...
+		await tokenService.destroyToken(refreshToken);
 	}
 	async refresh(refreshToken: string) {
-		//...
+		const tokenUser = tokenService.validateRefreshToken(refreshToken);
+
+		const storedToken = Token.findOne({ where: { refreshToken } });
+		const user = await User.findOne({ where: { id: tokenUser.id } });
+		if (!storedToken || !user) {
+			throw ApiError.Unauthorized();
+		}
+
+		const userDto = new UserDto(user);
+		const tokens = await tokenService.refreshTokens(userDto);
+
+		return tokens;
 	}
 }
 
