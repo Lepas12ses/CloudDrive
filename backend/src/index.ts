@@ -22,8 +22,6 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 app.use("/user", userRouter);
-
-// Error middleware
 app.use(errorMiddleware);
 
 async function start() {
