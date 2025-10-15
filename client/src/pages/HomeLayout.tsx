@@ -1,34 +1,30 @@
-import Button from "@/components/Button";
-import authService from "@/service/AuthService";
-import { useAppDispatch } from "@/store";
 import { type FC } from "react";
 
 import { Outlet } from "react-router-dom";
-import { actions as authActions } from "@/store/auth";
-import api from "@/http";
 import useProtected from "@/hooks/useProtected";
+import Menu from "@/components/Menu";
+import MenuLink from "@/components/Menu/MenuLink";
+import homeIcon from "@/assets/icons/home.svg";
+import profileIcon from "@/assets/icons/profile.svg";
 
 const HomeLayoutPage: FC = () => {
 	useProtected();
-	const dispatch = useAppDispatch();
-
-	async function logout() {
-		await authService.logout();
-		dispatch(authActions.setToken(null));
-	}
-
-	async function test() {
-		const response = await api.get<{ message: string }>("user/hello");
-		console.log(response.data.message);
-	}
 
 	return (
 		<>
-			<header>Какой то хэдер</header>
-			<Button onClick={logout}>Выйти</Button>
-			<Button onClick={test}>Тест</Button>
-
-			<Outlet />
+			<Menu>
+				<div className='flex flex-col gap-2 mt-4 pt-4 border-t-2 border-stone-300 border-dotted'>
+					<MenuLink to='/' expandedContent='Главная'>
+						<img src={homeIcon} alt='Home icon' />
+					</MenuLink>
+					<MenuLink to='/profile' expandedContent='Профиль'>
+						<img src={profileIcon} alt='Home icon' />
+					</MenuLink>
+				</div>
+			</Menu>
+			<main className='w-10 h-screen bg-blue-600 flex-1'>
+				<Outlet />
+			</main>
 		</>
 	);
 };

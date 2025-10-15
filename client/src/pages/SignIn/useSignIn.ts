@@ -2,7 +2,6 @@ import type { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 import type SignInData from "@/models/SignInData";
-import authService from "@/service/AuthService";
 import { useAppDispatch } from "@/store";
 import { actions as authActions } from "@/store/auth";
 import { client, signIn } from "@/http/query";
