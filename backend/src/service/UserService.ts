@@ -11,14 +11,12 @@ class UserService {
 		const user = await User.findOne({ where: { login } });
 
 		if (!user) {
-			throw ApiError.BadRequest(
-				`Пользователя с логином ${login} не существует`
-			);
+			throw ApiError.BadRequest("Неверный логин или пароль");
 		}
 
 		const isPasswordCorrect = await bcrypt.compare(password, user.password);
 		if (!isPasswordCorrect) {
-			throw ApiError.BadRequest(`Неверный пароль`);
+			throw ApiError.BadRequest("Неверный логин или пароль");
 		}
 
 		const userDto = new UserDto(user);

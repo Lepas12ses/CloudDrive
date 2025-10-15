@@ -3,9 +3,10 @@ import type { FC, HTMLProps } from "react";
 interface InputProps extends HTMLProps<HTMLInputElement> {
 	id: string;
 	label: string;
+	error?: string;
 }
 
-const Input: FC<InputProps> = ({ id, label, ...props }) => {
+const Input: FC<InputProps> = ({ id, label, error, ...props }) => {
 	return (
 		<div className='flex flex-col gap-1'>
 			<label htmlFor={id}>{label}</label>
@@ -15,6 +16,11 @@ const Input: FC<InputProps> = ({ id, label, ...props }) => {
 				id={id}
 				name={id}
 			/>
+			{error && (
+				<p className='bg-red-200 text-red-800 font-bold rounded-md py-1 px-2'>
+					{error}
+				</p>
+			)}
 		</div>
 	);
 };

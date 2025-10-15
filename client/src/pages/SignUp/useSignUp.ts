@@ -1,27 +1,26 @@
 import type { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
-import type SignInData from "@/models/SignInData";
-import authService from "@/service/AuthService";
 import { useAppDispatch } from "@/store";
 import { actions as authActions } from "@/store/auth";
-import { client, signIn } from "@/http/query";
-import type AuthResponse from "@/models/AuthResponse";
+import type SignUpData from "@/models/SignUpData";
 import type ApiErrorResponse from "@/models/ApiErrorResponse";
 import { useMutation } from "@tanstack/react-query";
+import { client, signUp } from "@/http/query";
+import type AuthResponse from "@/models/AuthResponse";
 
-export default function useSignIn() {
+export default function useSignUp() {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	const { error, isError, isPending, mutate } = useMutation<
 		AuthResponse,
 		ApiErrorResponse,
-		SignInData
+		SignUpData
 	>(
 		{
-			mutationKey: ["sign-in"],
-			mutationFn: signIn,
+			mutationKey: ["sign-up"],
+			mutationFn: signUp,
 			onSuccess: data => {
 				dispatch(authActions.setToken(data.accessToken));
 				navigate("/");
@@ -30,14 +29,15 @@ export default function useSignIn() {
 		client
 	);
 
-	async function onSignIn(e: FormEvent<HTMLFormElement>) {
+	function onSignUp(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
 		const fd = new FormData(e.target as HTMLFormElement);
 		const data = Object.fromEntries(fd.entries());
 
-		const dataToSend: SignInData = {
+		const dataToSend: SignUpData = {
 			login: data.login as string,
+			email: data.email as string,
 			password: data.password as string,
 		};
 
@@ -45,7 +45,7 @@ export default function useSignIn() {
 	}
 
 	return {
-		onSignIn,
+		onSignUp,
 		error,
 		isError,
 		isPending,
