@@ -5,15 +5,22 @@ import SignInPage from "./pages/SignIn";
 import SignUpPage from "./pages/SignUp";
 import { Provider } from "react-redux";
 import store from "./store";
+import RootLayoutPage from "./pages/RootLayout";
 
 const router = createBrowserRouter([
-	{ path: "/", element: <HomeLayoutPage />, children: [] },
 	{
-		path: "/auth",
-		element: <AuthLayoutPage />,
+		path: "/",
+		element: <RootLayoutPage />,
 		children: [
-			{ path: "sign-in/", element: <SignInPage /> },
-			{ path: "sign-up/", element: <SignUpPage /> },
+			{ index: true, element: <HomeLayoutPage /> },
+			{
+				path: "/auth",
+				element: <AuthLayoutPage />,
+				children: [
+					{ path: "sign-in/", element: <SignInPage /> },
+					{ path: "sign-up/", element: <SignUpPage /> },
+				],
+			},
 		],
 	},
 ]);

@@ -1,4 +1,6 @@
-import api from "../http";
+import axios from "axios";
+
+import api, { BASE_URL } from "../http";
 import type SignInData from "../models/SignInData";
 import type SignUpData from "../models/SignUpData";
 import type AuthResponse from "../models/AuthResponse";
@@ -14,6 +16,12 @@ class AuthService {
 	}
 	async logout() {
 		await api.post("user/logout");
+	}
+	async checkAuth() {
+		const result = await axios.get<AuthResponse>(`${BASE_URL}/user/refresh`, {
+			withCredentials: true,
+		});
+		return result.data;
 	}
 }
 
