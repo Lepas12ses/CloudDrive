@@ -7,34 +7,4 @@ const api = axios.create({
 	withCredentials: true,
 });
 
-// api.interceptors.request.use(req => {
-// 	req.headers.Authorization = `Bearer ${localStorage.getItem(
-// 		LOCAL_STORAGE_ACCESS_TOKEN
-// 	)}`;
-
-// 	return req;
-// });
-
-// api.interceptors.response.use(
-// 	config => {
-// 		return config;
-// 	},
-// 	async (err: AxiosError) => {
-// 		const originalRequest = err.config;
-
-// 		if (err.response?.status === 401) {
-// 			const response = await axios.get<AuthResponse>(`${BASE_URL}/refresh`, {
-// 				withCredentials: true,
-// 			});
-// 			localStorage.setItem(
-// 				LOCAL_STORAGE_ACCESS_TOKEN,
-// 				response.data.accessToken
-// 			);
-// 			return api.request(originalRequest as AxiosRequestConfig);
-// 		}
-
-// 		throw err;
-// 	}
-// );
-
 export default api;

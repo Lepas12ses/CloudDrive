@@ -9,8 +9,21 @@ const userRouter = Router();
 userRouter.post("/login", userController.login);
 userRouter.post(
 	"/register",
-	body("email").isEmail(),
-	body("password").isLength({ min: 3, max: 32 }),
+	body(
+		"login",
+		"Длина логина должна быть больше 1 и меньше 32 символов"
+	).isLength({
+		min: 1,
+		max: 32,
+	}),
+	body("email", "Неверный email").isEmail(),
+	body(
+		"password",
+		"Длина пароля должна быть больше 3 и меньше 32 символов"
+	).isLength({
+		min: 3,
+		max: 32,
+	}),
 	userController.register
 );
 userRouter.post("/logout", userController.logout);

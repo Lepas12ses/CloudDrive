@@ -25,7 +25,11 @@ class UserController {
 			const validation = validationResult(req);
 
 			if (!validation.isEmpty()) {
-				next(ApiError.BadRequest("Ошибка валидации", validation.array()));
+				console.log(validation.array()[0]);
+
+				return next(
+					ApiError.BadRequest("Ошибка валидации", validation.array())
+				);
 			}
 
 			const { login, email, password } = req.body;

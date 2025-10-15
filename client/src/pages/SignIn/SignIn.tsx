@@ -1,25 +1,42 @@
 import { type FC } from "react";
-import { Link } from "react-router-dom";
 
 import Form from "@/components/Form";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import useSignIn from "./useSignIn";
+import type ValidationError from "@/models/ValidationError";
+import RouterLink from "@/components/RouterLink";
 
 const SignInPage: FC = () => {
-	const { onSignIn } = useSignIn();
+	const { onSignIn, error, isError, isPending } = useSignIn();
+
+	let formError: string | null = null;
+	let fieldErrors: ValidationError[] | null = null;
+
+	if (isError && error) {
+		if (error.errors) {
+			fieldErrors = error.errors;
+		} else {
+			formError = error.message;
+		}
+	}
+
+	const loginError = fieldErrors?.find(err => err.path === "login")?.msg;
+	const passwordError = fieldErrors?.find(err => err.path === "password")?.msg;
 
 	return (
-		<Form onSubmit={onSignIn} title='Авторизация'>
-			<Input id='login' label='Логин' />
-			<Input id='password' type='password' label='Пароль' />
-			<Button>Войти</Button>
-			<Link
-				className='m-auto w-fit text-blue-500 hover:underline'
-				to='/auth/sign-up'
-			>
+		<Form onSubmit={onSignIn} title='Авторизация' error={formError}>
+			<Input id='login' label='Логин' error={loginError} />
+			<Input
+				id='password'
+				type='password'
+				label='Пароль'
+				error={passwordError}
+			/>
+			<Button disabled={isPending}>Войти</Button>
+			<RouterLink className='m-auto w-fit ' to='/auth/sign-up'>
 				У меня нет аккаунта
-			</Link>
+			</RouterLink>
 		</Form>
 	);
 };

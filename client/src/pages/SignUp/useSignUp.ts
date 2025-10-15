@@ -1,16 +1,35 @@
 import type { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
-import authService from "@/service/AuthService";
 import { useAppDispatch } from "@/store";
 import { actions as authActions } from "@/store/auth";
 import type SignUpData from "@/models/SignUpData";
+import type ApiErrorResponse from "@/models/ApiErrorResponse";
+import { useMutation } from "@tanstack/react-query";
+import { client, signUp } from "@/http/query";
+import type AuthResponse from "@/models/AuthResponse";
 
 export default function useSignUp() {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	async function onSignUp(e: FormEvent<HTMLFormElement>) {
+	const { error, isError, isPending, mutate } = useMutation<
+		AuthResponse,
+		ApiErrorResponse,
+		SignUpData
+	>(
+		{
+			mutationKey: ["sign-up"],
+			mutationFn: signUp,
+			onSuccess: data => {
+				dispatch(authActions.setToken(data.accessToken));
+				navigate("/");
+			},
+		},
+		client
+	);
+
+	function onSignUp(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
 		const fd = new FormData(e.target as HTMLFormElement);
@@ -22,12 +41,13 @@ export default function useSignUp() {
 			password: data.password as string,
 		};
 
-		const result = await authService.register(dataToSend);
-		dispatch(authActions.setToken(result.accessToken));
-		navigate("/");
+		mutate(dataToSend);
 	}
 
 	return {
 		onSignUp,
+		error,
+		isError,
+		isPending,
 	};
 }
