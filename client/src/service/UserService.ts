@@ -1,25 +1,19 @@
-import axios from "axios";
-
 import api from "@/http";
-import type ApiErrorResponse from "@/models/ApiErrorResponse";
 import type User from "@/models/User";
+import wrapResponse from "./util/wrapResponse";
 
 class UserService {
 	async profile() {
-		try {
+		return await wrapResponse(async () => {
 			const response = await api.get<User>("user/me");
 			return response.data;
-		} catch (err) {
-			if (axios.isAxiosError<ApiErrorResponse>(err)) {
-				const errResponse = err.response?.data;
-
-				if (errResponse) {
-					throw errResponse;
-				}
-			}
-
-			throw { message: "Что-то пошло не так" };
-		}
+		});
+	}
+	async files() {
+		return await wrapResponse(async () => {
+			const response = await api.get<File[]>("files");
+			return response.data;
+		});
 	}
 }
 

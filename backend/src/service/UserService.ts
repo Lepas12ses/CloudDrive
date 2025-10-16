@@ -62,7 +62,6 @@ class UserService {
 
 		return tokens;
 	}
-
 	async profile(userId: number) {
 		const user = await User.findByPk(userId);
 
