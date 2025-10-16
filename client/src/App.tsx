@@ -7,7 +7,7 @@ import store from "./store";
 import RootLayoutPage from "./pages/RootLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProfilePage from "./pages/Profile";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/Home";
 
 const router = createBrowserRouter([
 	{

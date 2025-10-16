@@ -3,6 +3,7 @@ import { body } from "express-validator";
 
 import userController from "../controller/UserController.js";
 import authMiddleware from "../middleware/AuthMiddleware.js";
+import { UPLOADS_PATH } from "../util/constants.js";
 
 const userRouter = Router();
 
@@ -29,8 +30,8 @@ userRouter.post(
 userRouter.post("/logout", userController.logout);
 userRouter.get("/refresh", userController.refresh);
 userRouter.get("/me", authMiddleware, userController.me);
-userRouter.get("/hello", authMiddleware, (req, res) => {
-	res.json({ message: `Hello user with id ${req.headers.userId}` });
+userRouter.get("/hello", (req, res) => {
+	res.json({ message: "Hello" });
 });
 
 export default userRouter;

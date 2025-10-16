@@ -1,7 +1,9 @@
+import path from "path";
 import FileDto from "../dto/FileDto.js";
 import ApiError from "../exceptions/ApiError.js";
 import File from "../models/File.js";
 import User from "../models/User.js";
+import { UPLOADS_PATH } from "../util/constants.js";
 
 class FileService {
 	async saveFile(userId: number, file: Express.Multer.File) {
@@ -23,6 +25,35 @@ class FileService {
 		});
 
 		return new FileDto(savedFile);
+	}
+
+	async downloadFile(fileId: number, userId: number) {
+		const user = await User.findByPk(userId);
+
+		if (!user) {
+			throw ApiError.Unauthorized();
+		}
+
+		const file = await File.findOne({ where: { id: fileId, userId: user.id } });
+
+		const originalName = file.originalName;
+		const filePath = path.join(UPLOADS_PATH, file.name);
+
+		return {
+			originalName,
+			filePath,
+		};
+	}
+	async getFiles(userId: number) {
+		const user = await User.findByPk(userId);
+
+		if (!user) {
+			throw ApiError.Unauthorized();
+		}
+
+		const files = await File.findAll({ where: { userId: user.id } });
+
+		return files.map(file => new FileDto(file));
 	}
 }
 
