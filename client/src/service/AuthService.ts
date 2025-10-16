@@ -4,15 +4,40 @@ import api, { BASE_URL } from "../http";
 import type SignInData from "../models/SignInData";
 import type SignUpData from "../models/SignUpData";
 import type AuthResponse from "../models/AuthResponse";
+import type ApiErrorResponse from "@/models/ApiErrorResponse";
 
 class AuthService {
 	async register(data: SignUpData) {
-		const response = await api.post<AuthResponse>("user/register", data);
-		return response.data;
+		try {
+			const response = await api.post<AuthResponse>("user/register", data);
+			return response.data;
+		} catch (err) {
+			if (axios.isAxiosError<ApiErrorResponse>(err)) {
+				const errResponse = err.response?.data;
+
+				if (errResponse) {
+					throw errResponse;
+				}
+			}
+
+			throw { message: "Что-то пошло не так" };
+		}
 	}
 	async login(data: SignInData) {
-		const response = await api.post<AuthResponse>("user/login", data);
-		return response.data;
+		try {
+			const response = await api.post<AuthResponse>("user/login", data);
+			return response.data;
+		} catch (err) {
+			if (axios.isAxiosError<ApiErrorResponse>(err)) {
+				const errResponse = err.response?.data;
+
+				if (errResponse) {
+					throw errResponse;
+				}
+			}
+
+			throw { message: "Что-то пошло не так" };
+		}
 	}
 	async logout() {
 		await api.post("user/logout");

@@ -6,7 +6,6 @@ import {
 	type PropsWithChildren,
 } from "react";
 
-import logoutIcon from "@/assets/icons/logout.svg";
 import menuIcon from "@/assets/icons/menu.svg";
 import MenuButton from "./MenuButton";
 
@@ -48,11 +47,6 @@ const Menu: FC<PropsWithChildren> = ({ children }) => {
 					<img src={menuIcon} alt='Home icon' />
 				</MenuButton>
 				{children}
-				<div className='mt-auto flex flex-col'>
-					<MenuButton expandedContent='Выйти'>
-						<img src={logoutIcon} alt='Home icon' />
-					</MenuButton>
-				</div>
 			</menu>
 		</MenuContext.Provider>
 	);

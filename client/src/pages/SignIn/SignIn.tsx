@@ -34,7 +34,7 @@ const SignInPage: FC = () => {
 				error={passwordError}
 			/>
 			<Button disabled={isPending}>Войти</Button>
-			<RouterLink className='m-auto w-fit ' to='/auth/sign-up'>
+			<RouterLink className='m-auto w-fit ' to='/sign-up'>
 				У меня нет аккаунта
 			</RouterLink>
 		</Form>

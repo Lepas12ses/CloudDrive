@@ -45,7 +45,7 @@ const SignUpPage: FC = () => {
 				error={passwordRepeatError}
 			/>
 			<Button disabled={isPending}>Зарегистрироваться</Button>
-			<RouterLink className='m-auto w-fit ' to='/auth/sign-in'>
+			<RouterLink className='m-auto w-fit ' to='/sign-in'>
 				У меня нет аккаунта
 			</RouterLink>
 		</Form>
