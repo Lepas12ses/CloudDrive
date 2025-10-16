@@ -51,7 +51,7 @@ class UserService {
 	async refresh(refreshToken: string) {
 		const tokenUser = tokenService.validateRefreshToken(refreshToken);
 
-		const storedToken = Token.findOne({ where: { refreshToken } });
+		const storedToken = await Token.findOne({ where: { refreshToken } });
 		const user = await User.findOne({ where: { id: tokenUser.id } });
 		if (!storedToken || !user) {
 			throw ApiError.Unauthorized();
