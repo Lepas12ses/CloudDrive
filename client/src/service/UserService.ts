@@ -1,6 +1,7 @@
 import api from "@/http";
 import type User from "@/models/User";
 import wrapResponse from "./util/wrapResponse";
+import type UserFile from "@/models/UserFile";
 
 class UserService {
 	async profile() {
@@ -11,7 +12,7 @@ class UserService {
 	}
 	async files() {
 		return await wrapResponse(async () => {
-			const response = await api.get<File[]>("files");
+			const response = await api.get<UserFile[]>("files");
 			return response.data;
 		});
 	}

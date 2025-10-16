@@ -1,4 +1,4 @@
-export default interface File {
+export default interface UserFile {
 	id: number;
 	name: string;
 	size: number;

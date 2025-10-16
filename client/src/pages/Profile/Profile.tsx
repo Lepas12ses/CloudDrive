@@ -32,8 +32,6 @@ const ProfilePage: FC = () => {
 			</div>
 		);
 	}
-
-	return <></>;
 };
 
 export default ProfilePage;
