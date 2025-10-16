@@ -6,7 +6,7 @@ const HomeLayoutPage: FC = () => {
 	return (
 		<>
 			<HomeMenu />
-			<main className='ml-20 p-3 flex-1'>
+			<main className=' ml-20 p-3 min-h-screen flex-1'>
 				<Outlet />
 			</main>
 		</>

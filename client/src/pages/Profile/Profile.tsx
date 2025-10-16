@@ -1,14 +1,27 @@
 import { type FC } from "react";
 import useProfile from "./useProfile";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import ErrorDisplay from "@/components/ErrorDisplay";
 
 const ProfilePage: FC = () => {
 	const { data, isError, error, isPending } = useProfile();
 
-	let content: React.ReactElement | null = null;
+	if (isError) {
+		return (
+			<ErrorDisplay
+				title='Возникла ошибка'
+				message={error?.message || "Что-то пошло не так"}
+				className='m-auto'
+			/>
+		);
+	}
+
+	if (isPending) {
+		return <LoadingSpinner className='m-auto w-20' />;
+	}
 
 	if (data) {
-		content = (
+		return (
 			<div>
 				<p>
 					Логин: <span className='font-bold'>{data.login}</span>
@@ -20,7 +33,7 @@ const ProfilePage: FC = () => {
 		);
 	}
 
-	return <LoadingSpinner />;
+	return <></>;
 };
 
 export default ProfilePage;
