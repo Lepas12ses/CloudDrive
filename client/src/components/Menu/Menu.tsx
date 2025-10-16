@@ -53,20 +53,3 @@ const Menu: FC<PropsWithChildren> = ({ children }) => {
 };
 
 export default Menu;
-
-{
-	/* <div className='mt-4 pt-4 border-t-2 border-dotted border-stone-300 flex flex-col gap-2'>
-	<NavLink
-		to='/'
-		className='bg-stone-50 shadow-md w-fit p-3 mx-auto rounded-lg border-stone-300 border hover:bg-stone-200'
-	>
-		<img src={homeIcon} alt='Home icon' />
-	</NavLink>
-	<NavLink
-		to='/profile'
-		className='bg-stone-50 shadow-md w-fit p-3 mx-auto rounded-lg border-stone-300 border hover:bg-stone-200'
-	>
-		<img src={profileIcon} alt='Person icon' />
-	</NavLink>
-</div>; */
-}

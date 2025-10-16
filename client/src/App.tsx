@@ -1,12 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeLayoutPage from "./pages/HomeLayout";
-import AuthLayoutPage from "./pages/AuthLayout";
 import SignInPage from "./pages/SignIn";
 import SignUpPage from "./pages/SignUp";
 import { Provider } from "react-redux";
 import store from "./store";
 import RootLayoutPage from "./pages/RootLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProfilePage from "./pages/Profile";
+import HomePage from "./pages/HomePage";
 
 const router = createBrowserRouter([
 	{
@@ -14,21 +15,19 @@ const router = createBrowserRouter([
 		element: <RootLayoutPage />,
 		children: [
 			{
-				index: true,
+				path: "/",
 				element: (
 					<ProtectedRoute>
 						<HomeLayoutPage />
 					</ProtectedRoute>
 				),
-			},
-			{
-				path: "/",
-				element: <AuthLayoutPage />,
 				children: [
-					{ path: "sign-in/", element: <SignInPage /> },
-					{ path: "sign-up/", element: <SignUpPage /> },
+					{ index: true, element: <HomePage /> },
+					{ path: "profile/", element: <ProfilePage /> },
 				],
 			},
+			{ path: "sign-in/", element: <SignInPage /> },
+			{ path: "sign-up/", element: <SignUpPage /> },
 		],
 	},
 ]);

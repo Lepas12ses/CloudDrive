@@ -25,19 +25,21 @@ const SignInPage: FC = () => {
 	const passwordError = fieldErrors?.find(err => err.path === "password")?.msg;
 
 	return (
-		<Form onSubmit={onSignIn} title='Авторизация' error={formError}>
-			<Input id='login' label='Логин' error={loginError} />
-			<Input
-				id='password'
-				type='password'
-				label='Пароль'
-				error={passwordError}
-			/>
-			<Button disabled={isPending}>Войти</Button>
-			<RouterLink className='m-auto w-fit ' to='/sign-up'>
-				У меня нет аккаунта
-			</RouterLink>
-		</Form>
+		<div className='min-h-screen flex items-center justify-center'>
+			<Form onSubmit={onSignIn} title='Авторизация' error={formError}>
+				<Input id='login' label='Логин' error={loginError} />
+				<Input
+					id='password'
+					type='password'
+					label='Пароль'
+					error={passwordError}
+				/>
+				<Button disabled={isPending}>Войти</Button>
+				<RouterLink className='m-auto w-fit ' to='/sign-up'>
+					У меня нет аккаунта
+				</RouterLink>
+			</Form>
+		</div>
 	);
 };
 

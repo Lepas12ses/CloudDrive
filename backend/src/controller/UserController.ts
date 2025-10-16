@@ -75,6 +75,17 @@ class UserController {
 			next(err);
 		}
 	};
+	me: RequestHandler = async (req, res, next) => {
+		try {
+			const userId = parseInt(req.headers.userId as string);
+
+			const userProfile = await userService.profile(userId);
+
+			res.json(userProfile);
+		} catch (err) {
+			next(err);
+		}
+	};
 }
 
 const userController = new UserController();

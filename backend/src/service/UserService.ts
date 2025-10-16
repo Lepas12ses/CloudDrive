@@ -5,6 +5,7 @@ import ApiError from "../exceptions/ApiError.js";
 import User from "../models/User.js";
 import tokenService from "./TokenService.js";
 import Token from "../models/Token.js";
+import UserProfileDto from "../dto/UserProfileDto.js";
 
 class UserService {
 	async login(login: string, password: string) {
@@ -60,6 +61,16 @@ class UserService {
 		const tokens = await tokenService.refreshTokens(userDto);
 
 		return tokens;
+	}
+
+	async profile(userId: number) {
+		const user = await User.findByPk(userId);
+
+		if (!user) {
+			throw ApiError.Unauthorized();
+		}
+
+		return new UserProfileDto(user);
 	}
 }
 

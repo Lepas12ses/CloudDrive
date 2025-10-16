@@ -29,26 +29,28 @@ const SignUpPage: FC = () => {
 	)?.msg;
 
 	return (
-		<Form onSubmit={onSignUp} title='Регистрация' error={formError}>
-			<Input id='login' label='Логин' error={loginError} />
-			<Input id='email' label='Почта' error={emailError} />
-			<Input
-				id='password'
-				type='password'
-				label='Пароль'
-				error={passwordError}
-			/>
-			<Input
-				id='password-repeat'
-				type='password'
-				label='Повторите пароль'
-				error={passwordRepeatError}
-			/>
-			<Button disabled={isPending}>Зарегистрироваться</Button>
-			<RouterLink className='m-auto w-fit ' to='/sign-in'>
-				У меня нет аккаунта
-			</RouterLink>
-		</Form>
+		<div className='min-h-screen flex items-center justify-center'>
+			<Form onSubmit={onSignUp} title='Регистрация' error={formError}>
+				<Input id='login' label='Логин' error={loginError} />
+				<Input id='email' label='Почта' error={emailError} />
+				<Input
+					id='password'
+					type='password'
+					label='Пароль'
+					error={passwordError}
+				/>
+				<Input
+					id='password-repeat'
+					type='password'
+					label='Повторите пароль'
+					error={passwordRepeatError}
+				/>
+				<Button disabled={isPending}>Зарегистрироваться</Button>
+				<RouterLink className='m-auto w-fit ' to='/sign-in'>
+					У меня нет аккаунта
+				</RouterLink>
+			</Form>
+		</div>
 	);
 };
 

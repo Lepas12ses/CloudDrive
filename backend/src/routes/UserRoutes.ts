@@ -28,6 +28,7 @@ userRouter.post(
 );
 userRouter.post("/logout", userController.logout);
 userRouter.get("/refresh", userController.refresh);
+userRouter.get("/me", authMiddleware, userController.me);
 userRouter.get("/hello", authMiddleware, (req, res) => {
 	res.json({ message: `Hello user with id ${req.headers.userId}` });
 });
