@@ -41,7 +41,7 @@ class FileController {
 			let fileId: number;
 			if (typeof fileIdParam === "string") fileId = parseInt(fileIdParam);
 			else {
-				next(ApiError.BadRequest("Неверный идентификатор файла"));
+				return next(ApiError.BadRequest("Неверный идентификатор файла"));
 			}
 
 			await fileService.removeFile(fileId, userId);
@@ -53,9 +53,22 @@ class FileController {
 	};
 	getFiles: RequestHandler = async (req, res, next) => {
 		try {
+			const { page, limit, search } = req.query;
+
+			if (
+				typeof page !== "string" ||
+				typeof limit !== "string" ||
+				typeof search !== "string"
+			) {
+				return next(ApiError.BadRequest("Неверные параметры поиска"));
+			}
 			const userId = parseInt(req.headers.userId as string);
 
-			const files = await fileService.getFiles(userId);
+			const files = await fileService.getFiles(userId, {
+				page: parseInt(page),
+				limit: parseInt(limit),
+				search,
+			});
 
 			res.json(files);
 		} catch (err) {

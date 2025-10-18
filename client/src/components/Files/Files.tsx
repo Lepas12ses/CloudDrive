@@ -1,29 +1,30 @@
 import type { FC } from "react";
 
-import useFiles from "./useFiles";
+import useFiles from "./hooks";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import ErrorDisplay from "@/components/ErrorDisplay";
 import FileCard from "@/components/FileCard";
 import TopFilesBar from "@/components/TopFilesBar";
 
 const Files: FC = () => {
-	const { data, isError, error, isPending, onDownloadFile, onDeleteFile } =
-		useFiles();
-	if (isError) {
+	const { fetching, deletion, downloading } = useFiles();
+
+	if (fetching.isError) {
 		return (
 			<ErrorDisplay
 				title='Возникла ошибка'
-				message={error?.message || "Что-то пошло не так"}
+				message={fetching.error?.message || "Что-то пошло не так"}
 				className='m-auto'
 			/>
 		);
 	}
 
-	if (isPending) {
+	if (fetching.isPending) {
 		return <LoadingSpinner className='m-auto w-20' />;
 	}
 
-	if (data) {
+	// TODO: Вынести сетку в отдельный компонент
+	if (fetching.data) {
 		return (
 			<div
 				className={`mx-auto w-fit flex flex-col
@@ -34,12 +35,12 @@ const Files: FC = () => {
 					className={`w-fit gap-4 grid grid-cols-1 
 					sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5`}
 				>
-					{data.map(file => (
+					{fetching.data.map(file => (
 						<li key={file.id}>
 							<FileCard
 								file={file}
-								onDelete={() => onDeleteFile(file)}
-								onDownload={() => onDownloadFile(file)}
+								onDelete={() => deletion.proceed(file)}
+								onDownload={() => downloading.proceed(file)}
 							/>
 						</li>
 					))}

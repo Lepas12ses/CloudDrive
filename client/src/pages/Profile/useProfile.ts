@@ -6,7 +6,7 @@ export default function useProfile() {
 	const { data, isError, error, isPending } = useQuery(
 		{
 			queryKey: ["profile"],
-			queryFn: userService.profile,
+			queryFn: ({ signal }) => userService.profile(signal),
 		},
 		queryClient
 	);

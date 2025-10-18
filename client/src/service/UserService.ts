@@ -2,17 +2,25 @@ import api from "@/http";
 import type User from "@/models/User";
 import wrapResponse from "./util/wrapResponse";
 import type UserFile from "@/models/UserFile";
+import { type FilesSearchParams } from "@/models/FilesSearchParams";
+import type { GenericAbortSignal } from "axios";
 
 class UserService {
-	async profile() {
+	async profile(signal?: GenericAbortSignal) {
 		return await wrapResponse(async () => {
-			const response = await api.get<User>("user/me");
+			const response = await api.get<User>("user/me", { signal });
 			return response.data;
 		});
 	}
-	async files() {
+	async files(
+		params: FilesSearchParams = { page: "1", limit: "10", search: "" },
+		signal?: GenericAbortSignal
+	) {
 		return await wrapResponse(async () => {
-			const response = await api.get<UserFile[]>("files");
+			const response = await api.get<UserFile[]>("files", {
+				params,
+				signal,
+			});
 			return response.data;
 		});
 	}

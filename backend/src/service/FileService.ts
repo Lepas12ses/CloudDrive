@@ -6,6 +6,7 @@ import ApiError from "../exceptions/ApiError.js";
 import File from "../models/File.js";
 import User from "../models/User.js";
 import { UPLOADS_PATH } from "../util/constants.js";
+import { Op } from "sequelize";
 
 class FileService {
 	async saveFile(userId: number, file: Express.Multer.File) {
@@ -72,14 +73,31 @@ class FileService {
 			filePath,
 		};
 	}
-	async getFiles(userId: number) {
+	async getFiles(
+		userId: number,
+		params: {
+			page: number;
+			limit: number;
+			search: string;
+		}
+	) {
+		const { page, limit, search } = params;
 		const user = await User.findByPk(userId);
 
 		if (!user) {
 			throw ApiError.Unauthorized();
 		}
 
-		const files = await File.findAll({ where: { userId: user.id } });
+		const files = await File.findAll({
+			where: {
+				userId: user.id,
+				originalName: {
+					[Op.substring]: search,
+				},
+			},
+			offset: (page - 1) * limit,
+			limit,
+		});
 
 		return files.map(file => new FileDto(file));
 	}
