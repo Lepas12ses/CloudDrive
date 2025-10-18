@@ -6,21 +6,21 @@ class FileController {
 	upload: RequestHandler = async (req, res, next) => {
 		try {
 			const userId = parseInt(req.headers.userId as string);
-			const file = req.file;
+			const files = req.files as Express.Multer.File[];
 
-			const savedFile = await fileService.saveFile(userId, file);
+			const savedFiles = await fileService.saveFiles(userId, files);
 
-			res.json(savedFile);
+			res.json(savedFiles);
 		} catch (err) {
 			next(err);
 		}
 	};
-	download: RequestHandler = async (req, res, next) => {
+	downloadFile: RequestHandler = async (req, res, next) => {
 		try {
 			const userId = parseInt(req.headers.userId as string);
 
 			const fileIdParam = req.query.fileId;
-			let fileId;
+			let fileId: number;
 			if (typeof fileIdParam === "string") fileId = parseInt(fileIdParam);
 			else {
 				next(ApiError.BadRequest("Неверный идентификатор файла"));
@@ -29,6 +29,24 @@ class FileController {
 			const file = await fileService.downloadFile(fileId, userId);
 
 			res.download(file.filePath, file.originalName);
+		} catch (err) {
+			next(err);
+		}
+	};
+	deleteFile: RequestHandler = async (req, res, next) => {
+		try {
+			const userId = parseInt(req.headers.userId as string);
+
+			const fileIdParam = req.query.fileId;
+			let fileId: number;
+			if (typeof fileIdParam === "string") fileId = parseInt(fileIdParam);
+			else {
+				next(ApiError.BadRequest("Неверный идентификатор файла"));
+			}
+
+			await fileService.removeFile(fileId, userId);
+
+			res.status(200).end();
 		} catch (err) {
 			next(err);
 		}

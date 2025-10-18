@@ -1,9 +1,10 @@
 import type { FC } from "react";
 
 import useFiles from "./useFiles";
-import LoadingSpinner from "../LoadingSpinner";
-import ErrorDisplay from "../ErrorDisplay";
-import FileCard from "../FileCard";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import ErrorDisplay from "@/components/ErrorDisplay";
+import FileCard from "@/components/FileCard";
+import TopFilesBar from "@/components/TopFilesBar";
 
 const Files: FC = () => {
 	const { data, isError, error, isPending, onDownloadFile, onDeleteFile } =
@@ -24,21 +25,26 @@ const Files: FC = () => {
 
 	if (data) {
 		return (
-			<ul
-				className={`w-fit gap-4 grid grid-cols-1 
-					sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5
-					mx-auto`}
+			<div
+				className={`mx-auto w-fit flex flex-col
+			gap-3`}
 			>
-				{data.map(file => (
-					<li key={file.id}>
-						<FileCard
-							file={file}
-							onDelete={() => onDeleteFile(file)}
-							onDownload={() => onDownloadFile(file)}
-						/>
-					</li>
-				))}
-			</ul>
+				<TopFilesBar />
+				<ul
+					className={`w-fit gap-4 grid grid-cols-1 
+					sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5`}
+				>
+					{data.map(file => (
+						<li key={file.id}>
+							<FileCard
+								file={file}
+								onDelete={() => onDeleteFile(file)}
+								onDownload={() => onDownloadFile(file)}
+							/>
+						</li>
+					))}
+				</ul>
+			</div>
 		);
 	}
 };

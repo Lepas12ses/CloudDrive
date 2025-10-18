@@ -41,7 +41,7 @@ const FileCard: FC<FileCardProps> = ({ file, onDownload, onDelete }) => {
 				<button onClick={onDownload}>
 					<img src={downloadIcon} alt='Скачать' />
 				</button>
-				<button>
+				<button onClick={onDelete}>
 					<img src={trashIcon} alt='Удалить' />
 				</button>
 			</div>

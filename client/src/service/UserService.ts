@@ -16,6 +16,11 @@ class UserService {
 			return response.data;
 		});
 	}
+	async upload(fd: FormData) {
+		return await wrapResponse(async () => {
+			await api.postForm("files/upload", fd);
+		});
+	}
 	async downloadFile(fileId: number) {
 		return await wrapResponse(async () => {
 			const response = await api.get<Blob>("files/download", {
@@ -26,6 +31,15 @@ class UserService {
 			});
 
 			return response.data;
+		});
+	}
+	async deleteFile(fileId: number) {
+		return await wrapResponse(async () => {
+			await api.delete<void>("files/delete", {
+				params: {
+					fileId,
+				},
+			});
 		});
 	}
 }

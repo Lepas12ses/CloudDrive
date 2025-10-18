@@ -28,19 +28,22 @@ export default function useFiles() {
 		queryClient
 	);
 
-	// const { isPending: deletePending, mutate: deleteFile } = useMutation(
-	// 	{
-
-	// 	},
-	// 	queryClient
-	// );
+	const { isPending: deletePending, mutate: deleteFile } = useMutation(
+		{
+			mutationFn: (file: UserFile) => userService.deleteFile(file.id),
+			onSuccess() {
+				queryClient.invalidateQueries({ queryKey: ["files"] });
+			},
+		},
+		queryClient
+	);
 
 	function onDownloadFile(file: UserFile) {
 		downloadFile(file);
 	}
 
 	function onDeleteFile(file: UserFile) {
-		//...
+		deleteFile(file);
 	}
 
 	return {
