@@ -46,9 +46,9 @@ const textExtensions = new Set(["txt", "md", "rtf", "csv", "doc", "docx"]);
 export default function getFileType(fileName: string): FileType {
 	const extension = fileName.split(".")[1];
 
-	if (extension in imageExtensions) return "image";
-	if (extension in codeExtensions) return "code";
-	if (extension in textExtensions) return "text";
+	if (imageExtensions.has(extension)) return "image";
+	if (codeExtensions.has(extension)) return "code";
+	if (textExtensions.has(extension)) return "text";
 
 	return "unknown";
 }

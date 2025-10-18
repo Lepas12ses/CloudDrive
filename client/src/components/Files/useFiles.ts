@@ -1,7 +1,7 @@
 import { queryClient } from "@/http";
 import type UserFile from "@/models/UserFile";
 import userService from "@/service/UserService";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export default function useFiles() {
 	const { data, isError, error, isPending } = useQuery(
@@ -12,16 +12,35 @@ export default function useFiles() {
 		queryClient
 	);
 
-	async function download(file: UserFile) {
-		const data = await userService.downloadFile(file.id);
-		const url = window.URL.createObjectURL(data);
-		const link = document.createElement("a");
+	const { isPending: downloadPending, mutate: downloadFile } = useMutation(
+		{
+			mutationFn: (file: UserFile) => userService.downloadFile(file.id),
+			onSuccess(data, file) {
+				const url = window.URL.createObjectURL(data);
+				const link = document.createElement("a");
+				link.setAttribute("download", file.name);
+				link.href = url;
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link);
+			},
+		},
+		queryClient
+	);
 
-		link.href = url;
-		link.setAttribute("download", file.name);
-		document.body.appendChild(link);
-		link.click();
-		document.body.removeChild(link);
+	// const { isPending: deletePending, mutate: deleteFile } = useMutation(
+	// 	{
+
+	// 	},
+	// 	queryClient
+	// );
+
+	function onDownloadFile(file: UserFile) {
+		downloadFile(file);
+	}
+
+	function onDeleteFile(file: UserFile) {
+		//...
 	}
 
 	return {
@@ -29,6 +48,7 @@ export default function useFiles() {
 		isError,
 		error,
 		isPending,
-		download,
+		onDownloadFile,
+		onDeleteFile,
 	};
 }

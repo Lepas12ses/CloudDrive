@@ -1,12 +1,13 @@
 import type { FC } from "react";
+
 import useFiles from "./useFiles";
 import LoadingSpinner from "../LoadingSpinner";
 import ErrorDisplay from "../ErrorDisplay";
 import FileCard from "../FileCard";
 
 const Files: FC = () => {
-	const { data, isError, error, isPending } = useFiles();
-
+	const { data, isError, error, isPending, onDownloadFile, onDeleteFile } =
+		useFiles();
 	if (isError) {
 		return (
 			<ErrorDisplay
@@ -30,7 +31,11 @@ const Files: FC = () => {
 			>
 				{data.map(file => (
 					<li key={file.id}>
-						<FileCard file={file} />
+						<FileCard
+							file={file}
+							onDelete={() => onDeleteFile(file)}
+							onDownload={() => onDownloadFile(file)}
+						/>
 					</li>
 				))}
 			</ul>
