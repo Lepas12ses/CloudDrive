@@ -7,6 +7,8 @@ export default class File extends Model {
 	declare name: string;
 	declare size: number;
 	declare userId: number;
+	declare createdAt?: string;
+	declare updatedAt?: string;
 }
 
 export function init(sequelize: Sequelize) {

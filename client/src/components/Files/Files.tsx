@@ -2,7 +2,7 @@ import type { FC } from "react";
 import useFiles from "./useFiles";
 import LoadingSpinner from "../LoadingSpinner";
 import ErrorDisplay from "../ErrorDisplay";
-import convertFileSize from "@/util/convertFileSize";
+import FileCard from "../FileCard";
 
 const Files: FC = () => {
 	const { data, isError, error, isPending } = useFiles();
@@ -23,11 +23,14 @@ const Files: FC = () => {
 
 	if (data) {
 		return (
-			<ul>
+			<ul
+				className={`w-fit gap-4 grid grid-cols-1 
+					sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5
+					mx-auto`}
+			>
 				{data.map(file => (
 					<li key={file.id}>
-						<p>{`Имя файла: ${file.name}`}</p>
-						<p>{`Размер файла: ${convertFileSize(file.size)}`}</p>
+						<FileCard file={file} />
 					</li>
 				))}
 			</ul>

@@ -16,6 +16,18 @@ class UserService {
 			return response.data;
 		});
 	}
+	async downloadFile(fileId: number) {
+		return await wrapResponse(async () => {
+			const response = await api.get<Blob>("files/download", {
+				params: {
+					fileId,
+				},
+				responseType: "blob",
+			});
+
+			return response.data;
+		});
+	}
 }
 
 const userService = new UserService();
