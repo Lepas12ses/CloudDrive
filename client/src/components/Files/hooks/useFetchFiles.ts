@@ -3,7 +3,10 @@ import { useSearchParams } from "react-router-dom";
 
 import userService from "@/service/UserService";
 import { queryClient } from "@/http";
-import type { FilesSearchParams } from "@/models/FilesSearchParams";
+import {
+	FILES_SEARCH_PARAMS_KEYS,
+	type FilesSearchParams,
+} from "@/models/FilesSearchParams";
 
 const DEFAULT_SEARCH_PARAMS: FilesSearchParams = {
 	page: "1",
@@ -37,10 +40,18 @@ export default function useFetchFiles() {
 		queryClient
 	);
 
+	function pageLinkConstructor(page: number) {
+		const params = new URLSearchParams(searchParams);
+		params.set(FILES_SEARCH_PARAMS_KEYS.PAGE, page.toString());
+
+		return `?${params.toString()}`;
+	}
+
 	return {
 		data,
 		isError,
 		error,
 		isPending,
+		pageLinkConstructor,
 	};
 }

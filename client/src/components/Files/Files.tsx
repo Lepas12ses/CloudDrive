@@ -5,6 +5,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import ErrorDisplay from "@/components/ErrorDisplay";
 import FileCard from "@/components/FileCard";
 import TopFilesBar from "@/components/TopFilesBar";
+import Pages from "../Pages";
 
 const Files: FC = () => {
 	const { fetching, deletion, downloading } = useFiles();
@@ -34,8 +35,8 @@ const Files: FC = () => {
 					className={`w-fit gap-4 grid grid-cols-1 
 					sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5`}
 				>
-					{!fetching.data.length && <div className='w-50'></div>}
-					{fetching.data.map(file => (
+					{!fetching.data.files.length && <div className='w-50'></div>}
+					{fetching.data.files.map(file => (
 						<li key={file.id}>
 							<FileCard
 								file={file}
@@ -45,6 +46,11 @@ const Files: FC = () => {
 						</li>
 					))}
 				</ul>
+				<Pages
+					currentPage={fetching.data.page}
+					totalPages={fetching.data.pages}
+					linkConstructor={fetching.pageLinkConstructor}
+				/>
 			</div>
 		);
 	}

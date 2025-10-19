@@ -4,6 +4,7 @@ import wrapResponse from "./util/wrapResponse";
 import type UserFile from "@/models/UserFile";
 import { type FilesSearchParams } from "@/models/FilesSearchParams";
 import type { GenericAbortSignal } from "axios";
+import type FilesResponse from "@/models/FilesResponse";
 
 class UserService {
 	async profile(signal?: GenericAbortSignal) {
@@ -17,7 +18,7 @@ class UserService {
 		signal?: GenericAbortSignal
 	) {
 		return await wrapResponse(async () => {
-			const response = await api.get<UserFile[]>("files", {
+			const response = await api.get<FilesResponse>("files", {
 				params,
 				signal,
 			});

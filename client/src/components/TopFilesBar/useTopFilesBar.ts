@@ -19,6 +19,7 @@ export default function useTopFilesBar() {
 		setSearchParams(prevParams => {
 			const params = new URLSearchParams(prevParams);
 			params.set(FILES_SEARCH_PARAMS_KEYS.SEARCH, e.target.value);
+			params.set(FILES_SEARCH_PARAMS_KEYS.PAGE, "1");
 
 			return params;
 		});

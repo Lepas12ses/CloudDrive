@@ -88,7 +88,7 @@ class FileService {
 			throw ApiError.Unauthorized();
 		}
 
-		const files = await File.findAll({
+		const { rows: files, count: total } = await File.findAndCountAll({
 			where: {
 				userId: user.id,
 				originalName: {
@@ -99,7 +99,9 @@ class FileService {
 			limit,
 		});
 
-		return files.map(file => new FileDto(file));
+		const pages = Math.ceil(total / limit);
+
+		return { files: files.map(file => new FileDto(file)), total, page, pages };
 	}
 	async removeFile(fileId: number, userId: number) {
 		const user = await User.findByPk(userId);
