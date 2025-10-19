@@ -1,14 +1,13 @@
 import type { FC } from "react";
 
-import useFiles from "./hooks";
+import useFilesGrid from "./hooks";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import ErrorDisplay from "@/components/ErrorDisplay";
 import FileCard from "@/components/FileCard";
-import TopFilesBar from "@/components/TopFilesBar";
 import Pages from "../Pages";
 
-const Files: FC = () => {
-	const { fetching, deletion, downloading } = useFiles();
+const FilesGrid: FC = () => {
+	const { fetching, deletion, downloading } = useFilesGrid();
 
 	if (fetching.isError) {
 		return (
@@ -26,11 +25,7 @@ const Files: FC = () => {
 
 	if (fetching.data) {
 		return (
-			<div
-				className={`mx-auto w-fit flex flex-col
-			gap-3`}
-			>
-				<TopFilesBar />
+			<>
 				<ul
 					className={`w-fit gap-4 grid grid-cols-1 
 					sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5`}
@@ -51,9 +46,9 @@ const Files: FC = () => {
 					totalPages={fetching.data.pages}
 					linkConstructor={fetching.pageLinkConstructor}
 				/>
-			</div>
+			</>
 		);
 	}
 };
 
-export default Files;
+export default FilesGrid;
