@@ -11,8 +11,13 @@ class UserController {
 			const { login, password } = req.body;
 
 			const tokens = await userService.login(login, password);
+			const now = new Date();
+			const expiration = new Date(now);
+			expiration.setDate(now.getDate() + 30);
 			res.cookie(REFRESH_TOKEN_COOKIE, tokens.refreshToken, {
 				httpOnly: true,
+				path: "/user/refresh",
+				expires: expiration,
 			});
 
 			res.json({ accessToken: tokens.accessToken });
@@ -66,8 +71,13 @@ class UserController {
 			}
 
 			const tokens = await userService.refresh(refreshToken);
+			const now = new Date();
+			const expiration = new Date(now);
+			expiration.setDate(now.getDate() + 30);
 			res.cookie(REFRESH_TOKEN_COOKIE, tokens.refreshToken, {
 				httpOnly: true,
+				path: "/user/refresh",
+				expires: expiration,
 			});
 
 			res.json({ accessToken: tokens.accessToken });

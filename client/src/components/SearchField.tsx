@@ -1,9 +1,9 @@
 import useDebounce from "@/http/useDebounce";
-import type { ChangeEvent, FC } from "react";
+import type { ChangeEvent, FC, HTMLAttributes } from "react";
 
-interface SearchFieldProps {
+interface SearchFieldProps extends HTMLAttributes<HTMLInputElement> {
 	id: string;
-	onChange: (value: string) => void;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	className?: string;
 	delay?: number;
 }
@@ -13,11 +13,12 @@ const SearchField: FC<SearchFieldProps> = ({
 	onChange,
 	className = "",
 	delay = 500,
+	...props
 }) => {
 	const debouncedChange = useDebounce(onChange, delay);
 
 	function handleChange(e: ChangeEvent<HTMLInputElement>) {
-		debouncedChange(e.target.value);
+		debouncedChange(e);
 	}
 
 	const classes = `bg-stone-100 border border-stone-400 rounded-full px-5
@@ -25,6 +26,7 @@ const SearchField: FC<SearchFieldProps> = ({
 
 	return (
 		<input
+			{...props}
 			className={classes}
 			type='text'
 			name={id}

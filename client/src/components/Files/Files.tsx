@@ -23,7 +23,6 @@ const Files: FC = () => {
 		return <LoadingSpinner className='m-auto w-20' />;
 	}
 
-	// TODO: Вынести сетку в отдельный компонент
 	if (fetching.data) {
 		return (
 			<div
@@ -35,6 +34,7 @@ const Files: FC = () => {
 					className={`w-fit gap-4 grid grid-cols-1 
 					sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5`}
 				>
+					{!fetching.data.length && <div className='w-50'></div>}
 					{fetching.data.map(file => (
 						<li key={file.id}>
 							<FileCard
