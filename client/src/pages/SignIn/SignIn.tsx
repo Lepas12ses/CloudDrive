@@ -1,12 +1,14 @@
 import { type FC } from "react";
 
 import Form from "@/components/Form";
-import Input from "@/components/Input";
+import Input from "@/components/Input/Input";
 import Button from "@/components/Button";
 import useSignIn from "./useSignIn";
 import type ValidationError from "@/models/ValidationError";
 import RouterLink from "@/components/RouterLink";
-import Container from "@/components/Container";
+import InputLabel from "@/components/Input/InputLabel";
+import InputField from "@/components/Input/InputField";
+import InputError from "@/components/Input/InputError";
 
 const SignInPage: FC = () => {
 	const { onSignIn, error, isError, isPending } = useSignIn();
@@ -27,17 +29,21 @@ const SignInPage: FC = () => {
 
 	return (
 		<div className='h-screen flex items-center justify-center'>
-			<Form onSubmit={onSignIn} title='Авторизация' error={formError}>
-				<Input id='login' label='Логин' error={loginError} />
-				<Input
-					id='password'
-					type='password'
-					label='Пароль'
-					error={passwordError}
-				/>
+			<Form onSubmit={onSignIn} error={formError}>
+				<h1 className='text-3xl'>Авторизация</h1>
+				<Input id='login' className='gap-1 flex flex-col rounded-md'>
+					<InputLabel>Логин</InputLabel>
+					<InputField type='text' />
+					{loginError && <InputError>{loginError}</InputError>}
+				</Input>
+				<Input id='password'>
+					<InputLabel>Пароль</InputLabel>
+					<InputField type='password' />
+					{passwordError && <InputError>{passwordError}</InputError>}
+				</Input>
 				<Button
 					variants={{ color: "primary", style: "fill" }}
-					className='rounded-full'
+					className='rounded-full mt-4'
 					disabled={isPending}
 				>
 					Войти

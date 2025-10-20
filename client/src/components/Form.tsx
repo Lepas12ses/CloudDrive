@@ -4,17 +4,15 @@ import Container from "./Container";
 
 interface FormProps extends PropsWithChildren {
 	onSubmit: (event: FormEvent<HTMLFormElement>) => void;
-	title?: string;
 	error?: React.ReactNode;
 }
 
-const Form: FC<FormProps> = ({ children, onSubmit, title, error }) => {
+const Form: FC<FormProps> = ({ children, onSubmit, error }) => {
 	return (
 		<Container
 			variants={{ padding: "m", shadow: "m" }}
 			className='rounded-lg flex flex-col gap-3'
 		>
-			{title && <h1 className='text-3xl'>{title}</h1>}
 			<form className='flex flex-col gap-2 w-full' onSubmit={onSubmit}>
 				{children}
 			</form>

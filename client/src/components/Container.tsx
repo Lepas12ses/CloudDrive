@@ -3,7 +3,7 @@ import type { FC, HTMLAttributes, PropsWithChildren } from "react";
 
 import cn from "@/util/cn";
 
-const container = cva(null, {
+export const container = cva(null, {
 	variants: {
 		color: {
 			light: "bg-(--bg-light)",
@@ -30,7 +30,7 @@ const container = cva(null, {
 	},
 });
 
-interface ContainerProps
+export interface ContainerProps
 	extends PropsWithChildren,
 		HTMLAttributes<HTMLDivElement> {
 	variants?: VariantProps<typeof container>;
