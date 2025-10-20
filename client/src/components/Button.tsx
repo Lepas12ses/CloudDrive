@@ -1,24 +1,52 @@
 import type { ButtonHTMLAttributes, FC } from "react";
 
+import cn from "@/util/cn";
+import { cva, type VariantProps } from "class-variance-authority";
+
+const button = cva("px-2 py-1.5 rounded-xl font-bold", {
+	variants: {
+		color: {
+			primary: "",
+		},
+		style: {
+			fill: "",
+			outline: "",
+		},
+	},
+	compoundVariants: [
+		{
+			color: "primary",
+			style: "fill",
+			class: "bg-(--primary) text-(--text-primary) hover:opacity-50",
+		},
+		{
+			color: "primary",
+			style: "outline",
+			class: "border-2 border-(--primary) text-(--primary)",
+		},
+	],
+	defaultVariants: {
+		color: "primary",
+		style: "fill",
+	},
+});
+
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	disabled?: boolean;
-	clasName?: string;
+	className?: string;
+	variants?: VariantProps<typeof button>;
 }
 
 const Button: FC<ButtonProps> = ({
 	children,
-	className = "",
-	disabled = false,
+	className,
+	variants,
 	...props
 }) => {
-	const classes = `
-	px-4 py-2 bg-blue-400
-	text-white font-bold rounded-sm 
-	${disabled ? "opacity-50" : "hover:opacity-50 cursor-pointer"}
-	${className}`;
+	const classes = cn(button({ ...variants, className }));
 
 	return (
-		<button {...props} className={classes} disabled={disabled}>
+		<button {...props} className={classes}>
 			{children}
 		</button>
 	);

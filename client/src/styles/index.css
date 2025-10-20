@@ -1,0 +1,81 @@
+:root {
+  --bg-light: oklch(0.95 0 279);
+  --bg: oklch(0.9 0 279);
+  --bg-dark: oklch(0.85 0 279);
+  --text: oklch(0.2 0 279);
+  --primary-light: oklch(0.75 0.1433 277.41);
+  --primary: oklch(0.7 0.1433 277.41);
+  --primary-dark: oklch(0.65 0.1433 277.41);
+  --text-primary: oklch(1 0 279);
+  --darker-15: #00000015;
+  --darker-30: #00000030;
+  --darker-45: #00000045;
+  --darker-60: #00000045;
+  --darker-75: #00000045;
+  --lighter-30: #ffffff30;
+  --lighter-50: #ffffff50;
+  --lighter-70: #ffffff70;
+  --shadow-s: inset 0 1px 2px var(--lighter-30), 0 1px 2px var(--darker-15),
+  	0 2px 4px var(--darker-15);
+  --shadow-m: inset 0 1px 2px var(--lighter-50), 0 2px 4px var(--darker-15),
+  	0 4px 8px var(--darker-15);
+  --shadow-l: inset 0 1px 2px var(--lighter-70), 0 4px 6px var(--darker-15),
+  	0 6px 10px var(--darker-15);
+  --inner-shadow-s: inset 0 4px 8px var(--darker-30),
+  	inset 0 2px 4px var(--darker-45), inset 0 1px 4px var(--darker-60);
+  --inner-shadow-m: inset 0 8px 8px var(--darker-30),
+  	inset 0 4px 4px var(--darker-45), inset 0 2px 4px var(--darker-60);
+  --inner-shadow-l: inset 0 12px 4px var(--darker-30),
+  	inset 0 8px 4px var(--darker-45), inset 0 4px 4px var(--darker-60);
+}
+
+.shadow-s {
+  box-shadow: var(--shadow-s);
+}
+
+.shadow-m {
+  box-shadow: var(--shadow-m);
+}
+
+.shadow-l {
+  box-shadow: var(--shadow-l);
+}
+
+.ishadow-s {
+  box-shadow: var(--inner-shadow-s);
+}
+
+.ishadow-m {
+  box-shadow: var(--inner-shadow-m);
+}
+
+.ishadow-l {
+  box-shadow: var(--inner-shadow-l);
+}
+
+body {
+  background-color: var(--bg-dark);
+}
+
+button {
+  cursor: pointer;
+}
+
+* {
+  font-family: "Inter";
+  transition: all 200ms;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/Inter.ttf");
+  font-weight: 100 900;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/Inter-Italic.ttf");
+  font-weight: 100 900;
+  font-style: italic;
+}
+
+/*# sourceMappingURL=index.css.map */

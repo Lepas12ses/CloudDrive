@@ -1,13 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store";
+
 import HomeLayoutPage from "./pages/HomeLayout";
 import SignInPage from "./pages/SignIn";
 import SignUpPage from "./pages/SignUp";
-import { Provider } from "react-redux";
-import store from "./store";
 import RootLayoutPage from "./pages/RootLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProfilePage from "./pages/Profile";
 import HomePage from "./pages/Home";
+
+import "./styles/index.css";
 
 const router = createBrowserRouter([
 	{

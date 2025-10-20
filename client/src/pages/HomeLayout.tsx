@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import { Outlet } from "react-router-dom";
-import HomeMenu from "@/components/HomeMenu.tsx";
+import HomeMenu from "@/components/HomeMenu";
 
 const HomeLayoutPage: FC = () => {
 	return (

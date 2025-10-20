@@ -23,9 +23,7 @@ const TopFilesBar: FC = memo(() => {
 					onChange={handleSearchChange}
 					defaultValue={defaultSearch}
 				/>
-				<Button className='h-full' onClick={onOpenUpload}>
-					Загрузить
-				</Button>
+				<Button onClick={onOpenUpload}>Загрузить</Button>
 			</div>
 		</>
 	);

@@ -1,5 +1,7 @@
 import type { FC, FormEvent, PropsWithChildren } from "react";
 
+import Container from "./Container";
+
 interface FormProps extends PropsWithChildren {
 	onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 	title?: string;
@@ -8,7 +10,10 @@ interface FormProps extends PropsWithChildren {
 
 const Form: FC<FormProps> = ({ children, onSubmit, title, error }) => {
 	return (
-		<div className='bg-stone-100 rounded-xl px-4 py-2 flex flex-col items-center shadow-2xl border-2 border-stone-300 gap-3 min-w-1/4'>
+		<Container
+			variants={{ padding: "m", shadow: "m" }}
+			className='rounded-lg flex flex-col gap-3'
+		>
 			{title && <h1 className='text-3xl'>{title}</h1>}
 			<form className='flex flex-col gap-2 w-full' onSubmit={onSubmit}>
 				{children}
@@ -18,7 +23,7 @@ const Form: FC<FormProps> = ({ children, onSubmit, title, error }) => {
 					{error}
 				</p>
 			)}
-		</div>
+		</Container>
 	);
 };
 

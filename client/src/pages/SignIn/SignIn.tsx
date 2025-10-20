@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 import useSignIn from "./useSignIn";
 import type ValidationError from "@/models/ValidationError";
 import RouterLink from "@/components/RouterLink";
+import Container from "@/components/Container";
 
 const SignInPage: FC = () => {
 	const { onSignIn, error, isError, isPending } = useSignIn();
@@ -25,7 +26,7 @@ const SignInPage: FC = () => {
 	const passwordError = fieldErrors?.find(err => err.path === "password")?.msg;
 
 	return (
-		<div className='min-h-screen flex items-center justify-center'>
+		<div className='h-screen flex items-center justify-center'>
 			<Form onSubmit={onSignIn} title='Авторизация' error={formError}>
 				<Input id='login' label='Логин' error={loginError} />
 				<Input
@@ -34,7 +35,13 @@ const SignInPage: FC = () => {
 					label='Пароль'
 					error={passwordError}
 				/>
-				<Button disabled={isPending}>Войти</Button>
+				<Button
+					variants={{ color: "primary", style: "fill" }}
+					className='rounded-full'
+					disabled={isPending}
+				>
+					Войти
+				</Button>
 				<RouterLink className='m-auto w-fit ' to='/sign-up'>
 					У меня нет аккаунта
 				</RouterLink>

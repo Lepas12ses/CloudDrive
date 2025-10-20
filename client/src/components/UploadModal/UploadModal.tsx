@@ -20,7 +20,12 @@ const UplodaModal: FC<ModalProps> = ({ open, onClose }) => {
 			<form onSubmit={onUpload} className='flex flex-col gap-2'>
 				<FileInput id='files' />
 				<div className='flex gap-2 justify-end'>
-					<Button onClick={onClose}>Закрыть</Button>
+					<Button
+						variants={{ color: "primary", style: "outline" }}
+						onClick={onClose}
+					>
+						Закрыть
+					</Button>
 					<Button>Отправить</Button>
 				</div>
 			</form>
