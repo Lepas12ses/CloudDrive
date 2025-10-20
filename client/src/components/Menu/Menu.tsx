@@ -36,7 +36,7 @@ const Menu: FC<PropsWithChildren> = ({ children }) => {
 
 	const expandedClasses = "w-60 transition-all";
 
-	const classes = `flex flex-col w-20 h-screen py-4 px-2 border-r-2 border-stone-200 rounded-r-md bg-stone-100 fixed left-0 shadow-md transition-all ${
+	const classes = `z-20 flex flex-col w-20 h-screen py-4 px-2 border-r-2 border-stone-200 rounded-r-md bg-stone-100 fixed left-0 shadow-md transition-all ${
 		isExpanded ? expandedClasses : ""
 	}`;
 

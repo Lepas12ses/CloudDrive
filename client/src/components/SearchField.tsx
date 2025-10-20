@@ -1,5 +1,5 @@
-import useDebounce from "@/http/useDebounce";
-import { memo, type ChangeEvent, type FC, type HTMLAttributes } from "react";
+import useDebounce from "@/hooks/useDebounce";
+import { type ChangeEvent, type FC, type HTMLAttributes } from "react";
 
 interface SearchFieldProps extends HTMLAttributes<HTMLInputElement> {
 	id: string;

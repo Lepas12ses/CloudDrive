@@ -28,7 +28,7 @@ const FilesGrid: FC = () => {
 			<>
 				<ul
 					className={`w-fit gap-4 grid grid-cols-1 
-					sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5`}
+					sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 m-auto`}
 				>
 					{!fetching.data.files.length && <div className='w-50'></div>}
 					{fetching.data.files.map(file => (

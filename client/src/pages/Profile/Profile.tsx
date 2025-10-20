@@ -22,14 +22,16 @@ const ProfilePage: FC = () => {
 
 	if (data) {
 		return (
-			<div>
-				<p>
-					Логин: <span className='font-bold'>{data.login}</span>
-				</p>
-				<p>
-					Почта: <span className='font-bold'>{data.email}</span>
-				</p>
-			</div>
+			<>
+				<div>
+					<p>
+						Логин:<span className='font-bold'>{data.login}</span>
+					</p>
+					<p>
+						Почта: <span className='font-bold'>{data.email}</span>
+					</p>
+				</div>
+			</>
 		);
 	}
 };
