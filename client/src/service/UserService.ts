@@ -1,7 +1,6 @@
 import api from "@/http";
 import type User from "@/models/User";
 import wrapResponse from "./util/wrapResponse";
-import type UserFile from "@/models/UserFile";
 import { type FilesSearchParams } from "@/models/FilesSearchParams";
 import type { GenericAbortSignal } from "axios";
 import type FilesResponse from "@/models/FilesResponse";

@@ -12,7 +12,7 @@ interface FileCardProps {
 }
 
 const FileCard: FC<FileCardProps> = ({ file, onDownload, onDelete }) => {
-	const { id, name, image, size, updatedAt } = useFileCard(file);
+	const { name, image, size, updatedAt } = useFileCard(file);
 
 	return (
 		<div
