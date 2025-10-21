@@ -53,5 +53,6 @@ export default function useFetchFiles() {
 		error,
 		isPending,
 		pageLinkConstructor,
+		cardLimit: parseInt(filesParams.limit),
 	};
 }

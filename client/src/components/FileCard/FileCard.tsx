@@ -5,6 +5,8 @@ import downloadIcon from "@/assets/icons/download.svg";
 import type UserFile from "@/models/UserFile";
 import useFileCard from "./useFileCard";
 import Container from "../Container";
+import cn from "@/util/cn";
+import SkeletonField from "../SkeletonField/SkeletonField";
 
 interface FileCardProps {
 	file: UserFile;
@@ -12,7 +14,7 @@ interface FileCardProps {
 	onDownload: () => void;
 }
 
-const FileCard: FC<FileCardProps> = ({ file, onDownload, onDelete }) => {
+const Card: FC<FileCardProps> = ({ file, onDownload, onDelete }) => {
 	const { name, image, size, updatedAt } = useFileCard(file);
 	return (
 		<Container
@@ -52,6 +54,41 @@ const FileCard: FC<FileCardProps> = ({ file, onDownload, onDelete }) => {
 			</Container>
 		</Container>
 	);
+};
+
+interface FileCardSkeletonProps {
+	className?: string;
+}
+
+const CardSkeleton: FC<FileCardSkeletonProps> = ({ className }) => {
+	return (
+		<Container
+			variants={{ shadow: "l" }}
+			className={cn(
+				"w-50 p-0 rounded-xl overflow-hidden h-full relative",
+				className
+			)}
+		>
+			<SkeletonField className='w-full aspect-square' />
+			<Container
+				variants={{ color: "light", padding: "s" }}
+				className='rounded-t-lg h-full'
+			>
+				<p>
+					<SkeletonField />
+					<SkeletonField />
+					<SkeletonField />
+					<SkeletonField />
+					<SkeletonField />
+				</p>
+			</Container>
+		</Container>
+	);
+};
+
+const FileCard = {
+	Card,
+	Skeleton: CardSkeleton,
 };
 
 export default FileCard;
