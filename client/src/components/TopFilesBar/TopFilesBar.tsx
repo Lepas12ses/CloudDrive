@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import useTopFilesBar from "./useTopFilesBar";
 import UplodaModal from "../UploadModal";
 import SearchField from "../SearchField";
+import Container from "../Container";
 
 const TopFilesBar: FC = memo(() => {
 	const {
@@ -16,15 +17,23 @@ const TopFilesBar: FC = memo(() => {
 	return (
 		<>
 			<UplodaModal open={isUploading} onClose={onCloseUploading} />
-			<div className='flex gap-2'>
-				<SearchField
-					id='search'
-					className='flex-1'
-					onChange={handleSearchChange}
-					defaultValue={defaultSearch}
-				/>
-				<Button onClick={onOpenUpload}>Загрузить</Button>
-			</div>
+			<Container variants={{ shadow: "s" }} className='flex gap-2 rounded-full'>
+				<Container
+					variants={{ color: "light", shadow: "is" }}
+					className='flex-1 rounded-full p-0'
+				>
+					<SearchField
+						id='search'
+						className='w-full h-full'
+						onChange={handleSearchChange}
+						defaultValue={defaultSearch}
+					/>
+				</Container>
+
+				<Button onClick={onOpenUpload} className='rounded-full'>
+					Загрузить
+				</Button>
+			</Container>
 		</>
 	);
 });

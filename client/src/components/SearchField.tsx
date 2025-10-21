@@ -21,7 +21,7 @@ const SearchField: FC<SearchFieldProps> = ({
 		debouncedChange(e);
 	}
 
-	const classes = `bg-stone-100 border border-stone-400 rounded-full px-5
+	const classes = `rounded-full px-5
                         ${className}`;
 
 	return (
@@ -32,6 +32,7 @@ const SearchField: FC<SearchFieldProps> = ({
 			name={id}
 			id={id}
 			onChange={handleChange}
+			placeholder='Поиск'
 		/>
 	);
 };

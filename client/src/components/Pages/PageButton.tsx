@@ -1,5 +1,6 @@
 import type { FC, PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
+import Container from "../Container";
 
 interface PageButtonProps extends PropsWithChildren {
 	link: string;
@@ -11,14 +12,26 @@ const PageButton: FC<PageButtonProps> = ({
 	link,
 	current = false,
 }) => {
-	const classes = `flex items-center justify-center w-8 aspect-square rounded-md bg-stone-300 `;
-	const currentClasses = `${classes} opacity-50`;
+	const classes = `flex items-center justify-center w-8 aspect-square `;
 
-	if (current) return <span className={currentClasses}>{children}</span>;
+	if (current)
+		return (
+			<Container
+				variants={{ color: "normal", shadow: "is" }}
+				className='p-0 rounded-full'
+			>
+				<span className={classes}>{children}</span>
+			</Container>
+		);
 	return (
-		<Link className={classes} to={link}>
-			{children}
-		</Link>
+		<Container
+			variants={{ color: "light", shadow: "m" }}
+			className='p-0 rounded-full'
+		>
+			<Link className={classes} to={link}>
+				{children}
+			</Link>
+		</Container>
 	);
 };
 
