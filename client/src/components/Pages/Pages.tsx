@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import PageButton from "./PageButton";
+import usePages from "./usePages";
 
 interface PagesProps {
 	currentPage: number;
@@ -12,28 +13,21 @@ const Pages: FC<PagesProps> = ({
 	totalPages,
 	linkConstructor,
 }) => {
-	const radius = 2;
-	const pages: number[] = [];
-	let leftDiff = 0;
-	let rightDiff = 0;
-	for (let page = currentPage - radius; page <= currentPage + radius; page++) {
-		if (page > 0 && page <= totalPages) {
-			pages.push(page);
-		}
-	}
-	leftDiff = pages[0] - 1;
-	rightDiff = totalPages - pages[pages.length - 1];
+	const { first, firstSpacer, last, lastSpacer, pages } = usePages(
+		currentPage,
+		totalPages
+	);
 
 	return (
 		<div>
 			<ul className={`flex w-full justify-center gap-5`}>
-				{leftDiff > 0 && (
+				{first && (
 					<>
 						<li>
 							<PageButton link={linkConstructor(1)}>1</PageButton>
 						</li>
 
-						{leftDiff > 1 && (
+						{firstSpacer && (
 							<li>
 								<span>...</span>
 							</li>
@@ -51,9 +45,9 @@ const Pages: FC<PagesProps> = ({
 						</li>
 					);
 				})}
-				{rightDiff > 0 && (
+				{last && (
 					<>
-						{rightDiff > 1 && (
+						{lastSpacer && (
 							<li>
 								<span>...</span>
 							</li>
