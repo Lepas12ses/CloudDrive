@@ -2,6 +2,7 @@ import { type FC } from "react";
 import useProfile from "./useProfile";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import ErrorDisplay from "@/components/ErrorDisplay";
+import Container from "@/components/Container";
 
 const ProfilePage: FC = () => {
 	const { data, isError, error, isPending } = useProfile();
@@ -22,16 +23,17 @@ const ProfilePage: FC = () => {
 
 	if (data) {
 		return (
-			<>
-				<div>
-					<p>
-						Логин:<span className='font-bold'>{data.login}</span>
-					</p>
-					<p>
-						Почта: <span className='font-bold'>{data.email}</span>
-					</p>
-				</div>
-			</>
+			<Container
+				variants={{ shadow: "l", color: "light" }}
+				className='w-fit rounded-lg'
+			>
+				<p>
+					Логин:<span className='font-bold'>{data.login}</span>
+				</p>
+				<p>
+					Почта: <span className='font-bold'>{data.email}</span>
+				</p>
+			</Container>
 		);
 	}
 };

@@ -12,8 +12,8 @@ export const container = cva(null, {
 		},
 		padding: {
 			s: "py-1.5 px-2",
-			m: "py-3 px-6",
-			l: "py-4.5 px-10",
+			m: "py-3 px-4.5",
+			l: "py-4.5 px-6",
 		},
 		shadow: {
 			s: "shadow-s",
@@ -24,6 +24,7 @@ export const container = cva(null, {
 			il: "ishadow-l",
 		},
 	},
+
 	defaultVariants: {
 		color: "normal",
 		padding: "m",

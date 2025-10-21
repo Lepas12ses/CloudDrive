@@ -4,6 +4,7 @@ import trashIcon from "@/assets/icons/trash.svg";
 import downloadIcon from "@/assets/icons/download.svg";
 import type UserFile from "@/models/UserFile";
 import useFileCard from "./useFileCard";
+import Container from "../Container";
 
 interface FileCardProps {
 	file: UserFile;
@@ -13,11 +14,10 @@ interface FileCardProps {
 
 const FileCard: FC<FileCardProps> = ({ file, onDownload, onDelete }) => {
 	const { name, image, size, updatedAt } = useFileCard(file);
-
 	return (
-		<div
-			className={`bg-stone-200 border border-stone-400 w-50 
-				shadow-lg rounded-md overflow-hidden relative`}
+		<Container
+			variants={{ shadow: "l" }}
+			className='w-50 p-0 rounded-xl overflow-hidden h-full relative'
 		>
 			<div
 				className={`w-full aspect-square flex justify-center 
@@ -25,7 +25,10 @@ const FileCard: FC<FileCardProps> = ({ file, onDownload, onDelete }) => {
 			>
 				<img src={image.src} alt={image.alt} />
 			</div>
-			<div className={`bg-stone-100 rounded-t-lg p-2`}>
+			<Container
+				variants={{ color: "light", padding: "s" }}
+				className='rounded-t-lg h-full'
+			>
 				<p className={`line-clamp-2 font-semibold`}>{name}</p>
 				<p className='mt-2'>
 					<span className='font-semibold'>Размер:</span> {size}
@@ -33,19 +36,21 @@ const FileCard: FC<FileCardProps> = ({ file, onDownload, onDelete }) => {
 				<p>
 					<span className='font-semibold'>Обновлен:</span> {updatedAt}
 				</p>
-			</div>
-			<div
-				className={`absolute top-0 right-0 p-2 
-				flex gap-2`}
+			</Container>
+			<Container
+				variants={{ color: "light", shadow: "s" }}
+				className={`absolute top-1 right-1 p-0 
+				flex rounded-full divide-x-2 divide-dotted 
+				divide-(--bg-dark) overflow-hidden`}
 			>
-				<button onClick={onDownload}>
+				<button className='py-2 px-3 hover:bg-(--bg-dark)' onClick={onDownload}>
 					<img src={downloadIcon} alt='Скачать' />
 				</button>
-				<button onClick={onDelete}>
+				<button className='py-2 px-3 hover:bg-(--bg-dark)' onClick={onDelete}>
 					<img src={trashIcon} alt='Удалить' />
 				</button>
-			</div>
-		</div>
+			</Container>
+		</Container>
 	);
 };
 
