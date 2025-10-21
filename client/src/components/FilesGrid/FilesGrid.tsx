@@ -4,6 +4,9 @@ import useFilesGrid from "./hooks";
 import ErrorDisplay from "@/components/ErrorDisplay";
 import FileCard from "@/components/FileCard";
 import Pages from "../Pages";
+import Container from "../Container";
+import Notification from "../Notification/Notification";
+import LoadingSpinner from "../LoadingSpinner";
 
 const FilesGrid: FC = () => {
 	const { fetching, deletion, downloading } = useFilesGrid();
@@ -39,6 +42,28 @@ const FilesGrid: FC = () => {
 	if (fetching.data) {
 		return (
 			<>
+				{downloading.isPending && (
+					<Notification>
+						<Container
+							variants={{ shadow: "l" }}
+							className='rounded-md flex items-center gap-5'
+						>
+							<LoadingSpinner className='w-15' />
+							<p>загрузка</p>
+						</Container>
+					</Notification>
+				)}
+				{deletion.isPending && (
+					<Notification>
+						<Container
+							variants={{ shadow: "l" }}
+							className='rounded-md flex items-center gap-5'
+						>
+							<LoadingSpinner className='w-15' />
+							<p>удаление</p>
+						</Container>
+					</Notification>
+				)}
 				<ul
 					className={`w-fit gap-4 grid grid-cols-1 
 					sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 m-auto`}
