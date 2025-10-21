@@ -14,12 +14,12 @@ const MenuButton: FC<MenuButtonProps> = ({
 }) => {
 	const { isExpanded } = useMenuContext();
 
-	const expandedClasses = `w-full justify-center overflow-elipsis word-nowrap`;
+	const expandedClasses = `w-full justify-center items-center overflow-elipsis word-nowrap`;
 
 	const classes = `text-nowrap transition-all flex gap-4 
-    cursor-pointer bg-stone-50 shadow-md w-fit 
-    p-3 mx-auto rounded-lg border-stone-300 border 
-    hover:bg-stone-200 
+    cursor-pointer bg-(--bg-light) shadow-md w-fit 
+    p-3 mx-auto rounded-lg border-(--bg-dark) border 
+    hover:bg-(--bg)
     ${isExpanded ? expandedClasses : ""}
     ${className ? className : ""}`;
 

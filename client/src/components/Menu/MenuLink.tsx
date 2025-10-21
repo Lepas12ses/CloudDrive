@@ -5,6 +5,7 @@ import {
 	type NavLinkProps,
 	type NavLinkRenderProps,
 } from "react-router-dom";
+import Container from "../Container";
 
 interface MenuLinkProps extends PropsWithChildren<NavLinkProps> {
 	expandedContent?: string;
@@ -24,12 +25,12 @@ const MenuLink: FC<MenuLinkProps> = ({
 		const { isActive } = navProps;
 
 		const classes = `text-nowrap transition-all flex gap-4 
-        shadow-md w-fit 
-        p-3 mx-auto rounded-lg border-stone-300 border 
+        shadow-s w-fit p-3 mx-auto
+		rounded-lg border-(--bg-dark) border 
         ${
 					isActive
-						? "cursor-default bg-blue-100"
-						: " bg-stone-50 hover:bg-stone-200"
+						? "cursor-default ishadow-s"
+						: " bg-(--bg-light) hover:bg-(--bg)"
 				}
         ${isExpanded ? expandedClasses : ""}
         ${className ? className : ""}`;
