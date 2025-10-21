@@ -1,5 +1,6 @@
 import type { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 
 import type SignInData from "@/models/SignInData";
 import { useAppDispatch } from "@/store";
@@ -7,8 +8,8 @@ import { actions as authActions } from "@/store/auth";
 import { queryClient } from "@/http";
 import type AuthResponse from "@/models/AuthResponse";
 import type ApiErrorResponse from "@/models/ApiErrorResponse";
-import { useMutation } from "@tanstack/react-query";
 import authService from "@/service/AuthService";
+import type ValidationError from "@/models/ValidationError";
 
 export default function useSignIn() {
 	const dispatch = useAppDispatch();
@@ -44,10 +45,26 @@ export default function useSignIn() {
 		mutate(dataToSend);
 	}
 
+	let formError: string | null = null;
+	let validationErrors: ValidationError[] | null = null;
+
+	if (isError && error) {
+		if (error.errors) {
+			validationErrors = error.errors;
+		} else {
+			formError = error.message;
+		}
+	}
+
+	const fieldErrors = {
+		loginError: validationErrors?.find(err => err.path === "login")?.msg,
+		passwordError: validationErrors?.find(err => err.path === "password")?.msg,
+	};
+
 	return {
 		onSignIn,
-		error,
-		isError,
+		formError,
+		fieldErrors,
 		isPending,
 	};
 }

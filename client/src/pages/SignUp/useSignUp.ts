@@ -1,14 +1,15 @@
 import type { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 
 import type SignUpData from "@/models/SignUpData";
 import type ApiErrorResponse from "@/models/ApiErrorResponse";
 import type AuthResponse from "@/models/AuthResponse";
 import { useAppDispatch } from "@/store";
 import { actions as authActions } from "@/store/auth";
-import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/http";
 import authService from "@/service/AuthService";
+import type ValidationError from "@/models/ValidationError";
 
 export default function useSignUp() {
 	const dispatch = useAppDispatch();
@@ -45,10 +46,30 @@ export default function useSignUp() {
 		mutate(dataToSend);
 	}
 
+	let formError: string | null = null;
+	let validationErrors: ValidationError[] | null = null;
+
+	if (isError && error) {
+		if (error.errors) {
+			validationErrors = error.errors;
+		} else {
+			formError = error.message;
+		}
+	}
+
+	const fieldErrors = {
+		loginError: validationErrors?.find(err => err.path === "login")?.msg,
+		emailError: validationErrors?.find(err => err.path === "email")?.msg,
+		passwordError: validationErrors?.find(err => err.path === "password")?.msg,
+		passwordRepeatError: validationErrors?.find(
+			err => err.path === "password-repeat"
+		)?.msg,
+	};
+
 	return {
 		onSignUp,
-		error,
-		isError,
+		formError,
+		fieldErrors,
 		isPending,
 	};
 }
