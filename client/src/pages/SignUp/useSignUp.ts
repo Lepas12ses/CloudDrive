@@ -1,11 +1,11 @@
-import type { FormEvent } from "react";
+import { useEffect, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
 import type SignUpData from "@/models/SignUpData";
 import type ApiErrorResponse from "@/models/ApiErrorResponse";
 import type AuthResponse from "@/models/AuthResponse";
-import { useAppDispatch } from "@/store";
+import { useAppDispatch, useAppSelector } from "@/store";
 import { actions as authActions } from "@/store/auth";
 import { queryClient } from "@/http";
 import authService from "@/service/AuthService";
@@ -14,6 +14,13 @@ import type ValidationError from "@/models/ValidationError";
 export default function useSignUp() {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+	const { token } = useAppSelector(state => state.auth);
+
+	useEffect(() => {
+		if (token) {
+			navigate("/", { replace: true });
+		}
+	}, [token, navigate]);
 
 	const { error, isError, isPending, mutate } = useMutation<
 		AuthResponse,
@@ -25,7 +32,7 @@ export default function useSignUp() {
 			mutationFn: authService.register,
 			onSuccess: data => {
 				dispatch(authActions.setToken(data.accessToken));
-				navigate("/");
+				navigate("/", { replace: true });
 			},
 		},
 		queryClient
