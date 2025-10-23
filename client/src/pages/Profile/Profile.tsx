@@ -1,8 +1,8 @@
 import { type FC } from "react";
 import useProfile from "./useProfile";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/shared/LoadingSpinner";
 import ErrorDisplay from "@/components/ErrorDisplay";
-import Container from "@/components/Container";
+import Container from "@/components/shared/Container";
 
 const ProfilePage: FC = () => {
 	const { data, isError, error, isPending } = useProfile();

@@ -1,8 +1,8 @@
 import type { FC } from "react";
-import type { ModalProps } from "../Modal";
-import Modal from "../Modal";
+import type { ModalProps } from "../shared/Modal";
+import Modal from "../shared/Modal";
 import FileInput from "../FileInput";
-import Button from "../Button";
+import Button from "../shared/Button";
 import useUploadModel from "./useUploadModel";
 
 const UplodaModal: FC<ModalProps> = ({ open, onClose }) => {

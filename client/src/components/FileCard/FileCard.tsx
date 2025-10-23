@@ -4,9 +4,9 @@ import trashIcon from "@/assets/icons/trash.svg";
 import downloadIcon from "@/assets/icons/download.svg";
 import type UserFile from "@/models/UserFile";
 import useFileCard from "./useFileCard";
-import Container from "../Container";
+import Container from "../shared/Container";
 import cn from "@/util/cn";
-import SkeletonField from "../SkeletonField/SkeletonField";
+import SkeletonField from "../shared/SkeletonField/SkeletonField";
 
 interface FileCardProps {
 	file: UserFile;

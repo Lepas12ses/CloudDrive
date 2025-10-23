@@ -1,6 +1,6 @@
 import type { FC, FormEvent, PropsWithChildren } from "react";
 
-import Container from "./Container";
+import Container from "./shared/Container";
 
 interface FormProps extends PropsWithChildren {
 	onSubmit: (event: FormEvent<HTMLFormElement>) => void;

@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import PageButton from "./PageButton";
 import usePages from "./usePages";
-import SkeletonField from "../SkeletonField/SkeletonField";
-import Container from "../Container";
+import SkeletonField from "../shared/SkeletonField/SkeletonField";
+import Container from "../shared/Container";
 
 interface PagesProps {
 	currentPage: number;

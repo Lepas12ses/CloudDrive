@@ -6,7 +6,7 @@ import store from "./store";
 import SignInPage from "./pages/SignIn";
 import SignUpPage from "./pages/SignUp";
 import RootLayoutPage from "./pages/RootLayout";
-import LoadingSpinner from "./components/LoadingSpinner";
+import LoadingSpinner from "./components/shared/LoadingSpinner";
 
 import "./styles/index.css";
 

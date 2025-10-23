@@ -4,9 +4,9 @@ import useFilesGrid from "./hooks";
 import ErrorDisplay from "@/components/ErrorDisplay";
 import FileCard from "@/components/FileCard";
 import Pages from "../Pages";
-import Container from "../Container";
-import Notification from "../Notification/Notification";
-import LoadingSpinner from "../LoadingSpinner";
+import Container from "../shared/Container";
+import Notification from "../shared/Notification";
+import LoadingSpinner from "../shared/LoadingSpinner";
 
 const FilesGrid: FC = () => {
 	const { fetching, deletion, downloading } = useFilesGrid();

@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
-import Container from "../Container";
+import Container from "../shared/Container";
 
 interface PageButtonProps extends PropsWithChildren {
 	link: string;

@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 import Form from "@/components/Form";
 import Input from "@/components/Input/Input";
-import Button from "@/components/Button";
+import Button from "@/components/shared/Button";
 import useSignUp from "./useSignUp";
 import RouterLink from "@/components/RouterLink";
 import InputLabel from "@/components/Input/InputLabel";

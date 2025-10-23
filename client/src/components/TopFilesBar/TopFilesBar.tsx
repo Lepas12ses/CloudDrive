@@ -1,9 +1,9 @@
 import { memo, type FC } from "react";
-import Button from "@/components/Button";
+import Button from "@/components/shared/Button";
 import useTopFilesBar from "./useTopFilesBar";
 import UplodaModal from "../UploadModal";
 import SearchField from "../SearchField";
-import Container from "../Container";
+import Container from "../shared/Container";
 
 const TopFilesBar: FC = memo(() => {
 	const {
