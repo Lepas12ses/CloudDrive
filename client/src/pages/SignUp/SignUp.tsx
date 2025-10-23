@@ -26,6 +26,7 @@ const SignUpPage: FC = () => {
 					onSubmit={onSignUp}
 					validators={signUpValidators}
 					errors={fieldErrors}
+					formError={formError}
 				>
 					<Form variants={{ gap: "m" }}>
 						<FieldProvider id='login'>
@@ -56,7 +57,7 @@ const SignUpPage: FC = () => {
 								<FieldError />
 							</div>
 						</FieldProvider>
-						<Button>Отправить</Button>
+						<Button disabled={isPending}>Отправить</Button>
 					</Form>
 				</FormProvider>
 				<RouterLink to={"/sign-in"}>У меня уже есть аккаунт</RouterLink>
