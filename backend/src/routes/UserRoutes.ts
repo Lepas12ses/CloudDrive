@@ -3,7 +3,6 @@ import { body } from "express-validator";
 
 import userController from "../controller/UserController.js";
 import authMiddleware from "../middleware/AuthMiddleware.js";
-import { UPLOADS_PATH } from "../util/constants.js";
 
 const userRouter = Router();
 

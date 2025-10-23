@@ -11,13 +11,9 @@ class UserController {
 			const { login, password } = req.body;
 
 			const tokens = await userService.login(login, password);
-			const now = new Date();
-			const expiration = new Date(now);
-			expiration.setDate(now.getDate() + 30);
 			res.cookie(REFRESH_TOKEN_COOKIE, tokens.refreshToken, {
 				httpOnly: true,
-				path: "/user/refresh",
-				expires: expiration,
+				path: "/user",
 			});
 
 			res.json({ accessToken: tokens.accessToken });
@@ -42,6 +38,7 @@ class UserController {
 			const tokens = await userService.register(login, email, password);
 			res.cookie(REFRESH_TOKEN_COOKIE, tokens.refreshToken, {
 				httpOnly: true,
+				path: "/user",
 			});
 
 			res.json({ accessToken: tokens.accessToken });
@@ -52,9 +49,13 @@ class UserController {
 	logout: RequestHandler = async (req, res, next) => {
 		try {
 			const { refreshToken } = req.cookies;
+
 			if (refreshToken) {
 				await userService.logout(refreshToken);
-				res.clearCookie(REFRESH_TOKEN_COOKIE);
+				res.clearCookie(REFRESH_TOKEN_COOKIE, {
+					httpOnly: true,
+					path: "/user",
+				});
 			}
 
 			res.status(200).end();

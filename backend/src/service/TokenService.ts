@@ -39,11 +39,13 @@ class TokenService {
 	}
 
 	async destroyToken(refreshToken: string) {
-		await Token.destroy({
+		const id = await Token.destroy({
 			where: {
 				refreshToken,
 			},
 		});
+
+		console.log(id);
 	}
 
 	validateAccessToken(accessToken: string) {
