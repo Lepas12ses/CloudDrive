@@ -23,7 +23,7 @@ const signUpValidators: Validator[] = [
 
 			if (typeof field !== "string") return false;
 
-			if (!field.match(/.@.{2}\..{2}/)) return false;
+			if (!field.match(/^.{1,}@.{2,}\..{2,}$/)) return false;
 
 			return true;
 		},
