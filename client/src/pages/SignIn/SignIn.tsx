@@ -1,46 +1,55 @@
 import { type FC } from "react";
 
-import Form from "@/components/Form";
-import Input from "@/components/Input/Input";
 import Button from "@/components/shared/Button";
 import useSignIn from "./useSignIn";
 import RouterLink from "@/components/RouterLink";
-import InputLabel from "@/components/Input/InputLabel";
-import InputField from "@/components/Input/InputField";
-import InputError from "@/components/Input/InputError";
+import Form from "@/components/shared/Form/Form";
+import FormProvider from "@/components/shared/Form/FormProvider";
+import FieldProvider from "@/components/shared/Form/field/FieldProvider";
+import Label from "@/components/shared/Form/field/Label";
+import Input from "@/components/shared/Form/field/Input";
+import FieldError from "@/components/shared/Form/field/FieldError";
+import Container from "@/components/shared/Container";
+import signInValidators from "./signInValidators";
+import FormError from "@/components/shared/Form/FormError";
 
 const SignInPage: FC = () => {
 	const { onSignIn, formError, fieldErrors, isPending } = useSignIn();
 
 	return (
 		<div className='h-screen flex items-center justify-center'>
-			<Form onSubmit={onSignIn} error={formError}>
-				<h1 className='text-3xl'>Авторизация</h1>
-				<Input id='login' className='gap-1 flex flex-col rounded-md'>
-					<InputLabel>Логин</InputLabel>
-					<InputField type='text' />
-					{fieldErrors.loginError && (
-						<InputError>{fieldErrors.loginError}</InputError>
-					)}
-				</Input>
-				<Input id='password'>
-					<InputLabel>Пароль</InputLabel>
-					<InputField type='password' />
-					{fieldErrors.passwordError && (
-						<InputError>{fieldErrors.passwordError}</InputError>
-					)}
-				</Input>
-				<Button
-					variants={{ color: "primary", style: "fill" }}
-					className='rounded-full mt-4'
-					disabled={isPending}
+			<Container
+				variants={{ shadow: "l" }}
+				className='rounded-xl flex flex-col items-center gap-2'
+			>
+				<h1 className='font-bold text-2xl'>Авторизация</h1>
+				<FormProvider
+					onSubmit={onSignIn}
+					validators={signInValidators}
+					errors={fieldErrors}
+					formError={formError}
 				>
-					Войти
-				</Button>
-				<RouterLink className='m-auto w-fit ' to='/sign-up'>
-					У меня нет аккаунта
-				</RouterLink>
-			</Form>
+					<Form variants={{ gap: "m" }}>
+						<FieldProvider id='login'>
+							<div className='flex  flex-col gap-0.25'>
+								<Label>Логин</Label>
+								<Input type='text' />
+								<FieldError />
+							</div>
+						</FieldProvider>
+						<FieldProvider id='password'>
+							<div className='flex  flex-col gap-0.25'>
+								<Label>Пароль</Label>
+								<Input type='password' />
+								<FieldError />
+							</div>
+						</FieldProvider>
+						<Button>Отправить</Button>
+					</Form>
+					<FormError />
+				</FormProvider>
+				<RouterLink to={"/sign-up"}>У меня нет аккаунта</RouterLink>
+			</Container>
 		</div>
 	);
 };

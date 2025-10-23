@@ -1,60 +1,66 @@
 import type { FC } from "react";
 
-import Form from "@/components/Form";
-import Input from "@/components/Input/Input";
+import Container from "@/components/shared/Container";
+import FormProvider from "@/components/shared/Form/FormProvider";
+import Form from "@/components/shared/Form/Form";
+import FieldProvider from "@/components/shared/Form/field/FieldProvider";
+import Label from "@/components/shared/Form/field/Label";
+import Input from "@/components/shared/Form/field/Input";
+import FieldError from "@/components/shared/Form/field/FieldError";
 import Button from "@/components/shared/Button";
-import useSignUp from "./useSignUp";
 import RouterLink from "@/components/RouterLink";
-import InputLabel from "@/components/Input/InputLabel";
-import InputField from "@/components/Input/InputField";
-import InputError from "@/components/Input/InputError";
+import signUpValidators from "./signUpValidators";
+import useSignUp from "./useSignUp";
 
 const SignUpPage: FC = () => {
 	const { onSignUp, formError, fieldErrors, isPending } = useSignUp();
 
 	return (
 		<div className='min-h-screen flex items-center justify-center'>
-			<Form onSubmit={onSignUp} error={formError}>
-				<h1 className='text-3xl'>Регистрация</h1>
-				<Input id='login' className='gap-1 flex flex-col rounded-md'>
-					<InputLabel>Логин</InputLabel>
-					<InputField type='text' />
-					{fieldErrors.loginError && (
-						<InputError>{fieldErrors.loginError}</InputError>
-					)}
-				</Input>
-				<Input id='email' className='gap-1 flex flex-col rounded-md'>
-					<InputLabel>Почта</InputLabel>
-					<InputField type='email' />
-					{fieldErrors.emailError && (
-						<InputError>{fieldErrors.emailError}</InputError>
-					)}
-				</Input>
-				<Input id='password' className='gap-1 flex flex-col rounded-md'>
-					<InputLabel>Пароль</InputLabel>
-					<InputField type='password' />
-					{fieldErrors.passwordError && (
-						<InputError>{fieldErrors.passwordError}</InputError>
-					)}
-				</Input>
-				<Input id='password-repeat' className='gap-1 flex flex-col rounded-md'>
-					<InputLabel>Повторите пароль</InputLabel>
-					<InputField type='password' />
-					{fieldErrors.passwordRepeatError && (
-						<InputError>{fieldErrors.passwordRepeatError}</InputError>
-					)}
-				</Input>
-				<Button
-					variants={{ color: "primary", style: "fill" }}
-					className='rounded-full mt-4'
-					disabled={isPending}
+			<Container
+				variants={{ shadow: "l" }}
+				className='rounded-xl flex flex-col items-center gap-2'
+			>
+				<h1 className='font-bold text-2xl'>Регистрация</h1>
+				<FormProvider
+					onSubmit={onSignUp}
+					validators={signUpValidators}
+					errors={fieldErrors}
 				>
-					Зарегистрироваться
-				</Button>
-				<RouterLink className='m-auto w-fit ' to='/sign-in'>
-					У меня есть аккаунт
-				</RouterLink>
-			</Form>
+					<Form variants={{ gap: "m" }}>
+						<FieldProvider id='login'>
+							<div className='flex  flex-col gap-0.25'>
+								<Label>Логин</Label>
+								<Input type='text' />
+								<FieldError />
+							</div>
+						</FieldProvider>
+						<FieldProvider id='email'>
+							<div className='flex  flex-col gap-0.25'>
+								<Label>Почта</Label>
+								<Input type='email' />
+								<FieldError />
+							</div>
+						</FieldProvider>
+						<FieldProvider id='password'>
+							<div className='flex  flex-col gap-0.25'>
+								<Label>Пароль</Label>
+								<Input type='password' />
+								<FieldError />
+							</div>
+						</FieldProvider>
+						<FieldProvider id='password-repeat'>
+							<div className='flex  flex-col gap-0.25'>
+								<Label>Пароль</Label>
+								<Input type='password' />
+								<FieldError />
+							</div>
+						</FieldProvider>
+						<Button>Отправить</Button>
+					</Form>
+				</FormProvider>
+				<RouterLink to={"/sign-in"}>У меня уже есть аккаунт</RouterLink>
+			</Container>
 		</div>
 	);
 };

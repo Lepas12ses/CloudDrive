@@ -9,10 +9,7 @@ const userRouter = Router();
 userRouter.post("/login", userController.login);
 userRouter.post(
 	"/register",
-	body(
-		"login",
-		"Длина логина должна быть больше 1 и меньше 32 символов"
-	).isLength({
+	body("login", "Длина логина должна 1 и меньше 32 символов").isLength({
 		min: 1,
 		max: 32,
 	}),

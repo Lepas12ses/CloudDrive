@@ -10,6 +10,7 @@ import { actions as authActions } from "@/store/auth";
 import { queryClient } from "@/http";
 import authService from "@/service/AuthService";
 import type ValidationError from "@/models/ValidationError";
+import type { FieldErrors } from "@/components/shared/Form/model/FieldErrors";
 
 export default function useSignUp() {
 	const dispatch = useAppDispatch();
@@ -38,10 +39,7 @@ export default function useSignUp() {
 		queryClient
 	);
 
-	function onSignUp(e: FormEvent<HTMLFormElement>) {
-		e.preventDefault();
-
-		const fd = new FormData(e.target as HTMLFormElement);
+	function onSignUp(fd: FormData) {
 		const data = Object.fromEntries(fd.entries());
 
 		const dataToSend: SignUpData = {
@@ -64,14 +62,17 @@ export default function useSignUp() {
 		}
 	}
 
-	const fieldErrors = {
-		loginError: validationErrors?.find(err => err.path === "login")?.msg,
-		emailError: validationErrors?.find(err => err.path === "email")?.msg,
-		passwordError: validationErrors?.find(err => err.path === "password")?.msg,
-		passwordRepeatError: validationErrors?.find(
-			err => err.path === "password-repeat"
-		)?.msg,
-	};
+	const fieldErrors: FieldErrors = new Map();
+	validationErrors?.forEach(error => {
+		const fieldError = fieldErrors.get(error.path);
+		if (fieldError) {
+			fieldError.messages.push(error.msg);
+			return;
+		}
+		fieldErrors.set(error.path, {
+			messages: [error.msg],
+		});
+	});
 
 	return {
 		onSignUp,
