@@ -4,21 +4,21 @@ import fileController from "../controller/FileController.js";
 import authMiddleware from "../middleware/AuthMiddleware.js";
 import { UPLOADS, UPLOADS_PATH } from "../util/constants.js";
 
-const fileRoutes = Router();
+const fileRouter = Router();
 
 const storage = diskStorage({
 	destination: UPLOADS_PATH,
 });
 const upload = multer({ storage });
 
-fileRoutes.post(
+fileRouter.post(
 	"/upload",
 	authMiddleware,
 	upload.array("files"),
 	fileController.upload
 );
-fileRoutes.get("/download", authMiddleware, fileController.downloadFile);
-fileRoutes.delete("/delete", authMiddleware, fileController.deleteFile);
-fileRoutes.get("/", authMiddleware, fileController.getFiles);
+fileRouter.get("/download", authMiddleware, fileController.downloadFile);
+fileRouter.delete("/delete", authMiddleware, fileController.deleteFile);
+fileRouter.get("/", authMiddleware, fileController.getFiles);
 
-export default fileRoutes;
+export default fileRouter;

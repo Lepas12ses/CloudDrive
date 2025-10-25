@@ -21,14 +21,14 @@ class AuthService {
 	}
 	async logout() {
 		await wrapResponse(async () => {
-			await api.post("user/logout");
+			await api.post("auth/logout");
 		});
 	}
 	async checkAuth() {
-		const result = await axios.get<AuthResponse>(`${BASE_URL}/user/refresh`, {
+		const result = await axios.get<AuthResponse>(`${BASE_URL}/auth/refresh`, {
 			withCredentials: true,
 		});
-		return result.data;
+		return result;
 	}
 }
 

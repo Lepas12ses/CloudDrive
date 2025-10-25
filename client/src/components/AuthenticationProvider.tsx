@@ -5,13 +5,13 @@ import {
 	type FC,
 	type PropsWithChildren,
 } from "react";
+import axios from "axios";
 
 import api, { BASE_URL } from "@/http";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { actions as authActions } from "@/store/auth";
 import authService from "@/service/AuthService";
 import type { AxiosError, AxiosRequestConfig } from "axios";
-import axios from "axios";
 import type AuthResponse from "@/models/AuthResponse";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -23,7 +23,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 		async function check() {
 			try {
 				const result = await authService.checkAuth();
-				dispatch(authActions.setToken(result.accessToken));
+				dispatch(authActions.setToken(result.data.accessToken));
 			} catch {
 				dispatch(authActions.setToken(null));
 			}
@@ -54,10 +54,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 
 				if (originalRequest && err.response?.status === 401) {
 					try {
-						const response = await axios.get<AuthResponse>(
-							`${BASE_URL}/user/refresh`,
-							{ withCredentials: true }
-						);
+						const response = await authService.checkAuth();
 						dispatch(authActions.setToken(response.data.accessToken));
 						originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
 						return axios.request(originalRequest as AxiosRequestConfig);
