@@ -4,11 +4,8 @@
 	"main": "dist/index.js",
 	"type": "module",
 	"scripts": {
-		"build": "rimraf dist && tsc",
-		"prestart": "npm run build",
 		"start": "node dist/index.js",
-		"preserve": "npm run build",
-		"serve": "concurrently \"tsc -w\" \"nodemon dist/index.js\""
+		"serve": "tsc-watch --onsuccess \"node -r tsconfig-paths/register dist/index.js\""
 	},
 	"keywords": [],
 	"author": "",
@@ -22,8 +19,6 @@
 		"@types/jsonwebtoken": "^9.0.10",
 		"@types/multer": "^2.0.0",
 		"@types/node": "^24.7.0",
-		"concurrently": "^9.2.1",
-		"nodemon": "^3.1.10",
 		"rimraf": "^6.0.1",
 		"typescript": "^5.9.3"
 	},
@@ -37,6 +32,8 @@
 		"jsonwebtoken": "^9.0.2",
 		"multer": "^2.0.2",
 		"pg": "^8.16.3",
-		"sequelize": "^6.37.7"
+		"sequelize": "^6.37.7",
+		"tsconfig-paths": "^4.2.0",
+		"tsc-watch": "^7.2.0"
 	}
 }

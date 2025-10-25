@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
-import fileService from "../service/FileService.js";
+import fileService from "../service/FilesService/FileService.js";
 import ApiError from "../exceptions/ApiError.js";
+import FilesSearchParams from "../service/FilesService/model/FilesSearchParams.js";
 
 class FileController {
 	upload: RequestHandler = async (req, res, next) => {
@@ -53,22 +54,19 @@ class FileController {
 	};
 	getFiles: RequestHandler = async (req, res, next) => {
 		try {
-			const { page, limit, search } = req.query;
+			const { page, limit, search, sort, order } = req.query;
 
-			if (
-				typeof page !== "string" ||
-				typeof limit !== "string" ||
-				typeof search !== "string"
-			) {
-				return next(ApiError.BadRequest("Неверные параметры поиска"));
-			}
+			const searchParams = new FilesSearchParams(
+				limit,
+				page,
+				search,
+				sort,
+				order
+			);
+
 			const userId = parseInt(req.headers.userId as string);
 
-			const files = await fileService.getFiles(userId, {
-				page: parseInt(page),
-				limit: parseInt(limit),
-				search,
-			});
+			const files = await fileService.getFiles(userId, searchParams);
 
 			res.json(files);
 		} catch (err) {

@@ -1,12 +1,13 @@
 import path from "path";
 import fs from "fs";
 
-import FileDto from "../dto/FileDto.js";
-import ApiError from "../exceptions/ApiError.js";
-import File from "../models/File.js";
-import User from "../models/User.js";
-import { UPLOADS_PATH } from "../util/constants.js";
-import { Op } from "sequelize";
+import ApiError from "../../exceptions/ApiError.js";
+import File from "../../models/File.js";
+import User from "../../models/User.js";
+import { UPLOADS_PATH } from "../../util/constants.js";
+import { Op, Order } from "sequelize";
+import FileDto from "../../dto/FileDto.js";
+import FilesSearchParams from "./model/FilesSearchParams.js";
 
 class FileService {
 	async saveFile(userId: number, file: Express.Multer.File) {
@@ -73,28 +74,23 @@ class FileService {
 			filePath,
 		};
 	}
-	async getFiles(
-		userId: number,
-		params: {
-			page: number;
-			limit: number;
-			search: string;
-		}
-	) {
-		const { page, limit, search } = params;
+	async getFiles(userId: number, params: FilesSearchParams) {
 		const user = await User.findByPk(userId);
-
 		if (!user) {
 			throw ApiError.Unauthorized();
 		}
 
+		const { page, limit, search, sort, order } = params;
+
+		const orderValue: Order = sort && order ? [[sort, order]] : undefined;
+		const searchValue = { [Op.substring]: search ?? "" };
+
 		const { rows: files, count: total } = await File.findAndCountAll({
 			where: {
 				userId: user.id,
-				originalName: {
-					[Op.substring]: search,
-				},
+				originalName: searchValue,
 			},
+			order: orderValue,
 			offset: (page - 1) * limit,
 			limit,
 		});
