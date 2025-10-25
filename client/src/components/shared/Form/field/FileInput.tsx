@@ -8,7 +8,6 @@ import {
 
 import cn from "@/util/cn";
 import useFieldContext from "./FieldContext";
-import fileIcon from "@/assets/icons/file.svg";
 
 const fileInput = cva(
 	`block px-4 py-2 border-2 
