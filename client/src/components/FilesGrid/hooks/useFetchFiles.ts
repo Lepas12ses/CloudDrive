@@ -5,26 +5,30 @@ import userService from "@/service/UserService";
 import { queryClient } from "@/http";
 import {
 	FILES_SEARCH_PARAMS_KEYS,
+	OPTIONAL_FILES_SEARCH_PARAMS_KEYS,
 	type FilesSearchParams,
 } from "@/models/FilesSearchParams";
 
 const DEFAULT_SEARCH_PARAMS: FilesSearchParams = {
 	page: "1",
 	limit: "10",
-	search: "",
 };
 
 function extractFilesParams(searchParams: URLSearchParams): FilesSearchParams {
 	const params = {
-		page: searchParams.get("page"),
-		limit: searchParams.get("limit"),
-		search: searchParams.get("search"),
+		page: searchParams.get(FILES_SEARCH_PARAMS_KEYS.PAGE),
+		limit: searchParams.get(FILES_SEARCH_PARAMS_KEYS.LIMIT),
+		search: searchParams.get(OPTIONAL_FILES_SEARCH_PARAMS_KEYS.SEARCH),
+		sort: searchParams.get(OPTIONAL_FILES_SEARCH_PARAMS_KEYS.SORT),
+		order: searchParams.get(OPTIONAL_FILES_SEARCH_PARAMS_KEYS.ORDER),
 	};
 
 	return {
 		page: params.page ?? DEFAULT_SEARCH_PARAMS.page,
 		limit: params.limit ?? DEFAULT_SEARCH_PARAMS.limit,
-		search: params.search ?? DEFAULT_SEARCH_PARAMS.search,
+		search: params.search ?? undefined,
+		sort: params.sort ?? undefined,
+		order: params.sort ?? undefined,
 	};
 }
 

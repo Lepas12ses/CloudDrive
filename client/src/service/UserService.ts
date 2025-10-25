@@ -13,7 +13,7 @@ class UserService {
 		});
 	}
 	async files(
-		params: FilesSearchParams = { page: "1", limit: "10", search: "" },
+		params: FilesSearchParams = { page: "1", limit: "10" },
 		signal?: GenericAbortSignal
 	) {
 		return await wrapResponse(async () => {
