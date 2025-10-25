@@ -28,7 +28,7 @@ function extractFilesParams(searchParams: URLSearchParams): FilesSearchParams {
 		limit: params.limit ?? DEFAULT_SEARCH_PARAMS.limit,
 		search: params.search ?? undefined,
 		sort: params.sort ?? undefined,
-		order: params.sort ?? undefined,
+		order: params.order ?? undefined,
 	};
 }
 
