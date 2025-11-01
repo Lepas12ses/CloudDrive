@@ -6,10 +6,12 @@ import Header from "@/components/Header/Header";
 const HomeLayoutPage: FC = () => {
 	return (
 		<>
-			<Header />
-			<main className='p-3 min-h-screen flex-1'>
-				<Outlet />
-			</main>
+			<div className=' h-screen overflow-hidden'>
+				<Header />
+				<main className='p-3'>
+					<Outlet />
+				</main>
+			</div>
 		</>
 	);
 };

@@ -1,12 +1,12 @@
 import type { FC } from "react";
 import TopFilesBar from "./TopFilesBar";
-import FilesGrid from "./FilesGrid";
+import FilesDisplay from "./FilesDisplay/FilesDisplay";
 
 const Files: FC = () => {
 	return (
-		<div className='flex flex-col w-fit mx-auto gap-3'>
+		<div className='flex flex-col mx-auto gap-3'>
 			<TopFilesBar />
-			<FilesGrid />
+			<FilesDisplay />
 		</div>
 	);
 };

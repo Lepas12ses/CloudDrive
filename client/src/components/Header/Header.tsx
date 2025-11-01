@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import { Link } from "react-router-dom";
 import Button from "../shared/Button";
 import useHeader from "./useHeader";
 
