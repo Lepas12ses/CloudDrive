@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { FC } from "react";
 import useSelectContext from "./SelectContext";
 
 interface SelectedOptionProps {

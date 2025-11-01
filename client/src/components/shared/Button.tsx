@@ -3,7 +3,7 @@ import type { ButtonHTMLAttributes, FC } from "react";
 import cn from "@/util/cn";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const button = cva("px-2 py-1.5 rounded-xl font-bold", {
+const button = cva("rounded-xl font-bold", {
 	variants: {
 		color: {
 			primary: "",
@@ -11,6 +11,12 @@ const button = cva("px-2 py-1.5 rounded-xl font-bold", {
 		style: {
 			fill: "",
 			outline: "",
+		},
+		size: {
+			xs: "px-0.5 py-0.25",
+			sm: "px-1 py-0.75",
+			md: "px-1.5 py-1",
+			lg: "px-2 py-1.5",
 		},
 	},
 	compoundVariants: [
@@ -28,6 +34,7 @@ const button = cva("px-2 py-1.5 rounded-xl font-bold", {
 	defaultVariants: {
 		color: "primary",
 		style: "fill",
+		size: "lg",
 	},
 });
 
