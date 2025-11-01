@@ -13,10 +13,10 @@ const button = cva("rounded-xl font-bold", {
 			outline: "",
 		},
 		size: {
-			xs: "px-0.5 py-0.25",
-			sm: "px-1 py-0.75",
-			md: "px-1.5 py-1",
-			lg: "px-2 py-1.5",
+			xs: "px-1.5 py-0.5",
+			sm: "px-1.75 py-1.25",
+			md: "px-2 py-1.5",
+			lg: "px-4 py-1.75",
 		},
 	},
 	compoundVariants: [
@@ -34,7 +34,7 @@ const button = cva("rounded-xl font-bold", {
 	defaultVariants: {
 		color: "primary",
 		style: "fill",
-		size: "lg",
+		size: "md",
 	},
 });
 
