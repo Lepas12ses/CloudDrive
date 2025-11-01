@@ -1,10 +1,11 @@
 import { queryClient } from "@/http";
-import authService from "@/service/AuthService";
 import { useAppDispatch } from "@/store";
-import { actions as authActions } from "@/store/auth";
 import { useMutation } from "@tanstack/react-query";
 
-export default function useHomeMenu() {
+import authService from "@/service/AuthService";
+import { actions as authActions } from "@/store/auth";
+
+export default function useHeader() {
 	const dispatch = useAppDispatch();
 	const { mutate } = useMutation(
 		{
