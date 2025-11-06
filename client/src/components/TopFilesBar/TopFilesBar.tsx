@@ -1,6 +1,6 @@
 import { memo, type FC } from "react";
 import Button from "@/components/shared/Button";
-import useTopFilesBar, { SORT_OPTIONS } from "./useTopFilesBar";
+import useTopFilesBar from "./useTopFilesBar";
 import UplodaModal from "../UploadModal";
 import SearchField from "../SearchField";
 import Container from "../shared/Container";
