@@ -4,10 +4,6 @@ import useTopFilesBar, { SORT_OPTIONS } from "./useTopFilesBar";
 import UplodaModal from "../UploadModal";
 import SearchField from "../SearchField";
 import Container from "../shared/Container";
-import SelectedOption from "../shared/Select/SelectedOption";
-import SelectProvider from "../shared/Select/SelectProvider";
-import Options from "../shared/Select/Options";
-import Option from "../shared/Select/Option";
 
 const TopFilesBar: FC = memo(() => {
 	const {
@@ -16,7 +12,6 @@ const TopFilesBar: FC = memo(() => {
 		onOpenUpload,
 		handleSearchChange,
 		defaultSearch,
-		onSortChange,
 	} = useTopFilesBar();
 
 	return (
