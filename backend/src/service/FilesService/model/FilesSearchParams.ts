@@ -42,6 +42,10 @@ export default class FilesSearchParams {
 					this.sort = "originalName";
 					break;
 				}
+				case "size": {
+					this.sort = "size";
+					break;
+				}
 			}
 		}
 
