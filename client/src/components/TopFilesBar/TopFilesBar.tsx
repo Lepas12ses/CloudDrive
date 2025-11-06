@@ -38,31 +38,6 @@ const TopFilesBar: FC = memo(() => {
 				<Button onClick={onOpenUpload} className='rounded-full'>
 					Загрузить
 				</Button>
-				<Container
-					variants={{ color: "light", shadow: "s" }}
-					className='px-1 py-0.5 w-50 relative rounded-full flex items-center'
-				>
-					<SelectProvider
-						onChange={option => {
-							onSortChange(option);
-						}}
-						getSelectedOptionContent={value => SORT_OPTIONS.get(value) ?? ""}
-					>
-						<SelectedOption fallbackText='Ничего не выбрано' />
-						<Options>
-							<Container
-								variants={{ color: "light", shadow: "l" }}
-								className='absolute z-10 top-full w-full flex flex-col mt-2 rounded-md'
-							>
-								{Array.from(SORT_OPTIONS.entries()).map(entry => (
-									<Option key={entry[0]} value={entry[0]}>
-										{entry[1]}
-									</Option>
-								))}
-							</Container>
-						</Options>
-					</SelectProvider>
-				</Container>
 			</Container>
 		</>
 	);
