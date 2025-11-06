@@ -7,7 +7,7 @@ export default function useFilesDisplay() {
 
 	const downloading = useDownload();
 
-	const deletion = useDelete(fetching.data?.files);
+	const deletion = useDelete(fetching.onFileDelete);
 
 	return {
 		fetching,
