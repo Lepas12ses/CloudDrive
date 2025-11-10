@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import HeaderSort from "./HeaderSort";
-import HeaderButton from "./HeaderButton";
+import SortDropDown from "../SortDropDown/SortDropDown";
 
 const FilesTableHeader: FC = () => {
 	return (
@@ -13,7 +13,7 @@ const FilesTableHeader: FC = () => {
 				<HeaderSort sortField='size' className='hidden lg:table-cell'>
 					Размер файла
 				</HeaderSort>
-				<HeaderButton>Сортировка</HeaderButton>
+				<SortDropDown />
 			</tr>
 		</thead>
 	);
