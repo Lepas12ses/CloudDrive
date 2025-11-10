@@ -1,5 +1,10 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import type { FC, HTMLAttributes, PropsWithChildren } from "react";
+import {
+	forwardRef,
+	type FC,
+	type HTMLAttributes,
+	type PropsWithChildren,
+} from "react";
 
 import cn from "@/util/cn";
 
@@ -37,19 +42,16 @@ export interface ContainerProps
 	variants?: VariantProps<typeof container>;
 }
 
-const Container: FC<ContainerProps> = ({
-	children,
-	className,
-	variants,
-	...props
-}) => {
-	const classes = cn(container({ ...variants, className }));
+const Container = forwardRef<HTMLDivElement, ContainerProps>(
+	({ children, className, variants, ...props }, ref) => {
+		const classes = cn(container({ ...variants, className }));
 
-	return (
-		<div className={classes} {...props}>
-			{children}
-		</div>
-	);
-};
+		return (
+			<div ref={ref} className={classes} {...props}>
+				{children}
+			</div>
+		);
+	}
+);
 
 export default Container;
