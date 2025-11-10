@@ -1,28 +1,34 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import useMobile from "./useMobile";
 
 export default function useHover<T extends HTMLElement>() {
 	const [isHover, setIsHover] = useState(false);
 	const ref = useRef<T>(null);
-
-	const onMouseEnter = useCallback(() => {
-		setIsHover(true);
-	}, []);
-
-	const onMouseLeave = useCallback(() => {
-		setIsHover(false);
-	}, []);
+	const isMobile = useMobile();
 
 	useEffect(() => {
-		const item = ref.current;
+		if (isMobile) {
+			setIsHover(false);
+		} else {
+			function onMouseEnter() {
+				setIsHover(true);
+			}
 
-		item?.addEventListener("mouseenter", onMouseEnter);
-		item?.addEventListener("mouseleave", onMouseLeave);
+			function onMouseLeave() {
+				setIsHover(false);
+			}
 
-		return () => {
+			const item = ref.current;
+
 			item?.addEventListener("mouseenter", onMouseEnter);
 			item?.addEventListener("mouseleave", onMouseLeave);
-		};
-	}, [onMouseEnter, onMouseLeave]);
+
+			return () => {
+				item?.removeEventListener("mouseenter", onMouseEnter);
+				item?.removeEventListener("mouseleave", onMouseLeave);
+			};
+		}
+	}, [isMobile]);
 
 	return {
 		ref,
