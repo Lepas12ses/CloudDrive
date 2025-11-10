@@ -8,6 +8,8 @@ export default function useMobile() {
 			"screen and (hover: none) and (pointer: coarse)"
 		);
 
+		setIsMobile(mediaQuery.matches);
+
 		function handleChange(e: MediaQueryListEvent) {
 			if (e.matches) setIsMobile(true);
 			else setIsMobile(false);
@@ -18,7 +20,7 @@ export default function useMobile() {
 		return () => {
 			mediaQuery.removeEventListener("change", handleChange);
 		};
-	});
+	}, []);
 
 	return isMobile;
 }
