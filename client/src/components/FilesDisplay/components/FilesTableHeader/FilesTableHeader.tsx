@@ -7,8 +7,12 @@ const FilesTableHeader: FC = () => {
 		<thead>
 			<tr>
 				<HeaderSort sortField='name'>Название</HeaderSort>
-				<HeaderSort sortField='date'>Дата изменения</HeaderSort>
-				<HeaderSort sortField='size'>Размер файла</HeaderSort>
+				<HeaderSort sortField='date' className='hidden md:table-cell'>
+					Дата изменения
+				</HeaderSort>
+				<HeaderSort sortField='size' className='hidden lg:table-cell'>
+					Размер файла
+				</HeaderSort>
 				<HeaderButton>Сортировка</HeaderButton>
 			</tr>
 		</thead>

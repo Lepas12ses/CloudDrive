@@ -12,9 +12,14 @@ import { OPTIONAL_FILES_SEARCH_PARAMS_KEYS } from "@/models/FilesSearchParams";
 
 interface HeaderSortProps extends PropsWithChildren {
 	sortField: string;
+	className?: string;
 }
 
-const HeaderSort: FC<HeaderSortProps> = ({ children, sortField }) => {
+const HeaderSort: FC<HeaderSortProps> = ({
+	children,
+	sortField,
+	className = "",
+}) => {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [order, setOrder] = useState<"asc" | "desc" | null>(null);
 
@@ -77,7 +82,7 @@ const HeaderSort: FC<HeaderSortProps> = ({ children, sortField }) => {
 	}
 
 	return (
-		<th>
+		<th className={className}>
 			<button
 				onClick={handleClick}
 				className={`px-2 h-12 w-full flex gap-1 

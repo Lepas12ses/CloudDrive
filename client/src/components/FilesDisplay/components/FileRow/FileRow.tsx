@@ -33,24 +33,27 @@ const FileRow: FC<FileRowProps> = ({ file, onDownload, onDelete }) => {
 					</div>
 				</td>
 				<td>
-					<p className='pointer-events-none'>{formatDate(file.updatedAt)}</p>
+					<p className='pointer-events-none hidden md:block'>
+						{formatDate(file.updatedAt)}
+					</p>
 				</td>
 				<td>
-					<p className='pointer-events-none'>{convertFileSize(file.size)}</p>
+					<p className='pointer-events-none hidden lg:block'>
+						{convertFileSize(file.size)}
+					</p>
 				</td>
 				<td>
 					<div className='flex justify-end gap-3 pr-5'>
-						{isHover ||
-							(isMobile && (
-								<div className='flex gap-3'>
-									<button onClick={onDownload}>
-										<img src={downloadIcon} alt={`Скачать ${file.name}`} />
-									</button>
-									<button onClick={onDelete}>
-										<img src={trashIcon} alt={`Удалить ${file.name}`} />
-									</button>
-								</div>
-							))}
+						{(isHover || isMobile) && (
+							<div className='flex gap-3'>
+								<button onClick={onDownload}>
+									<img src={downloadIcon} alt={`Скачать ${file.name}`} />
+								</button>
+								<button onClick={onDelete}>
+									<img src={trashIcon} alt={`Удалить ${file.name}`} />
+								</button>
+							</div>
+						)}
 					</div>
 				</td>
 			</tr>
