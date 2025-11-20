@@ -44,7 +44,7 @@ const SignInPage: FC = () => {
 								<FieldError />
 							</div>
 						</FieldProvider>
-						<Button disabled={isPending}>Отправить</Button>
+						<Button disabled={isPending}>Войти</Button>
 					</Form>
 					<FormError />
 				</FormProvider>

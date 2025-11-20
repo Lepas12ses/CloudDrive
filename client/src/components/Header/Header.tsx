@@ -14,7 +14,7 @@ const Header: FC = () => {
 				className={`bg-stone-200 border-b border-b-stone-400 px-5 py-2 flex justify-between items-center ${classes.highlight}`}
 			>
 				<nav className={`flex gap-3 `}>
-					<NavigationLink to='/'>Домой</NavigationLink>
+					<NavigationLink to='/'>Домашняя</NavigationLink>
 					<NavigationLink to='/profile'>Профиль</NavigationLink>
 				</nav>
 
