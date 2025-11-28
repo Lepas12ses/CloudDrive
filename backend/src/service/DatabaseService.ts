@@ -1,9 +1,6 @@
 import { Sequelize } from "sequelize";
-import { config } from "dotenv";
 
 import models from "../models/index.js";
-
-config();
 
 class DatabaseService {
 	sequelize: Sequelize | null;

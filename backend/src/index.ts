@@ -1,5 +1,4 @@
 import express from "express";
-import { config } from "dotenv";
 import cors from "cors";
 
 import databaseService from "./service/DatabaseService.js";
@@ -9,9 +8,7 @@ import errorMiddleware from "./middleware/ErrorMiddleware.js";
 import authRouter from "./routes/AuthRoutes.js";
 import fileRouter from "./routes/FileRoutes.js";
 
-config();
-
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8080;
 
 const app = express();
 

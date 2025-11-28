@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"start": "node dist/index.js",
-		"dev": "tsc-watch --onsuccess \"node -r tsconfig-paths/register dist/index.js\""
+		"dev": "tsc-watch --onsuccess \"node --env-file .env dist/index.js\""
 	},
 	"devDependencies": {
 		"@types/bcrypt": "^6.0.0",
@@ -22,14 +22,13 @@
 		"bcrypt": "^6.0.0",
 		"cookie-parser": "^1.4.7",
 		"cors": "^2.8.5",
-		"dotenv": "^17.2.3",
 		"express": "^5.1.0",
 		"express-validator": "^7.2.1",
 		"jsonwebtoken": "^9.0.2",
 		"multer": "^2.0.2",
 		"pg": "^8.16.3",
 		"sequelize": "^6.37.7",
-		"tsconfig-paths": "^4.2.0",
-		"tsc-watch": "^7.2.0"
+		"tsc-watch": "^7.2.0",
+		"tsconfig-paths": "^4.2.0"
 	}
 }
