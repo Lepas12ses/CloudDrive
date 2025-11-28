@@ -1,0 +1,14 @@
+{
+	"name": "cloud-drive",
+	"version": "1.0.0",
+	"scripts": {
+		"dev": "npx concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=client\""
+	},
+	"workspaces": [
+		"backend",
+		"client"
+	],
+	"devDependencies": {
+		"concurrently": "^9.2.1"
+	}
+}

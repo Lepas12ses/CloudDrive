@@ -1,11 +1,11 @@
 {
-	"name": "express-with-ts",
+	"name": "backend",
 	"version": "1.0.0",
 	"main": "dist/index.js",
 	"type": "module",
 	"scripts": {
 		"start": "node dist/index.js",
-		"serve": "tsc-watch --onsuccess \"node -r tsconfig-paths/register dist/index.js\""
+		"dev": "tsc-watch --onsuccess \"node -r tsconfig-paths/register dist/index.js\""
 	},
 	"keywords": [],
 	"author": "",
