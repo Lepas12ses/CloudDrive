@@ -2,7 +2,7 @@ import type { RequestHandler } from "express";
 import { validationResult } from "express-validator";
 
 import userService from "../service/UserService.js";
-import { REFRESH_TOKEN_COOKIE } from "../constants/constants.js";
+import { REFRESH_TOKEN_COOKIE } from "../shared/lib/constants/index.js";
 import ApiError from "../exceptions/ApiError.js";
 import { getExpirationTime } from "./lib/util.js";
 

@@ -7,10 +7,6 @@
 		"start": "node dist/index.js",
 		"dev": "tsc-watch --onsuccess \"node -r tsconfig-paths/register dist/index.js\""
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"description": "",
 	"devDependencies": {
 		"@types/bcrypt": "^6.0.0",
 		"@types/cookie-parser": "^1.4.9",

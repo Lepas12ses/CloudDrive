@@ -1,8 +1,9 @@
 import { Router } from "express";
 import multer, { diskStorage } from "multer";
+
 import fileController from "../controller/FileController.js";
 import authMiddleware from "../middleware/AuthMiddleware.js";
-import { UPLOADS, UPLOADS_PATH } from "../util/constants.js";
+import { UPLOADS_PATH } from "../shared/lib/constants/index.js";
 
 const fileRouter = Router();
 
