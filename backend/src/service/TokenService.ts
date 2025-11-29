@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
+
 import Token from "../models/Token.js";
 import UserDto from "../dto/UserDto.js";
+import env from "../shared/lib/env.js";
 
 class TokenService {
 	async refreshTokens(userDto: UserDto) {
@@ -11,10 +13,10 @@ class TokenService {
 	}
 
 	generateTokens(payload: object) {
-		const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
+		const accessToken = jwt.sign(payload, env.jwtAccessSecret, {
 			expiresIn: "15m",
 		});
-		const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {
+		const refreshToken = jwt.sign(payload, env.jwtRefreshSecret, {
 			expiresIn: "30d",
 		});
 		return {
@@ -50,10 +52,7 @@ class TokenService {
 
 	validateAccessToken(accessToken: string) {
 		try {
-			const userDto = jwt.verify(
-				accessToken,
-				process.env.JWT_ACCESS_SECRET
-			) as UserDto;
+			const userDto = jwt.verify(accessToken, env.jwtAccessSecret) as UserDto;
 			return userDto;
 		} catch (err) {
 			return null;
@@ -62,10 +61,7 @@ class TokenService {
 
 	validateRefreshToken(refreshToken: string) {
 		try {
-			const userDto = jwt.verify(
-				refreshToken,
-				process.env.JWT_REFRESH_SECRET
-			) as UserDto;
+			const userDto = jwt.verify(refreshToken, env.jwtRefreshSecret) as UserDto;
 			return userDto;
 		} catch (err) {
 			return null;
