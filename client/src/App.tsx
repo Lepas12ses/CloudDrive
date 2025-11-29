@@ -8,7 +8,7 @@ import SignUpPage from "./pages/SignUp";
 import RootLayoutPage from "./pages/RootLayout";
 import LoadingSpinner from "./components/shared/LoadingSpinner";
 
-import "./styles/index.css";
+import "./styles/index.scss";
 
 const HomeLayoutPage = lazy(() => import("./pages/HomeLayout"));
 const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));

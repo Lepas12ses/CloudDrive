@@ -2,7 +2,7 @@ import type { FC } from "react";
 import Button from "../shared/Button";
 import useHeader from "./useHeader";
 
-import classes from "./Header.module.css";
+import classes from "./Header.module.scss";
 import NavigationLink from "../shared/NavigationLink";
 
 const Header: FC = () => {
