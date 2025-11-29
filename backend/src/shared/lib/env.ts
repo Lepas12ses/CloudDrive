@@ -31,7 +31,7 @@ class Env {
 		this.dbHost = getString("POSTGRES_HOST", true);
 		this.dbPort = getNumber("POSTGRES_PORT", true);
 		this.dbUser = getString("POSTGRES_USER", true);
-		this.dbPassword = getString("POSTGRES_USER", true);
+		this.dbPassword = getString("POSTGRES_PASSWORD", true);
 		this.jwtAccessSecret = getString("JWT_ACCESS_SECRET", true);
 		this.jwtRefreshSecret = getString("JWT_REFRESH_SECRET", true);
 	}
