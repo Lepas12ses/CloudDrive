@@ -2,18 +2,18 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { lazy, Suspense } from "react";
 
-import store from "./store";
-import SignInPage from "./pages/SignIn";
-import SignUpPage from "./pages/SignUp";
-import RootLayoutPage from "./pages/RootLayout";
-import LoadingSpinner from "./components/shared/LoadingSpinner";
+import store from "@/shared/lib/store";
+import SignInPage from "@/pages/SignIn";
+import SignUpPage from "@/pages/SignUp";
+import RootLayoutPage from "@/pages/RootLayout";
+import LoadingSpinner from "@/components/shared/LoadingSpinner";
 
 import "./styles/index.scss";
 
-const HomeLayoutPage = lazy(() => import("./pages/HomeLayout"));
-const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
-const ProfilePage = lazy(() => import("./pages/Profile"));
-const HomePage = lazy(() => import("./pages/Home"));
+const HomeLayoutPage = lazy(() => import("@/pages/HomeLayout"));
+const ProtectedRoute = lazy(() => import("@/components/ProtectedRoute"));
+const ProfilePage = lazy(() => import("@/pages/Profile"));
+const HomePage = lazy(() => import("@/pages/Home"));
 
 const router = createBrowserRouter([
 	{

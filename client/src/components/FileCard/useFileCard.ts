@@ -3,9 +3,9 @@ import textFileIcon from "@/assets/icons/text-file.svg";
 import codeFileIcon from "@/assets/icons/code-file.svg";
 import fileIcon from "@/assets/icons/file.svg";
 import type UserFile from "@/models/UserFile";
-import getFileType from "@/util/getFileType";
-import convertFileSize from "@/util/convertFileSize";
-import formatDate from "@/util/formatDate";
+import getFileType from "@/shared/lib/helper/getFileType";
+import convertFileSize from "@/shared/lib/helper/convertFileSize";
+import formatDate from "@/shared/lib/helper/formatDate";
 
 export default function useFileCard(file: UserFile) {
 	const { id, name, size, createdAt, updatedAt } = file;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import authService from "@/service/AuthService";
-import { useAppDispatch } from "@/store";
-import { actions as authActions } from "@/store/auth";
+import authService from "@/shared/lib/service/AuthService";
+import { actions as authActions } from "@/shared/lib/store/reducers/auth";
+import useAppDispatch from "@/shared/lib/store/hooks/useAppDispatch";
 
 export default function useCheckAuth() {
 	const dispatch = useAppDispatch();

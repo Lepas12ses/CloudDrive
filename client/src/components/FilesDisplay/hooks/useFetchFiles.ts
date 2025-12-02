@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import userService from "@/service/UserService";
-import { queryClient } from "@/http";
+import userService from "@/shared/lib/service/UserService";
 import { FILES_SEARCH_PARAMS_KEYS } from "@/models/FilesSearchParams";
 import { DEFAULT_SEARCH_PARAMS } from "../util/constants";
 import extractFilesParams from "../util/extractFilesSearchParams";
+import queryClient from "@/shared/api/queryClient";
 
 export default function useFetchFiles() {
 	const [searchParams] = useSearchParams(DEFAULT_SEARCH_PARAMS);

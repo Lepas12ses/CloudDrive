@@ -1,13 +1,13 @@
 import type { FC } from "react";
 
 import type UserFile from "@/models/UserFile";
-import convertFileSize from "@/util/convertFileSize";
-import formatDate from "@/util/formatDate";
+import convertFileSize from "@/shared/lib/helper/convertFileSize";
+import formatDate from "@/shared/lib/helper/formatDate";
 import useFileRow from "./useFileRow";
-import useHover from "@/hooks/useHover";
-import trashIcon from "@/assets/icons/trash.svg";
-import downloadIcon from "@/assets/icons/download.svg";
-import useMobile from "@/hooks/useMobile";
+import useHover from "@/shared/lib/hooks/useHover";
+import trashIcon from "@/shared/assets/icons/trash.svg";
+import downloadIcon from "@/shared/assets/icons/download.svg";
+import useMobile from "@/shared/lib/hooks/useMobile";
 
 interface FileRowProps {
 	file: UserFile;

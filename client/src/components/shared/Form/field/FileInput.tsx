@@ -6,7 +6,7 @@ import {
 	type InputHTMLAttributes,
 } from "react";
 
-import cn from "@/util/cn";
+import cn from "@/shared/lib/helper/cn";
 import useFieldContext from "./FieldContext";
 
 const fileInput = cva(

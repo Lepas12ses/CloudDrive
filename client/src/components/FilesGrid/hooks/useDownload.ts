@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import { queryClient } from "@/http";
 import type UserFile from "@/models/UserFile";
-import userService from "@/service/UserService";
+import userService from "@/shared/lib/service/UserService";
 
 export default function useDownload() {
 	const { isError, error, isPending, mutate } = useMutation(

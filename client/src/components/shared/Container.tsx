@@ -6,7 +6,7 @@ import {
 	type PropsWithChildren,
 } from "react";
 
-import cn from "@/util/cn";
+import cn from "@/shared/lib/helper/cn";
 
 export const container = cva(null, {
 	variants: {

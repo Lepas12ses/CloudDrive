@@ -1,4 +1,4 @@
-import cn from "@/util/cn";
+import cn from "@/shared/lib/helper/cn";
 import { cva, type VariantProps } from "class-variance-authority";
 import type { FC, FormEvent, PropsWithChildren } from "react";
 import useFormContext from "./FormContext";

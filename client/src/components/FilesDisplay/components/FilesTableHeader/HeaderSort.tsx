@@ -6,7 +6,7 @@ import {
 	type ReactNode,
 } from "react";
 
-import arrowIcon from "@/assets/icons/circle-arrow.svg";
+import arrowIcon from "@/shared/assets/icons/circle-arrow.svg";
 import { useSearchParams } from "react-router-dom";
 import { OPTIONAL_FILES_SEARCH_PARAMS_KEYS } from "@/models/FilesSearchParams";
 

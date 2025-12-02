@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, FC } from "react";
 
-import cn from "@/util/cn";
+import cn from "@/shared/lib/helper/cn";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const button = cva("rounded-xl font-bold", {

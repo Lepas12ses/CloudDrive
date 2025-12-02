@@ -5,7 +5,7 @@ import downloadIcon from "@/assets/icons/download.svg";
 import type UserFile from "@/models/UserFile";
 import useFileCard from "./useFileCard";
 import Container from "../shared/Container";
-import cn from "@/util/cn";
+import cn from "@/shared/lib/helper/cn";
 import SkeletonField from "../shared/SkeletonField/SkeletonField";
 
 interface FileCardProps {

@@ -1,20 +1,20 @@
 import { useLayoutEffect } from "react";
 
-import api from "@/http";
-import { useAppSelector } from "@/store";
+import instance from "@/shared/api/credentialsAxiosInstance";
+import { useAppSelector } from "@/shared/lib/store/hooks/useAppSelector";
 
 export default function useAuthorizationInterceptor() {
 	const { token } = useAppSelector(state => state.auth);
 
 	useLayoutEffect(() => {
 		if (token) {
-			const interceptor = api.interceptors.request.use(config => {
+			const interceptor = instance.interceptors.request.use(config => {
 				config.headers.Authorization = `Bearer ${token}`;
 				return config;
 			});
 
 			return () => {
-				api.interceptors.request.eject(interceptor);
+				instance.interceptors.request.eject(interceptor);
 			};
 		}
 	}, [token]);

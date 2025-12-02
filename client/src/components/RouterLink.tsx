@@ -1,4 +1,4 @@
-import cn from "@/util/cn";
+import cn from "@/shared/lib/helper/cn";
 import type { FC, PropsWithChildren } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 

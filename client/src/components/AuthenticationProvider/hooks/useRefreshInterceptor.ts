@@ -2,16 +2,16 @@ import type { AxiosError, AxiosRequestConfig } from "axios";
 import { useLayoutEffect } from "react";
 import axios from "axios";
 
-import api from "@/http";
-import authService from "@/service/AuthService";
-import { actions as authActions } from "@/store/auth";
-import { useAppDispatch } from "@/store";
+import instance from "@/shared/api/credentialsAxiosInstance";
+import authService from "@/shared/lib/service/AuthService";
+import { actions as authActions } from "@/shared/lib/store/reducers/auth";
+import useAppDispatch from "@/shared/lib/store/hooks/useAppDispatch";
 
 export default function useRefreshInterceptor() {
 	const dispatch = useAppDispatch();
 
 	useLayoutEffect(() => {
-		const interceptor = api.interceptors.response.use(
+		const interceptor = instance.interceptors.response.use(
 			config => config,
 			async (err: AxiosError) => {
 				const originalRequest = err.config;
@@ -32,7 +32,7 @@ export default function useRefreshInterceptor() {
 		);
 
 		return () => {
-			api.interceptors.response.eject(interceptor);
+			instance.interceptors.response.eject(interceptor);
 		};
 	}, [dispatch]);
 }

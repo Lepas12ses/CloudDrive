@@ -1,27 +1,27 @@
 import axios from "axios";
 
-import api, { BASE_URL } from "../http";
-import type SignInData from "../models/SignInData";
-import type SignUpData from "../models/SignUpData";
-import type AuthResponse from "../models/AuthResponse";
-import wrapResponse from "./util/wrapResponse";
+import type SignInData from "@/models/SignInData";
+import type SignUpData from "@/models/SignUpData";
+import type AuthResponse from "@/models/AuthResponse";
+import wrapResponse from "./util/lib/helper/wrapResponse";
+import instance, { BASE_URL } from "@/shared/api/credentialsAxiosInstance";
 
 class AuthService {
 	async register(data: SignUpData) {
 		return await wrapResponse(async () => {
-			const response = await api.post<AuthResponse>("user/register", data);
+			const response = await instance.post<AuthResponse>("user/register", data);
 			return response.data;
 		});
 	}
 	async login(data: SignInData) {
 		return await wrapResponse(async () => {
-			const response = await api.post<AuthResponse>("user/login", data);
+			const response = await instance.post<AuthResponse>("user/login", data);
 			return response.data;
 		});
 	}
 	async logout() {
 		await wrapResponse(async () => {
-			await api.post("auth/logout");
+			await instance.post("auth/logout");
 		});
 	}
 	async checkAuth() {

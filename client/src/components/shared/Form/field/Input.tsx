@@ -2,7 +2,7 @@ import type { FC, InputHTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import useFieldContext from "./FieldContext";
-import cn from "@/util/cn";
+import cn from "@/shared/lib/helper/cn";
 
 const input = cva("px-2 py-1 rounded-md text-(--text)", {
 	variants: {

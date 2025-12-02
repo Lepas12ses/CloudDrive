@@ -2,7 +2,7 @@ import { useCallback, useState, type FC } from "react";
 
 import HeaderButton from "../FilesTableHeader/HeaderButton";
 import SortDropDownContent from "./SortDropDownContent";
-import useClickOutside from "@/hooks/useClickOutside";
+import useClickOutside from "@/shared/lib/hooks/useClickOutside";
 
 const SortDropDown: FC = () => {
 	const [isVisible, setIsVisible] = useState(false);

@@ -1,8 +1,8 @@
-import getFileType from "@/util/getFileType";
-import imageFileIcon from "@/assets/icons/image-file.svg";
-import textFileIcon from "@/assets/icons/text-file.svg";
-import codeFileIcon from "@/assets/icons/code-file.svg";
-import fileIcon from "@/assets/icons/file.svg";
+import getFileType from "@/shared/lib/helper/getFileType";
+import imageFileIcon from "@/shared/assets/icons/image-file.svg";
+import textFileIcon from "@/shared/assets/icons/text-file.svg";
+import codeFileIcon from "@/shared/assets/icons/code-file.svg";
+import fileIcon from "@/shared/assets/icons/file.svg";
 import type UserFile from "@/models/UserFile";
 
 export default function useFileRow(file: UserFile) {

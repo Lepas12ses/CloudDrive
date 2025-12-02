@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 
 import type UserFile from "@/models/UserFile";
-import userService from "@/service/UserService";
+import userService from "@/shared/lib/service/UserService";
 import { queryClient } from "@/http";
 
 export default function useDelete() {

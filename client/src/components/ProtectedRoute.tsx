@@ -1,6 +1,7 @@
-import { useAppSelector } from "@/store";
 import { useEffect, type FC, type PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { useAppSelector } from "@/shared/lib/store/hooks/useAppSelector";
 
 const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
 	const { token } = useAppSelector(state => state.auth);

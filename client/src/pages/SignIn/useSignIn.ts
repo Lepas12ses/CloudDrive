@@ -3,14 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
 import type SignInData from "@/models/SignInData";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { actions as authActions } from "@/store/auth";
-import { queryClient } from "@/http";
+import { actions as authActions } from "@/shared/lib/store/reducers/auth";
 import type AuthResponse from "@/models/AuthResponse";
 import type ApiErrorResponse from "@/models/ApiErrorResponse";
-import authService from "@/service/AuthService";
+import authService from "@/shared/lib/service/AuthService";
 import type ValidationError from "@/models/ValidationError";
 import type { FieldErrors } from "@/components/shared/Form/model/FieldErrors";
+import queryClient from "@/shared/api/queryClient";
+import useAppDispatch from "@/shared/lib/store/hooks/useAppDispatch";
+import { useAppSelector } from "@/shared/lib/store/hooks/useAppSelector";
 
 export default function useSignIn() {
 	const dispatch = useAppDispatch();

@@ -1,7 +1,7 @@
 import type { FC } from "react";
 
 import classes from "./SkeletonField.module.css";
-import cn from "@/util/cn";
+import cn from "@/shared/lib/helper/cn";
 
 interface SkeletonFieldProps {
 	className?: string;

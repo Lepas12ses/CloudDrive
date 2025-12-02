@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 
-import userService from "@/service/UserService";
+import userService from "@/shared/lib/service/UserService";
 import { queryClient } from "@/http";
 import {
 	FILES_SEARCH_PARAMS_KEYS,

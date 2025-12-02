@@ -1,5 +1,5 @@
 import { queryClient } from "@/http";
-import userService from "@/service/UserService";
+import userService from "@/shared/lib/service/UserService";
 import { useQuery } from "@tanstack/react-query";
 
 export default function useProfile() {
