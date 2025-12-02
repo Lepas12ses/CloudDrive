@@ -30,28 +30,28 @@ const SignUp: FC = () => {
 				>
 					<Form variants={{ gap: "m" }}>
 						<FieldProvider id='login'>
-							<div className='flex  flex-col gap-0.25'>
+							<div className='flex  flex-col gap-px'>
 								<Label>Логин</Label>
 								<Input type='text' />
 								<FieldError />
 							</div>
 						</FieldProvider>
 						<FieldProvider id='email'>
-							<div className='flex  flex-col gap-0.25'>
+							<div className='flex  flex-col gap-px'>
 								<Label>Почта</Label>
 								<Input type='email' />
 								<FieldError />
 							</div>
 						</FieldProvider>
 						<FieldProvider id='password'>
-							<div className='flex  flex-col gap-0.25'>
+							<div className='flex  flex-col gap-px'>
 								<Label>Пароль</Label>
 								<Input type='password' />
 								<FieldError />
 							</div>
 						</FieldProvider>
 						<FieldProvider id='password-repeat'>
-							<div className='flex  flex-col gap-0.25'>
+							<div className='flex  flex-col gap-px'>
 								<Label>Пароль</Label>
 								<Input type='password' />
 								<FieldError />

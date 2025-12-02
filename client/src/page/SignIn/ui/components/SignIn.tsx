@@ -38,7 +38,7 @@ const SignIn: FC = () => {
 							</div>
 						</FieldProvider>
 						<FieldProvider id='password'>
-							<div className='flex  flex-col gap-0.25'>
+							<div className='flex  flex-col gap-px'>
 								<Label>Пароль</Label>
 								<Input type='password' />
 								<FieldError />
