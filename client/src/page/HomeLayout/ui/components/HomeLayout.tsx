@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 import Header from "@/components/Header/Header";
 
-const HomeLayoutPage: FC = () => {
+const HomeLayout: FC = () => {
 	return (
 		<>
 			<div className=' h-screen overflow-hidden'>
@@ -16,4 +16,4 @@ const HomeLayoutPage: FC = () => {
 	);
 };
 
-export default HomeLayoutPage;
+export default HomeLayout;

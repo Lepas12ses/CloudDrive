@@ -9,10 +9,10 @@ import Input from "@/components/shared/Form/field/Input";
 import FieldError from "@/components/shared/Form/field/FieldError";
 import Button from "@/components/shared/Button";
 import RouterLink from "@/components/RouterLink";
-import signUpValidators from "./signUpValidators";
-import useSignUp from "./useSignUp";
+import useSignUp from "../../lib/hooks/useSignUp";
+import signUpValidators from "../../lib/validators";
 
-const SignUpPage: FC = () => {
+const SignUp: FC = () => {
 	const { onSignUp, formError, fieldErrors, isPending } = useSignUp();
 
 	return (
@@ -66,4 +66,4 @@ const SignUpPage: FC = () => {
 	);
 };
 
-export default SignUpPage;
+export default SignUp;

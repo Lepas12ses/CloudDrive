@@ -1,7 +1,6 @@
 import { type FC } from "react";
 
 import Button from "@/components/shared/Button";
-import useSignIn from "./useSignIn";
 import RouterLink from "@/components/RouterLink";
 import Form from "@/components/shared/Form/Form";
 import FormProvider from "@/components/shared/Form/FormProvider";
@@ -10,10 +9,11 @@ import Label from "@/components/shared/Form/field/Label";
 import Input from "@/components/shared/Form/field/Input";
 import FieldError from "@/components/shared/Form/field/FieldError";
 import Container from "@/components/shared/Container";
-import signInValidators from "./signInValidators";
 import FormError from "@/components/shared/Form/FormError";
+import useSignIn from "../../lib/hooks/useSignIn";
+import signInValidators from "../../lib/validators";
 
-const SignInPage: FC = () => {
+const SignIn: FC = () => {
 	const { onSignIn, formError, fieldErrors, isPending } = useSignIn();
 
 	return (
@@ -31,7 +31,7 @@ const SignInPage: FC = () => {
 				>
 					<Form variants={{ gap: "m" }}>
 						<FieldProvider id='login'>
-							<div className='flex  flex-col gap-0.25'>
+							<div className='flex  flex-col gap-px'>
 								<Label>Логин</Label>
 								<Input type='text' />
 								<FieldError />
@@ -54,4 +54,4 @@ const SignInPage: FC = () => {
 	);
 };
 
-export default SignInPage;
+export default SignIn;

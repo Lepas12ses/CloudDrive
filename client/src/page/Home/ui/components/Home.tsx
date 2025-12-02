@@ -1,7 +1,8 @@
 import type { FC } from "react";
 
 import Files from "@/components/Files";
-const HomePage: FC = () => {
+
+const Home: FC = () => {
 	return (
 		<>
 			<Files />
@@ -9,4 +10,4 @@ const HomePage: FC = () => {
 	);
 };
 
-export default HomePage;
+export default Home;

@@ -1,4 +1,4 @@
-import { queryClient } from "@/http";
+import queryClient from "@/shared/api/queryClient";
 import userService from "@/shared/lib/service/UserService";
 import { useQuery } from "@tanstack/react-query";
 
