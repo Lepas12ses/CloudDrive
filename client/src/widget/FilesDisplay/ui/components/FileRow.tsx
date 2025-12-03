@@ -32,15 +32,11 @@ const FileRow: FC<FileRowProps> = ({ file, onDownload, onDelete }) => {
 						<p>{file.name}</p>
 					</div>
 				</td>
-				<td>
-					<p className='pointer-events-none hidden md:block'>
-						{formatDate(file.updatedAt)}
-					</p>
+				<td className='hidden md:table-cell'>
+					<p className='pointer-events-none'>{formatDate(file.updatedAt)}</p>
 				</td>
-				<td>
-					<p className='pointer-events-none hidden lg:block'>
-						{convertFileSize(file.size)}
-					</p>
+				<td className='hidden lg:table-cell'>
+					<p className='pointer-events-none'>{convertFileSize(file.size)}</p>
 				</td>
 				<td>
 					<div className='flex justify-end gap-3 pr-5'>
