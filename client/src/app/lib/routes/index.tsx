@@ -1,14 +1,14 @@
 import type { RouteObject } from "react-router-dom";
 import { Suspense } from "react";
 
-import LoadingSpinner from "@/components/shared/LoadingSpinner";
+import LoadingSpinner from "@/shared/ui/components/LoadingSpinner/LoadingSpinner";
 import { RootLayout } from "@/page/RootLayout";
 import { SignIn } from "@/page/SignIn";
 import { SignUp } from "@/page/SignUp";
 import { Profile } from "@/page/Profile";
 import { Home } from "@/page/Home";
 import { HomeLayout } from "@/page/HomeLayout/index";
-import ProtectedRoute from "@/components/ProtectedRoute";
+import ProtectedRoute from "@/widget/ProtectedRoute/ui/components/ProtectedRoute";
 
 const routes: RouteObject[] = [
 	{

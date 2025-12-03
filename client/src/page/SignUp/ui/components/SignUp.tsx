@@ -1,14 +1,14 @@
 import type { FC } from "react";
 
-import Container from "@/components/shared/Container";
-import FormProvider from "@/components/shared/Form/FormProvider";
-import Form from "@/components/shared/Form/Form";
-import FieldProvider from "@/components/shared/Form/field/FieldProvider";
-import Label from "@/components/shared/Form/field/Label";
-import Input from "@/components/shared/Form/field/Input";
-import FieldError from "@/components/shared/Form/field/FieldError";
-import Button from "@/components/shared/Button";
-import RouterLink from "@/components/RouterLink";
+import Container from "@/shared/ui/components/Container";
+import FormProvider from "@/shared/ui/components/Form/FormProvider";
+import Form from "@/shared/ui/components/Form/Form";
+import FieldProvider from "@/shared/ui/components/Form/field/FieldProvider";
+import Label from "@/shared/ui/components/Form/field/Label";
+import Input from "@/shared/ui/components/Form/field/Input";
+import FieldError from "@/shared/ui/components/Form/field/FieldError";
+import Button from "@/shared/ui/components/Button";
+import RouterLink from "@/shared/ui/components/RouterLink";
 import useSignUp from "../../lib/hooks/useSignUp";
 import signUpValidators from "../../lib/validators";
 

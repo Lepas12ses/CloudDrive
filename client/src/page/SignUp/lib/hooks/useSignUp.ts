@@ -2,17 +2,16 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
-import type SignUpData from "@/models/SignUpData";
-import type ApiErrorResponse from "@/models/ApiErrorResponse";
-import type AuthResponse from "@/models/AuthResponse";
-
-import { actions as authActions } from "@/shared/lib/store/reducers/auth";
+import type SignUpData from "@/page/SignUp/model/SignUpData";
+import { authActions } from "@/shared/lib/store/reducers/auth";
 import queryClient from "@/shared/api/queryClient";
-import authService from "@/shared/lib/service/AuthService";
-import type ValidationError from "@/models/ValidationError";
-import type { FieldErrors } from "@/components/shared/Form/model/FieldErrors";
+import type ValidationError from "@/shared/model/ValidationError";
+import type { FieldErrors } from "@/shared/ui/components/Form/model/FieldErrors";
 import useAppDispatch from "@/shared/lib/store/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/store/hooks/useAppSelector";
+import type AuthResponse from "@/shared/api/types/AuthResponse";
+import type ApiErrorResponse from "@/shared/model/ApiErrorResponse";
+import signUp from "../../api/signUp";
 
 export default function useSignUp() {
 	const dispatch = useAppDispatch();
@@ -32,7 +31,7 @@ export default function useSignUp() {
 	>(
 		{
 			mutationKey: ["sign-up"],
-			mutationFn: authService.register,
+			mutationFn: signUp,
 			onSuccess: data => {
 				dispatch(authActions.setToken(data.accessToken));
 				navigate("/", { replace: true });

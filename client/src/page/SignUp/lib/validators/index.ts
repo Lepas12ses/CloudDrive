@@ -1,4 +1,4 @@
-import type Validator from "@/components/shared/Form/model/Validator";
+import type Validator from "@/shared/ui/components/Form/model/Validator";
 
 const signUpValidators: Validator[] = [
 	{

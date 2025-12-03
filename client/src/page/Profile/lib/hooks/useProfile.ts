@@ -1,12 +1,13 @@
 import queryClient from "@/shared/api/queryClient";
-import userService from "@/shared/lib/service/UserService";
+
 import { useQuery } from "@tanstack/react-query";
+import fetchProfile from "../../api/fetchProfile";
 
 export default function useProfile() {
 	const { data, isError, error, isPending } = useQuery(
 		{
 			queryKey: ["profile"],
-			queryFn: ({ signal }) => userService.profile(signal),
+			queryFn: ({ signal }) => fetchProfile(signal),
 		},
 		queryClient
 	);

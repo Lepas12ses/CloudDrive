@@ -1,8 +1,9 @@
 import { type FC } from "react";
+
 import useProfile from "../../lib/hooks/useProfile";
-import LoadingSpinner from "@/components/shared/LoadingSpinner";
-import ErrorDisplay from "@/components/ErrorDisplay";
-import Container from "@/components/shared/Container";
+import LoadingSpinner from "@/shared/ui/components/LoadingSpinner/LoadingSpinner";
+import ErrorDisplay from "@/shared/ui/components/ErrorDisplay";
+import Container from "@/shared/ui/components/Container";
 
 const Profile: FC = () => {
 	const { data, isError, error, isPending } = useProfile();

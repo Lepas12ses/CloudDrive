@@ -1,11 +1,15 @@
 import type { FC } from "react";
 
-import Files from "@/components/Files";
+import { TopFilesBar } from "@/widget/TopFilesBar";
+import { FilesDisplay } from "@/widget/FilesDisplay";
 
 const Home: FC = () => {
 	return (
 		<>
-			<Files />
+			<div className='flex flex-col gap-3'>
+				<TopFilesBar />
+				<FilesDisplay />
+			</div>
 		</>
 	);
 };
