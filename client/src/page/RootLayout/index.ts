@@ -1,1 +1,1 @@
-export { default as RootLayout } from "./ui/components/RootLayout.lazy";
+export { default as RootLayout } from "./ui/components/RootLayout";

@@ -1,5 +1,5 @@
 import instance from "@/shared/api/credentialsAxiosInstance";
-import type AuthResponse from "@/shared/api/types/AuthResponse";
+import type AuthResponse from "@/shared/model/AuthResponse";
 import wrapResponse from "@/shared/lib/helper/wrapResponse";
 import type SignUpData from "../model/SignUpData";
 

@@ -1,6 +1,6 @@
 import type SignInData from "../model/SignInData";
 import instance from "@/shared/api/credentialsAxiosInstance";
-import type AuthResponse from "@/shared/api/types/AuthResponse";
+import type AuthResponse from "@/shared/model/AuthResponse";
 import wrapResponse from "@/shared/lib/helper/wrapResponse";
 
 export default async function signIn(data: SignInData) {

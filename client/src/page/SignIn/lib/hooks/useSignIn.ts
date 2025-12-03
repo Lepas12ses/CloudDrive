@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import type SignInData from "@/page/SignIn/model/SignInData";
 import { authActions } from "@/shared/lib/store/reducers/auth";
-import type AuthResponse from "@/shared/api/types/AuthResponse";
+import type AuthResponse from "@/shared/model/AuthResponse";
 import type ApiErrorResponse from "@/shared/model/ApiErrorResponse";
 import type ValidationError from "@/shared/model/ValidationError";
 import type { FieldErrors } from "@/shared/ui/components/Form/model/FieldErrors";

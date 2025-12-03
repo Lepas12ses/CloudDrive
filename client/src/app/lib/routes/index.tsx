@@ -9,6 +9,7 @@ import { Profile } from "@/page/Profile";
 import { Home } from "@/page/Home";
 import { HomeLayout } from "@/page/HomeLayout/index";
 import ProtectedRoute from "@/widget/ProtectedRoute/ui/components/ProtectedRoute";
+import { ProfileLayout } from "@/page/ProfileLayout";
 
 const routes: RouteObject[] = [
 	{
@@ -19,9 +20,7 @@ const routes: RouteObject[] = [
 				path: "/",
 				element: (
 					<ProtectedRoute>
-						<Suspense fallback={<LoadingSpinner />}>
-							<HomeLayout />
-						</Suspense>
+						<HomeLayout />
 					</ProtectedRoute>
 				),
 				children: [
@@ -35,11 +34,18 @@ const routes: RouteObject[] = [
 					},
 					{
 						path: "profile/",
-						element: (
-							<Suspense fallback={<LoadingSpinner />}>
-								<Profile />
-							</Suspense>
-						),
+
+						element: <ProfileLayout />,
+						children: [
+							{
+								index: true,
+								element: (
+									<Suspense fallback={<LoadingSpinner />}>
+										<Profile />
+									</Suspense>
+								),
+							},
+						],
 					},
 				],
 			},

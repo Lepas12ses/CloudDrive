@@ -1,6 +1,6 @@
 import type { GenericAbortSignal } from "axios";
 
-import type User from "@/models/User";
+import type User from "../model/User";
 import instance from "@/shared/api/credentialsAxiosInstance";
 import wrapResponse from "@/shared/lib/helper/wrapResponse";
 

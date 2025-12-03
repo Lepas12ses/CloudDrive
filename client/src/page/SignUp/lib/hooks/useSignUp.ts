@@ -9,7 +9,7 @@ import type ValidationError from "@/shared/model/ValidationError";
 import type { FieldErrors } from "@/shared/ui/components/Form/model/FieldErrors";
 import useAppDispatch from "@/shared/lib/store/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/store/hooks/useAppSelector";
-import type AuthResponse from "@/shared/api/types/AuthResponse";
+import type AuthResponse from "@/shared/model/AuthResponse";
 import type ApiErrorResponse from "@/shared/model/ApiErrorResponse";
 import signUp from "../../api/signUp";
 

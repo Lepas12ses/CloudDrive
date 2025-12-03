@@ -6,7 +6,7 @@ import { Header } from "@/widget/Header";
 const HomeLayout: FC = () => {
 	return (
 		<>
-			<div className=' h-screen overflow-hidden'>
+			<div>
 				<Header />
 				<main className='p-3'>
 					<Outlet />

@@ -1,4 +1,4 @@
-import type AuthResponse from "@/shared/api/types/AuthResponse";
+import type AuthResponse from "@/shared/model/AuthResponse";
 import axios from "axios";
 
 import { BASE_URL } from "@/shared/api/credentialsAxiosInstance";

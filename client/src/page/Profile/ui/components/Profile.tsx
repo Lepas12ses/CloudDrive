@@ -1,12 +1,12 @@
 import { type FC } from "react";
 
-import useProfile from "../../lib/hooks/useProfile";
 import LoadingSpinner from "@/shared/ui/components/LoadingSpinner/LoadingSpinner";
 import ErrorDisplay from "@/shared/ui/components/ErrorDisplay";
 import Container from "@/shared/ui/components/Container";
+import { useUserQuery } from "@/entity/User";
 
 const Profile: FC = () => {
-	const { data, isError, error, isPending } = useProfile();
+	const { data, isError, error, isPending } = useUserQuery();
 
 	if (isError) {
 		return (
@@ -25,11 +25,11 @@ const Profile: FC = () => {
 	if (data) {
 		return (
 			<Container
-				variants={{ shadow: "l", color: "light" }}
-				className='w-fit rounded-lg'
+				variants={{ color: "normal" }}
+				className='w-full rounded-lg flex flex-col'
 			>
 				<p>
-					Логин:<span className='font-bold'>{data.login}</span>
+					Логин: <span className='font-bold'>{data.login}</span>
 				</p>
 				<p>
 					Почта: <span className='font-bold'>{data.email}</span>
