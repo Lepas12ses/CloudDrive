@@ -46,8 +46,6 @@ class TokenService {
 				refreshToken,
 			},
 		});
-
-		console.log(id);
 	}
 
 	validateAccessToken(accessToken: string) {
