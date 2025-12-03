@@ -18,18 +18,16 @@ const TopFilesBar: FC = memo(() => {
 	return (
 		<>
 			<UplodaModal open={isUploading} onClose={onCloseUploading} />
-			<Container variants={{ shadow: "s" }} className='flex gap-2 rounded-full'>
-				<Container
-					variants={{ color: "light", shadow: "is" }}
-					className='flex-1 rounded-full p-0'
-				>
-					<SearchField
-						id='search'
-						className='w-full h-full'
-						onChange={handleSearchChange}
-						defaultValue={defaultSearch}
-					/>
-				</Container>
+			<Container
+				variants={{ shadow: "s" }}
+				className='flex items-center justify-between gap-2 rounded-md'
+			>
+				<SearchField
+					id='search'
+					className='w-full h-full'
+					onChange={handleSearchChange}
+					defaultValue={defaultSearch}
+				/>
 
 				<Button onClick={onOpenUpload} className='rounded-full'>
 					Загрузить

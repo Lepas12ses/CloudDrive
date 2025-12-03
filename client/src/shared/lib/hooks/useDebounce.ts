@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 export default function useDebounce(
 	actionFn: (...args: any[]) => void,
@@ -7,28 +7,36 @@ export default function useDebounce(
 ) {
 	const timerRef = useRef<number>(null);
 
-	function handleClear() {
+	const handleClear = useCallback(() => {
 		if (timerRef.current) {
 			clearTimeout(timerRef.current);
 			timerRef.current = null;
 		}
-	}
+	}, []);
 
-	function handleSet(...args: any[]) {
-		handleClear();
+	const handleSet = useCallback(
+		(...args: any[]) => {
+			handleClear();
 
-		timerRef.current = setTimeout(() => {
-			actionFn(...args);
-		}, delay);
-	}
+			timerRef.current = setTimeout(() => {
+				actionFn(...args);
+			}, delay);
+		},
+		[actionFn, delay, handleClear]
+	);
+
+	const resFn = useCallback(
+		(...args: any[]) => {
+			handleSet(...args);
+		},
+		[handleSet]
+	);
 
 	useEffect(() => {
 		return () => {
 			handleClear();
 		};
-	}, []);
+	}, [handleClear]);
 
-	return (...args: any[]) => {
-		handleSet(...args);
-	};
+	return resFn;
 }
