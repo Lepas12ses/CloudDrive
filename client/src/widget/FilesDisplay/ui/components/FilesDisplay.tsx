@@ -23,7 +23,7 @@ const FilesDisplay: FC = () => {
 						<p className='text-xl'>Мои файлы</p>
 					</header>
 					{fetching.data && (
-						<div>
+						<div className='flex flex-col gap-1.5'>
 							<table className='w-full'>
 								<FilesTableHeader />
 								<tbody>

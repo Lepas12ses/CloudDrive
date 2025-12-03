@@ -86,7 +86,7 @@ const HeaderSort: FC<HeaderSortProps> = ({
 			<button
 				onClick={handleClick}
 				className={`px-2 h-12 w-full flex gap-1 
-							items-center rounded-md hover:bg-stone-300`}
+							items-center rounded-md hover:bg-(--bg-dark) transition-colors`}
 			>
 				{children}
 				{icon}

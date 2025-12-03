@@ -22,12 +22,9 @@ const FileRow: FC<FileRowProps> = ({ file, onDownload, onDelete }) => {
 
 	return (
 		<>
-			<tr
-				ref={rowRef}
-				className='h-10 border-t border-stone-400 hover:bg-stone-300'
-			>
+			<tr ref={rowRef} className='h-10 transition-colors hover:bg-(--bg-dark)'>
 				<td>
-					<div className='flex items-center gap-2 pointer-events-none'>
+					<div className='flex items-center gap-2 pointer-events-none pl-2'>
 						<img className='h-4' src={image.src} alt={image.alt} />
 						<p>{file.name}</p>
 					</div>
@@ -39,7 +36,7 @@ const FileRow: FC<FileRowProps> = ({ file, onDownload, onDelete }) => {
 					<p className='pointer-events-none'>{convertFileSize(file.size)}</p>
 				</td>
 				<td>
-					<div className='flex justify-end gap-3 pr-5'>
+					<div className='flex justify-end gap-3 pr-2'>
 						{(isHover || isMobile) && (
 							<div className='flex gap-3'>
 								<button onClick={onDownload}>
