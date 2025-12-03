@@ -1,10 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import {
-	forwardRef,
-	type FC,
-	type HTMLAttributes,
-	type PropsWithChildren,
-} from "react";
+import { forwardRef, type HTMLAttributes, type PropsWithChildren } from "react";
 
 import cn from "@/shared/lib/helper/cn";
 

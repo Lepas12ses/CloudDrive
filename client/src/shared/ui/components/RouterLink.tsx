@@ -2,7 +2,7 @@ import cn from "@/shared/lib/helper/cn";
 import type { FC, PropsWithChildren } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 
-interface RouterLinkProps extends PropsWithChildren<LinkProps> {}
+type RouterLinkProps = PropsWithChildren<LinkProps>;
 
 const RouterLink: FC<RouterLinkProps> = ({ className, children, ...props }) => {
 	const classes = cn(`text-(--primary) hover:opacity-50`, className);
