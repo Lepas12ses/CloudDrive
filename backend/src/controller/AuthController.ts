@@ -1,8 +1,8 @@
 import { RequestHandler } from "express";
 
-import userService from "../service/UserService.js";
-import { REFRESH_TOKEN_COOKIE } from "../shared/lib/constants/index.js";
-import ApiError from "../exceptions/ApiError.js";
+import userService from "#src/service/UserService.js";
+import { REFRESH_TOKEN_COOKIE } from "#src/shared/lib/consts/index.js";
+import ApiError from "#src/exceptions/ApiError.js";
 import { getExpirationTime } from "./lib/util.js";
 
 class AuthController {

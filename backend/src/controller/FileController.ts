@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
-import fileService from "../service/FilesService/FileService.js";
-import ApiError from "../exceptions/ApiError.js";
-import FilesSearchParams from "../service/FilesService/model/FilesSearchParams.js";
+import fileService from "#src/service/FilesService/FileService.js";
+import ApiError from "#src/exceptions/ApiError.js";
+import FilesSearchParams from "#src/service/FilesService/model/FilesSearchParams.js";
 
 class FileController {
 	upload: RequestHandler = async (req, res, next) => {

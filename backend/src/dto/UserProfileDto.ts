@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User from "#src/models/User.js";
 
 export default class UserProfileDto {
 	login: string;

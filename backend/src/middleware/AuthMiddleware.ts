@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
-import ApiError from "../exceptions/ApiError.js";
-import TokenService from "../service/TokenService.js";
+import ApiError from "#src/exceptions/ApiError.js";
+import TokenService from "#src/service/TokenService.js";
 
 const authMiddleware: RequestHandler = (req, res, next) => {
 	const auth = req.headers.authorization;

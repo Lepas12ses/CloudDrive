@@ -1,4 +1,4 @@
-import ApiError from "../../../exceptions/ApiError.js";
+import ApiError from "#src/exceptions/ApiError.js";
 
 export default class FilesSearchParams {
 	limit: number;

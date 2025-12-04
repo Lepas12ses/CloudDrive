@@ -2,11 +2,11 @@ import path from "path";
 import fs from "fs";
 import { Op, Order } from "sequelize";
 
-import ApiError from "../../exceptions/ApiError.js";
-import File from "../../models/File.js";
-import User from "../../models/User.js";
-import { UPLOADS_PATH } from "../../shared/lib/constants/index.js";
-import FileDto from "../../dto/FileDto.js";
+import ApiError from "#src/exceptions/ApiError.js";
+import File from "#src/models/File.js";
+import User from "#src/models/User.js";
+import { UPLOADS_PATH } from "#src/shared/lib/consts/index.js";
+import FileDto from "#src/dto/FileDto.js";
 import FilesSearchParams from "./model/FilesSearchParams.js";
 
 class FileService {
