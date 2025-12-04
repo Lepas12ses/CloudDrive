@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"scripts": {
 		"dev": "npx concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=client\"",
-		"lint": "npm run lint --workspaces",
+		"lint": "npm run lint --workspace=client",
 		"prepare": "husky"
 	},
 	"workspaces": [

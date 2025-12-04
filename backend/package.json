@@ -5,8 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"start": "node dist/index.js",
-		"dev": "tsc-watch --onsuccess \"node --env-file .env dist/index.js\"",
-		"lint": "eslint ."
+		"dev": "tsc-watch --onsuccess \"node --env-file .env dist/index.js\""
 	},
 	"devDependencies": {
 		"@types/bcrypt": "^6.0.0",
