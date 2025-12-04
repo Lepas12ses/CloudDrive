@@ -3,7 +3,7 @@ import { RequestHandler } from "express";
 import userService from "#src/service/UserService.js";
 import { REFRESH_TOKEN_COOKIE } from "#src/shared/lib/consts/index.js";
 import ApiError from "#src/exceptions/ApiError.js";
-import { getExpirationTime } from "./lib/util.js";
+import getExpirationTime from "#src/shared/lib/helper/getExpirationTime.js";
 
 class AuthController {
 	logout: RequestHandler = async (req, res, next) => {
