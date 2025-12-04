@@ -2,9 +2,9 @@ import type { RequestHandler } from "express";
 import { validationResult } from "express-validator";
 
 import userService from "#src/service/UserService.js";
-import { REFRESH_TOKEN_COOKIE } from "#src/shared/lib/consts/index.js";
+import { REFRESH_TOKEN_COOKIE } from "#src/shared/lib/consts/headers.js";
 import ApiError from "#src/exceptions/ApiError.js";
-import { getExpirationTime } from "./lib/util.js";
+import getExpirationTime from "#src/shared/lib/helper/getExpirationTime.js";
 
 class UserController {
 	login: RequestHandler = async (req, res, next) => {

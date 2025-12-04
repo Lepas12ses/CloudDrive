@@ -3,7 +3,7 @@ import multer, { diskStorage } from "multer";
 
 import fileController from "#src/controller/FileController.js";
 import authMiddleware from "#src/middleware/AuthMiddleware.js";
-import { UPLOADS_PATH } from "#src/shared/lib/consts/index.js";
+import { UPLOADS_PATH } from "#src/shared/lib/consts/paths.js";
 
 const fileRouter = Router();
 
