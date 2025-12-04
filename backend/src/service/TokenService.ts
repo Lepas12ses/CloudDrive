@@ -41,7 +41,7 @@ class TokenService {
 	}
 
 	async destroyToken(refreshToken: string) {
-		const id = await Token.destroy({
+		await Token.destroy({
 			where: {
 				refreshToken,
 			},
@@ -52,7 +52,7 @@ class TokenService {
 		try {
 			const userDto = jwt.verify(accessToken, env.jwtAccessSecret) as UserDto;
 			return userDto;
-		} catch (err) {
+		} catch {
 			return null;
 		}
 	}
@@ -61,7 +61,7 @@ class TokenService {
 		try {
 			const userDto = jwt.verify(refreshToken, env.jwtRefreshSecret) as UserDto;
 			return userDto;
-		} catch (err) {
+		} catch {
 			return null;
 		}
 	}

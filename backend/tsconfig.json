@@ -7,5 +7,6 @@
 		"outDir": "dist",
 		"types": ["cookie-parser", "cors", "jsonwebtoken", "bcrypt", "multer"]
 	},
+
 	"include": ["src/**/*"]
 }
