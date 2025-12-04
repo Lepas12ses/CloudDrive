@@ -27,7 +27,7 @@ app.use(errorMiddleware);
 export default async function startApp() {
 	const port = env.port;
 	try {
-		databaseService.connect();
+		await databaseService.connect();
 
 		app.listen(port, () => {
 			console.log(`Сервер запущен на порту: ${port}`);
