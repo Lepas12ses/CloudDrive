@@ -18,7 +18,11 @@ export async function signJwt(
 }
 
 export async function verifyJwt(jwt: string) {
-	return await jose.jwtVerify(jwt, signSecret);
+	try {
+		return await jose.jwtVerify(jwt, signSecret);
+	} catch {
+		return null;
+	}
 }
 
 export async function encryptJwt(
@@ -36,5 +40,9 @@ export async function encryptJwt(
 }
 
 export async function decryptJwt(jwt: string) {
-	return await jose.jwtDecrypt(jwt, encryptionSecret);
+	try {
+		return await jose.jwtDecrypt(jwt, encryptionSecret);
+	} catch {
+		return null;
+	}
 }
