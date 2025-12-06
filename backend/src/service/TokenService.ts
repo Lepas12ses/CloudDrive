@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
-import Token from "../models/Token.js";
-import UserDto from "../dto/UserDto.js";
+import Token from "../model/schema/Token.js";
+import UserDto from "../model/dto/UserDto.js";
 import env from "../shared/lib/env.js";
 
 class TokenService {

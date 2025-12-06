@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 
-import models from "../models/index.js";
+import models from "#src/model/schema/index.js";
 import env from "../shared/lib/env.js";
 
 class DatabaseService {

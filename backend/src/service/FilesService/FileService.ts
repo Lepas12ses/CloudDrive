@@ -3,10 +3,10 @@ import fs from "fs";
 import { Op, Order } from "sequelize";
 
 import ApiError from "#src/exceptions/ApiError.js";
-import File from "#src/models/File.js";
-import User from "#src/models/User.js";
+import File from "#src/model/schema/File.js";
+import User from "#src/model/schema/User.js";
 import { UPLOADS_PATH } from "#src/shared/lib/consts/paths.js";
-import FileDto from "#src/dto/FileDto.js";
+import FileDto from "#src/model/dto/FileDto.js";
 import FilesSearchParams from "./model/FilesSearchParams.js";
 
 class FileService {

@@ -1,4 +1,4 @@
-import File from "#src/models/File.js";
+import File from "#src/model/schema/File.js";
 
 export default class FileDto {
 	id: number;

@@ -1,11 +1,11 @@
 import bcrypt from "bcrypt";
 
-import UserDto from "../dto/UserDto.js";
+import UserDto from "../model/dto/UserDto.js";
 import ApiError from "../exceptions/ApiError.js";
-import User from "../models/User.js";
+import User from "../model/schema/User.js";
 import tokenService from "./TokenService.js";
-import Token from "../models/Token.js";
-import UserProfileDto from "../dto/UserProfileDto.js";
+import Token from "../model/schema/Token.js";
+import UserProfileDto from "../model/dto/UserProfileDto.js";
 
 class UserService {
 	async login(login: string, password: string) {
