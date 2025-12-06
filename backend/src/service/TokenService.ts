@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 import Token from "../model/schema/Token.js";
 import UserDto from "../model/dto/UserDto.js";
-import env from "../shared/lib/env.js";
+import env from "../shared/lib/helper/env.js";
 
 class TokenService {
 	async refreshTokens(userDto: UserDto) {

@@ -1,5 +1,5 @@
 import * as jose from "jose";
-import env from "../env.js";
+import env from "./env.js";
 
 const signSecret = new TextEncoder().encode(env.jwtAccessSecret);
 const encryptionSecret = jose.base64url.decode(

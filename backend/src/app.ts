@@ -7,7 +7,7 @@ import authRouter from "./routes/AuthRoutes.js";
 import fileRouter from "./routes/FileRoutes.js";
 import databaseService from "./service/DatabaseService.js";
 import errorMiddleware from "./middleware/ErrorMiddleware.js";
-import env from "./shared/lib/env.js";
+import env from "./shared/lib/helper/env.js";
 
 export const app = express();
 
