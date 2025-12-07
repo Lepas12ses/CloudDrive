@@ -1,8 +1,8 @@
 import { RequestHandler } from "express";
 import ApiError from "#src/exceptions/ApiError.js";
-import TokenService from "#src/service/TokenService.js";
+import tokenService from "#src/service/TokenService.js";
 
-const authMiddleware: RequestHandler = (req, res, next) => {
+const authMiddleware: RequestHandler = async (req, res, next) => {
 	const auth = req.headers.authorization;
 
 	if (!auth) {
@@ -14,11 +14,11 @@ const authMiddleware: RequestHandler = (req, res, next) => {
 		return next(ApiError.Unauthorized());
 	}
 
-	const userDto = TokenService.validateAccessToken(token);
-	if (!userDto) {
+	const accessPayload = await tokenService.validateAccessToken(token);
+	if (!accessPayload) {
 		return next(ApiError.Unauthorized());
 	}
-	req.headers.userId = `${userDto.id}`;
+	req.headers.userId = `${accessPayload.userId}`;
 
 	next();
 };

@@ -6,7 +6,7 @@ import { DeviceInfo, isDeviceInfo } from "./DeviceInfo.js";
 
 export interface RefreshTokenPayload extends AccessTokenPayload {
 	deviceInfo: DeviceInfo;
-	creationTime: Date;
+	creationTime: string;
 }
 
 export function isRefreshTokenPayload(
@@ -16,7 +16,7 @@ export function isRefreshTokenPayload(
 
 	if (!("deviceInfo" in obj) || !isDeviceInfo(obj.deviceInfo)) return false;
 
-	if (!("creationTime" in obj) || !(obj.creationTime instanceof Date))
+	if (!("creationTime" in obj) || typeof obj.creationTime !== "string")
 		return false;
 
 	return true;

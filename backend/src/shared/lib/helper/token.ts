@@ -15,7 +15,7 @@ export async function createAccessToken(payload: AccessTokenPayload) {
 
 export async function verifyAccessToken(
 	token: string
-): Promise<AccessTokenPayload> {
+): Promise<AccessTokenPayload | null> {
 	const data = await verifyJwt(token);
 
 	if (!data) return null;
@@ -31,7 +31,7 @@ export async function createRefreshToken(payload: RefreshTokenPayload) {
 
 export async function verifyRefreshToken(
 	token: string
-): Promise<RefreshTokenPayload> {
+): Promise<RefreshTokenPayload | null> {
 	const data = await decryptJwt(token);
 
 	if (!data) return null;

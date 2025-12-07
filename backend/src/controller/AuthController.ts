@@ -4,6 +4,7 @@ import userService from "#src/service/UserService.js";
 import { REFRESH_TOKEN_COOKIE } from "#src/shared/lib/consts/headers.js";
 import ApiError from "#src/exceptions/ApiError.js";
 import getExpirationTime from "#src/shared/lib/helper/getExpirationTime.js";
+import { DeviceInfo } from "#src/model/DeviceInfo.js";
 
 class AuthController {
 	logout: RequestHandler = async (req, res, next) => {
@@ -31,7 +32,12 @@ class AuthController {
 				return next(ApiError.Unauthorized());
 			}
 
-			const tokens = await userService.refresh(refreshToken);
+			const device: DeviceInfo = {
+				ip: req.ip || "unknown",
+				name: req.headers["user-agent"] || "unknown",
+			};
+
+			const tokens = await userService.refresh(refreshToken, device);
 			const expiration = getExpirationTime(30);
 			res.cookie(REFRESH_TOKEN_COOKIE, tokens.refreshToken, {
 				httpOnly: true,

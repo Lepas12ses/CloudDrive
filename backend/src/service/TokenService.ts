@@ -1,31 +1,38 @@
-import jwt from "jsonwebtoken";
-
 import Token from "../model/schema/Token.js";
-import UserDto from "../model/dto/UserDto.js";
-import env from "../shared/lib/helper/env.js";
+import { AccessTokenPayload } from "#src/model/AccessTokenPayload.js";
+import { RefreshTokenPayload } from "#src/model/RefreshTokenPayload.js";
+import {
+	createAccessToken,
+	createRefreshToken,
+	verifyAccessToken,
+	verifyRefreshToken,
+} from "#src/shared/lib/helper/token.js";
 
 class TokenService {
-	async refreshTokens(userDto: UserDto) {
-		const tokens = this.generateTokens({ ...userDto });
-		await this.saveToken(userDto.id, tokens.refreshToken);
+	async refreshTokens(
+		accessPayload: AccessTokenPayload,
+		refreshPayload: RefreshTokenPayload
+	) {
+		const tokens = await this.generateTokens(accessPayload, refreshPayload);
+
+		await this.saveToken(accessPayload.userId, tokens.refreshToken);
 
 		return tokens;
 	}
 
-	generateTokens(payload: object) {
-		const accessToken = jwt.sign(payload, env.jwtAccessSecret, {
-			expiresIn: "15m",
-		});
-		const refreshToken = jwt.sign(payload, env.jwtRefreshSecret, {
-			expiresIn: "30d",
-		});
+	async generateTokens(
+		accessPayload: AccessTokenPayload,
+		refreshPayload: RefreshTokenPayload
+	) {
+		const accessToken = await createAccessToken(accessPayload);
+		const refreshToken = await createRefreshToken(refreshPayload);
 		return {
 			refreshToken,
 			accessToken,
 		};
 	}
 
-	async saveToken(userId: number, refreshToken: string) {
+	protected async saveToken(userId: number, refreshToken: string) {
 		const existingToken = await Token.findOne({
 			where: {
 				userId,
@@ -48,22 +55,12 @@ class TokenService {
 		});
 	}
 
-	validateAccessToken(accessToken: string) {
-		try {
-			const userDto = jwt.verify(accessToken, env.jwtAccessSecret) as UserDto;
-			return userDto;
-		} catch {
-			return null;
-		}
+	async validateAccessToken(accessToken: string) {
+		return await verifyAccessToken(accessToken);
 	}
 
-	validateRefreshToken(refreshToken: string) {
-		try {
-			const userDto = jwt.verify(refreshToken, env.jwtRefreshSecret) as UserDto;
-			return userDto;
-		} catch {
-			return null;
-		}
+	async validateRefreshToken(refreshToken: string) {
+		return await verifyRefreshToken(refreshToken);
 	}
 }
 

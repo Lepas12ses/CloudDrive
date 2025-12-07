@@ -5,13 +5,19 @@ import userService from "#src/service/UserService.js";
 import { REFRESH_TOKEN_COOKIE } from "#src/shared/lib/consts/headers.js";
 import ApiError from "#src/exceptions/ApiError.js";
 import getExpirationTime from "#src/shared/lib/helper/getExpirationTime.js";
+import { DeviceInfo } from "#src/model/DeviceInfo.js";
 
 class UserController {
 	login: RequestHandler = async (req, res, next) => {
 		try {
 			const { login, password } = req.body;
 
-			const tokens = await userService.login(login, password);
+			const device: DeviceInfo = {
+				ip: req.ip || "unknown",
+				name: req.headers["user-agent"] || "unknown",
+			};
+
+			const tokens = await userService.login(login, password, device);
 			const expiration = getExpirationTime(30);
 			res.cookie(REFRESH_TOKEN_COOKIE, tokens.refreshToken, {
 				httpOnly: true,
@@ -38,7 +44,12 @@ class UserController {
 
 			const { login, email, password } = req.body;
 
-			const tokens = await userService.register(login, email, password);
+			const device: DeviceInfo = {
+				ip: req.ip || "unknown",
+				name: req.headers["user-agent"] || "unknown",
+			};
+
+			const tokens = await userService.register(login, email, password, device);
 			const expiration = getExpirationTime(30);
 			res.cookie(REFRESH_TOKEN_COOKIE, tokens.refreshToken, {
 				httpOnly: true,
