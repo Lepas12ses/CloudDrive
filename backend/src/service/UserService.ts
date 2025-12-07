@@ -74,7 +74,8 @@ class UserService {
 
 		const tokens = await tokenService.refreshTokens(
 			{ userId: user.id },
-			{ userId: user.id, deviceInfo, creationTime: new Date().toISOString() }
+			{ userId: user.id, deviceInfo, creationTime: new Date().toISOString() },
+			refreshToken
 		);
 
 		return tokens;

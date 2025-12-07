@@ -11,11 +11,16 @@ import {
 class TokenService {
 	async refreshTokens(
 		accessPayload: AccessTokenPayload,
-		refreshPayload: RefreshTokenPayload
+		refreshPayload: RefreshTokenPayload,
+		oldRefreshToken?: string
 	) {
 		const tokens = await this.generateTokens(accessPayload, refreshPayload);
 
-		await this.saveToken(accessPayload.userId, tokens.refreshToken);
+		await this.saveToken(
+			accessPayload.userId,
+			tokens.refreshToken,
+			oldRefreshToken
+		);
 
 		return tokens;
 	}
@@ -32,19 +37,40 @@ class TokenService {
 		};
 	}
 
-	protected async saveToken(userId: number, refreshToken: string) {
-		const existingToken = await Token.findOne({
+	protected async saveToken(
+		userId: number,
+		refreshToken: string,
+		oldRefreshToken?: string
+	) {
+		const existingTokens = await Token.findAll({
 			where: {
 				userId,
 			},
 		});
 
-		if (existingToken) {
-			existingToken.refreshToken = refreshToken;
-			return await existingToken.save();
+		for (const token of existingTokens) {
+			if (!(await verifyRefreshToken(token.refreshToken))) {
+				await token.destroy();
+			}
 		}
 
-		return await Token.create({ userId, refreshToken });
+		if (oldRefreshToken) {
+			const existingToken = await Token.findOne({
+				where: {
+					userId,
+					refreshToken: oldRefreshToken,
+				},
+			});
+
+			if (existingToken) {
+				existingToken.refreshToken = refreshToken;
+				return await existingToken.save();
+			}
+
+			return await Token.create({ userId, refreshToken });
+		} else {
+			return await Token.create({ userId, refreshToken });
+		}
 	}
 
 	async destroyToken(refreshToken: string) {

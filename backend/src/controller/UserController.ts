@@ -6,6 +6,7 @@ import { REFRESH_TOKEN_COOKIE } from "#src/shared/lib/consts/headers.js";
 import ApiError from "#src/exceptions/ApiError.js";
 import getExpirationTime from "#src/shared/lib/helper/getExpirationTime.js";
 import { DeviceInfo } from "#src/model/DeviceInfo.js";
+import env from "#src/shared/lib/helper/env.js";
 
 class UserController {
 	login: RequestHandler = async (req, res, next) => {
@@ -18,7 +19,7 @@ class UserController {
 			};
 
 			const tokens = await userService.login(login, password, device);
-			const expiration = getExpirationTime(30);
+			const expiration = getExpirationTime(env.jwtRefreshExpiration);
 			res.cookie(REFRESH_TOKEN_COOKIE, tokens.refreshToken, {
 				httpOnly: true,
 				path: "/auth",
@@ -50,7 +51,7 @@ class UserController {
 			};
 
 			const tokens = await userService.register(login, email, password, device);
-			const expiration = getExpirationTime(30);
+			const expiration = getExpirationTime(env.jwtRefreshExpiration);
 			res.cookie(REFRESH_TOKEN_COOKIE, tokens.refreshToken, {
 				httpOnly: true,
 				path: "/auth",
