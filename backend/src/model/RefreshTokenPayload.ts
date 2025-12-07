@@ -5,7 +5,6 @@ import {
 import { DeviceInfo, isDeviceInfo } from "./DeviceInfo.js";
 
 export interface RefreshTokenPayload extends AccessTokenPayload {
-	ip: string;
 	deviceInfo: DeviceInfo;
 	creationTime: Date;
 }
