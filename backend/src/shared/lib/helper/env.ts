@@ -23,6 +23,8 @@ class Env {
 	dbPassword: string;
 	jwtAccessSecret: string;
 	jwtRefreshSecret: string;
+	jwtAccessExpiration: string;
+	jwtRefreshExpiration: string;
 
 	constructor() {
 		this.port = getNumber("PORT") ?? 8000;
@@ -34,6 +36,8 @@ class Env {
 		this.dbPassword = getString("POSTGRES_PASSWORD", true);
 		this.jwtAccessSecret = getString("JWT_ACCESS_SECRET", true);
 		this.jwtRefreshSecret = getString("JWT_REFRESH_SECRET", true);
+		this.jwtAccessExpiration = getString("JWT_ACCESS_EXPIRATION", true);
+		this.jwtRefreshExpiration = getString("JWT_REFRESH_EXPIRATION", true);
 	}
 }
 
