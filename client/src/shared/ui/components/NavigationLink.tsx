@@ -1,7 +1,7 @@
 import type { ComponentProps, FC } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-const NavigationLink: FC<ComponentProps<typeof Link>> = ({
+const NavigationLink: FC<ComponentProps<typeof NavLink>> = ({
 	children,
 	...props
 }) => {

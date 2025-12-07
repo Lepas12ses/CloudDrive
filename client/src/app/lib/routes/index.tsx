@@ -10,6 +10,7 @@ import { Home } from "@/page/Home";
 import { HomeLayout } from "@/page/HomeLayout/index";
 import ProtectedRoute from "@/widget/ProtectedRoute/ui/components/ProtectedRoute";
 import { ProfileLayout } from "@/page/ProfileLayout";
+import { Sessions } from "@/page/Sessions";
 
 const routes: RouteObject[] = [
 	{
@@ -42,6 +43,14 @@ const routes: RouteObject[] = [
 								element: (
 									<Suspense fallback={<LoadingSpinner />}>
 										<Profile />
+									</Suspense>
+								),
+							},
+							{
+								path: "sessions/",
+								element: (
+									<Suspense fallback={<LoadingSpinner />}>
+										<Sessions />
 									</Suspense>
 								),
 							},
