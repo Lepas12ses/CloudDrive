@@ -76,6 +76,19 @@ class UserController {
 			next(err);
 		}
 	};
+	sessions: RequestHandler = async (req, res, next) => {
+		try {
+			const userId = parseInt(req.headers.userId as string);
+
+			if (userId === undefined) next(ApiError.Unauthorized);
+
+			const sessions = await tokenService.getSessions(userId);
+
+			res.json({ sessions });
+		} catch (err) {
+			next(err);
+		}
+	};
 }
 
 const userController = new UserController();

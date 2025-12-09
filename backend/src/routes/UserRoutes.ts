@@ -24,6 +24,7 @@ userRouter.post(
 	userController.register
 );
 userRouter.get("/me", authMiddleware, userController.me);
+userRouter.get("/sessions", authMiddleware, userController.sessions);
 userRouter.get("/hello", (req, res) => {
 	res.json({ message: "Hello" });
 });

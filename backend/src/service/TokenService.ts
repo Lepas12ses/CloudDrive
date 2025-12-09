@@ -7,6 +7,7 @@ import {
 	verifyAccessToken,
 	verifyRefreshToken,
 } from "#src/shared/lib/helper/token.js";
+import { Session } from "#src/model/Session.js";
 
 class TokenService {
 	async refreshTokens(
@@ -87,6 +88,30 @@ class TokenService {
 
 	async validateRefreshToken(refreshToken: string) {
 		return await verifyRefreshToken(refreshToken);
+	}
+
+	async getSessions(userId: number) {
+		const tokens = await Token.findAll({
+			where: {
+				userId,
+			},
+		});
+
+		const sessions: Session[] = [];
+
+		for (const token of tokens) {
+			const tokenData = await verifyRefreshToken(token.refreshToken);
+
+			if (!tokenData) continue;
+
+			sessions.push({
+				id: token.id!,
+				deviceInfo: tokenData.deviceInfo,
+				creationTime: tokenData.creationTime,
+			});
+		}
+
+		return sessions;
 	}
 }
 

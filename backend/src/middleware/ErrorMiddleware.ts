@@ -1,8 +1,9 @@
 import { ErrorRequestHandler } from "express";
 import ApiError from "#src/exceptions/ApiError.js";
 
-const errorMiddleware: ErrorRequestHandler = (err, req, res) => {
+const errorMiddleware: ErrorRequestHandler = (err, req, res, next) => {
 	console.log(err);
+
 	if (err instanceof ApiError) {
 		return res
 			.status(err.status)
