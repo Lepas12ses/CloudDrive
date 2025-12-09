@@ -1,1 +1,1 @@
-export const SESSIONS_QUERY_KEY = ["profile"];
+export const SESSIONS_QUERY_KEY = ["sessions"];
