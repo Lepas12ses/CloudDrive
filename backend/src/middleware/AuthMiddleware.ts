@@ -1,6 +1,8 @@
 import { RequestHandler } from "express";
+
 import ApiError from "#src/exceptions/ApiError.js";
 import tokenService from "#src/service/TokenService.js";
+import { setHeadersData } from "#src/shared/lib/helper/headersData.js";
 
 const authMiddleware: RequestHandler = async (req, res, next) => {
 	const auth = req.headers.authorization;
@@ -18,7 +20,10 @@ const authMiddleware: RequestHandler = async (req, res, next) => {
 	if (!accessPayload) {
 		return next(ApiError.Unauthorized());
 	}
-	req.headers.userId = `${accessPayload.userId}`;
+
+	setHeadersData(req, {
+		userId: accessPayload.userId,
+	});
 
 	next();
 };

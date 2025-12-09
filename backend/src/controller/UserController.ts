@@ -7,6 +7,8 @@ import ApiError from "#src/exceptions/ApiError.js";
 import getExpirationTime from "#src/shared/lib/helper/getExpirationTime.js";
 import { DeviceInfo } from "#src/model/DeviceInfo.js";
 import env from "#src/shared/lib/helper/env.js";
+import tokenService from "#src/service/TokenService.js";
+import { getHeadersData } from "#src/shared/lib/helper/headersData.js";
 
 class UserController {
 	login: RequestHandler = async (req, res, next) => {
@@ -36,8 +38,6 @@ class UserController {
 			const validation = validationResult(req);
 
 			if (!validation.isEmpty()) {
-				console.log(validation.array()[0]);
-
 				return next(
 					ApiError.BadRequest("Ошибка валидации", validation.array())
 				);
@@ -65,7 +65,9 @@ class UserController {
 	};
 	me: RequestHandler = async (req, res, next) => {
 		try {
-			const userId = parseInt(req.headers.userId as string);
+			const { userId } = getHeadersData(req);
+
+			if (userId === undefined) next(ApiError.Unauthorized);
 
 			const userProfile = await userService.profile(userId);
 
