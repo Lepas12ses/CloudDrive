@@ -1,5 +1,4 @@
-import { lazy, Suspense } from "react";
-import type { FC } from "react";
+import { lazy, Suspense, type FC } from "react";
 import HomeSkeleton from "./HomeSkeleton";
 
 const Component = lazy(() => import("./Home"));

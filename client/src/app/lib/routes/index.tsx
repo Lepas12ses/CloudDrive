@@ -1,7 +1,5 @@
 import type { RouteObject } from "react-router-dom";
-import { Suspense } from "react";
 
-import LoadingSpinner from "@/shared/ui/components/LoadingSpinner/LoadingSpinner";
 import { RootLayout } from "@/page/RootLayout";
 import { SignIn } from "@/page/SignIn";
 import { SignUp } from "@/page/SignUp";
@@ -36,19 +34,11 @@ const routes: RouteObject[] = [
 						children: [
 							{
 								index: true,
-								element: (
-									<Suspense fallback={<LoadingSpinner />}>
-										<Profile />
-									</Suspense>
-								),
+								element: <Profile />,
 							},
 							{
 								path: "sessions/",
-								element: (
-									<Suspense fallback={<LoadingSpinner />}>
-										<Sessions />
-									</Suspense>
-								),
+								element: <Sessions />,
 							},
 						],
 					},

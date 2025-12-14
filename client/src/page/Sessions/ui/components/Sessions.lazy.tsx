@@ -1,5 +1,15 @@
-import { lazy } from "react";
+import { lazy, Suspense, type FC } from "react";
 
-const SessionsLazy = lazy(() => import("./Sessions"));
+import SessionsSkeleton from "./SessionsSkeleton";
+
+const Component = lazy(() => import("./Sessions"));
+
+const SessionsLazy: FC = () => {
+	return (
+		<Suspense fallback={<SessionsSkeleton />}>
+			<Component />
+		</Suspense>
+	);
+};
 
 export default SessionsLazy;

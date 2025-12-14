@@ -26,7 +26,7 @@ const Sessions: FC = () => {
 		return (
 			<Container
 				variants={{ color: "normal" }}
-				className='w-full rounded-lg flex flex-col gap-1.5'
+				className='rounded-lg flex flex-col gap-1.5 max-w-150'
 			>
 				{data.sessions.map(session => (
 					<SessionCard key={session.id} session={session} />

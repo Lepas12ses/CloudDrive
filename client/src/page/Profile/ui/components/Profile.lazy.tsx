@@ -1,5 +1,14 @@
-import { lazy } from "react";
+import { lazy, Suspense, type FC } from "react";
+import ProfileSkeleton from "./ProfileSkeleton";
 
-const ProfileLazy = lazy(() => import("./Profile"));
+const Component = lazy(() => import("./Profile"));
+
+const ProfileLazy: FC = () => {
+	return (
+		<Suspense fallback={<ProfileSkeleton />}>
+			<Component />
+		</Suspense>
+	);
+};
 
 export default ProfileLazy;
