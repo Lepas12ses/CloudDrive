@@ -9,6 +9,7 @@ export const container = cva(null, {
 			light: "bg-(--bg-light)",
 			normal: "bg-(--bg)",
 			dark: "bg-(--bg-dark)",
+			transparent: "",
 		},
 		padding: {
 			s: "py-1.5 px-2",

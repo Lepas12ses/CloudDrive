@@ -6,8 +6,9 @@ import FilesTableHeader from "./FilesTableHeader/FilesTableHeader";
 import Pages from "./Pages/Pages";
 import LoadingNotification from "./LoadingNotification";
 import Container from "@/shared/ui/components/Container";
+import FilesDisplaySkeleton from "./FilesDisplaySkeleton";
 
-const FilesDisplay: FC = () => {
+const FilesDisplayComponent: FC = () => {
 	const { fetching, deletion, downloading } = useFilesDisplay();
 	return (
 		<>
@@ -49,5 +50,13 @@ const FilesDisplay: FC = () => {
 		</>
 	);
 };
+
+type FilesDisplayType = typeof FilesDisplayComponent & {
+	Skeleton: typeof FilesDisplaySkeleton;
+};
+
+const FilesDisplay = FilesDisplayComponent as FilesDisplayType;
+
+FilesDisplay.Skeleton = FilesDisplaySkeleton;
 
 export default FilesDisplay;

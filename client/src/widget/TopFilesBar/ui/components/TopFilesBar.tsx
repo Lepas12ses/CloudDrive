@@ -5,8 +5,9 @@ import useTopFilesBar from "../../lib/hooks/useTopFilesBar";
 import UplodaModal from "./UploadModal";
 import SearchField from "./SearchField";
 import Container from "@/shared/ui/components/Container";
+import TopFilesBarSkeleton from "./TopFilesBarSkeleton";
 
-const TopFilesBar: FC = memo(() => {
+const TopFilesBarComponent: FC = memo(() => {
 	const {
 		isUploading,
 		onCloseUploading,
@@ -36,5 +37,13 @@ const TopFilesBar: FC = memo(() => {
 		</>
 	);
 });
+
+type TopFilesBarType = typeof TopFilesBarComponent & {
+	Skeleton: typeof TopFilesBarSkeleton;
+};
+
+const TopFilesBar = TopFilesBarComponent as TopFilesBarType;
+
+TopFilesBar.Skeleton = TopFilesBarSkeleton;
 
 export default TopFilesBar;

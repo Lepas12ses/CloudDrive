@@ -27,11 +27,7 @@ const routes: RouteObject[] = [
 				children: [
 					{
 						index: true,
-						element: (
-							<Suspense fallback={<LoadingSpinner />}>
-								<Home />
-							</Suspense>
-						),
+						element: <Home />,
 					},
 					{
 						path: "profile/",
