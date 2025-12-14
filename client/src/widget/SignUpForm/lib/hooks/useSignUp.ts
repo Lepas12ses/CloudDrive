@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
-import type SignUpData from "@/page/SignUp/model/SignUpData";
 import { authActions } from "@/shared/lib/store/reducers/auth";
 import queryClient from "@/shared/api/queryClient";
 import type ValidationError from "@/shared/model/ValidationError";
@@ -12,6 +11,7 @@ import { useAppSelector } from "@/shared/lib/store/hooks/useAppSelector";
 import type AuthResponse from "@/shared/model/AuthResponse";
 import type ApiErrorResponse from "@/shared/model/ApiErrorResponse";
 import signUp from "../../api/signUp";
+import type SignUpData from "../../model/SignUpData";
 
 export default function useSignUp() {
 	const dispatch = useAppDispatch();
