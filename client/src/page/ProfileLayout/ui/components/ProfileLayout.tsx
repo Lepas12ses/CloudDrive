@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 const ProfileLayout: FC = () => {
 	return (
 		<div className='flex gap-3 justify-center pt-15'>
-			<Container className='rounded-md'>
+			<Container className='rounded-md h-fit'>
 				<menu className='flex flex-col gap-1'>
 					<NavigationLink to={""} end>
 						Личные данные
