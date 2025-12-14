@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
-import type SignInData from "@/page/SignIn/model/SignInData";
 import { authActions } from "@/shared/lib/store/reducers/auth";
 import type AuthResponse from "@/shared/model/AuthResponse";
 import type ApiErrorResponse from "@/shared/model/ApiErrorResponse";
@@ -12,6 +11,7 @@ import queryClient from "@/shared/api/queryClient";
 import useAppDispatch from "@/shared/lib/store/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/store/hooks/useAppSelector";
 import signIn from "../../api/signIn";
+import type SignInData from "../../model/SignInData";
 
 export default function useSignIn() {
 	const dispatch = useAppDispatch();
