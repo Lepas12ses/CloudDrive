@@ -4,8 +4,6 @@ export default function useBreakpoint(
 	left: number | null,
 	right: number | null
 ) {
-	const [isMatches, setIsMatches] = useState(false);
-
 	let query = "";
 
 	if (left !== null && right !== null) {
@@ -17,6 +15,10 @@ export default function useBreakpoint(
 	}
 
 	const mediaQuery = window.matchMedia(query);
+
+	const [isMatches, setIsMatches] = useState(
+		query ? mediaQuery.matches : false
+	);
 
 	useEffect(() => {
 		if (query) {
