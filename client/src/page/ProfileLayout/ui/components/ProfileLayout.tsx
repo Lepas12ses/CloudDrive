@@ -16,7 +16,7 @@ const ProfileLayout: FC = () => {
 					</NavigationLink>
 				</menu>
 			</Container>
-			<div className='min-w-100'>
+			<div className='w-full lg:max-w-150'>
 				<Outlet />
 			</div>
 		</div>

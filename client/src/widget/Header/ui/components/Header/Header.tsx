@@ -2,8 +2,8 @@ import type { FC } from "react";
 
 import Button from "@/shared/ui/components/Button";
 import useHeader from "../../../lib/hooks/useHeader";
-import NavigationLink from "@/shared/ui/components/NavigationLink";
 import classes from "./Header.module.scss";
+import Navigation from "../Navigation/Navigation";
 
 const Header: FC = () => {
 	const { onLogout } = useHeader();
@@ -11,12 +11,15 @@ const Header: FC = () => {
 	return (
 		<>
 			<header
-				className={`bg-stone-200 border-b border-b-stone-400 px-5 py-2 flex justify-between items-center ${classes.highlight}`}
+				className={`
+					sticky bg-stone-200 border-b 
+					border-b-stone-400 px-5 py-2 
+					flex justify-between items-center 
+					top-0 z-20
+					${classes.highlight}
+					`}
 			>
-				<nav className={`flex gap-3 `}>
-					<NavigationLink to='/'>Домашняя</NavigationLink>
-					<NavigationLink to='/profile'>Профиль</NavigationLink>
-				</nav>
+				<Navigation />
 
 				<nav>
 					<Button
