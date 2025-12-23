@@ -8,7 +8,6 @@ import useClickOutside from "@/shared/lib/hooks/useClickOutside";
 const Navigation: FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const isScreenSmall = useBreakpoint(null, 639);
-	console.log(isScreenSmall);
 
 	const handleBurgerClick = useCallback(() => {
 		setIsMenuOpen(prev => !prev);
