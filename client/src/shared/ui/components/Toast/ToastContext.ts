@@ -1,7 +1,10 @@
 import { createContext, type ReactNode } from "react";
 
+export type ToastType = "info" | "error" | "success";
+
 export interface ToastOptions {
 	dismissTime?: number;
+	type?: ToastType;
 }
 
 export interface IToastContext {

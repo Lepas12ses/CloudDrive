@@ -12,11 +12,13 @@ import {
 } from "./ToastContext";
 import { v4 } from "uuid";
 import ToastPortal from "./ToastPortal";
+import ToastContainer from "./ToastContainer";
 
 const ToastProvider: FC<PropsWithChildren> = ({ children }) => {
 	const [toasts, setToasts] = useState<
 		Array<{
 			id: string;
+			options?: ToastOptions;
 			component: ReactNode;
 		}>
 	>([]);
@@ -29,7 +31,7 @@ const ToastProvider: FC<PropsWithChildren> = ({ children }) => {
 		(component: ReactNode, options?: ToastOptions) => {
 			const id = v4();
 
-			setToasts(prev => [...prev, { id, component }]);
+			setToasts(prev => [...prev, { id, component, options }]);
 
 			if (options) {
 				if (options.dismissTime) {
@@ -50,7 +52,9 @@ const ToastProvider: FC<PropsWithChildren> = ({ children }) => {
 				<div className='fixed bottom-10 right-10 flex flex-col gap-1 z-10'>
 					{toasts.map(toast => (
 						// Change to toast container
-						<div key={toast.id}>{toast.component}</div>
+						<ToastContainer toastType={toast.options?.type} key={toast.id}>
+							{toast.component}
+						</ToastContainer>
 					))}
 				</div>
 			</ToastPortal>

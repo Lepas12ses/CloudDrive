@@ -1,10 +1,9 @@
-import type { FC } from "react";
+import { type FC } from "react";
 
 import useFilesDisplay from "../../lib/hooks/useFilesDisplay";
 import FileRow from "./FileRow";
 import FilesTableHeader from "./FilesTableHeader/FilesTableHeader";
 import Pages from "./Pages/Pages";
-import LoadingNotification from "./LoadingNotification";
 import Container from "@/shared/ui/components/Container";
 import FilesDisplaySkeleton from "./FilesDisplaySkeleton";
 
@@ -12,12 +11,6 @@ const FilesDisplayComponent: FC = () => {
 	const { fetching, deletion, downloading } = useFilesDisplay();
 	return (
 		<>
-			{deletion.isPending && (
-				<LoadingNotification>Удаляем файл</LoadingNotification>
-			)}
-			{downloading.isPending && (
-				<LoadingNotification>Загружаем файл</LoadingNotification>
-			)}
 			<Container variants={{ color: "light" }} className='rounded-md'>
 				<section>
 					<header>
