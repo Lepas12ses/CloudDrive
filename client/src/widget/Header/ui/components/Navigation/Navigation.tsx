@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState, type FC } from "react";
 
-import NavigationLink from "@/shared/ui/components/NavigationLink";
+import NavigationLink from "@/shared/ui/components/NavigationLink/NavigationLink";
 import classes from "./Navigation.module.scss";
 import useBreakpoint from "@/shared/lib/hooks/useBreakpoint";
 import useClickOutside from "@/shared/lib/hooks/useClickOutside";

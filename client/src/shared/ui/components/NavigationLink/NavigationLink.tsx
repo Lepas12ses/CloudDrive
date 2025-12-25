@@ -1,6 +1,8 @@
 import type { ComponentProps, FC } from "react";
 import { NavLink } from "react-router-dom";
 
+import classes from "./NavigationLink.module.scss";
+
 const NavigationLink: FC<ComponentProps<typeof NavLink>> = ({
 	children,
 	...props
@@ -9,7 +11,7 @@ const NavigationLink: FC<ComponentProps<typeof NavLink>> = ({
 		<NavLink
 			{...props}
 			className={({ isActive }) =>
-				`hover:opacity-70 ${isActive ? `underline` : ``}`
+				`${classes.link} ${isActive ? classes["link_active"] : ``}`
 			}
 		>
 			{children}

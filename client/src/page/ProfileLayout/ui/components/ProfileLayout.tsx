@@ -1,5 +1,5 @@
 import Container from "@/shared/ui/components/Container";
-import NavigationLink from "@/shared/ui/components/NavigationLink";
+import NavigationLink from "@/shared/ui/components/NavigationLink/NavigationLink";
 import type { FC } from "react";
 import { Outlet } from "react-router-dom";
 

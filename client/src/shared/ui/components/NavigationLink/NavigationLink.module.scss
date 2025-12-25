@@ -1,0 +1,16 @@
+.link {
+	font-weight: 300;
+	border-bottom: 1px solid transparent;
+
+	&_active {
+		border-bottom: 1px solid var(--primary);
+
+		pointer-events: none;
+	}
+
+	@media screen and (hover: hover) and (pointer: fine) {
+		&:hover {
+			opacity: 0.6;
+		}
+	}
+}
