@@ -2,7 +2,7 @@ import { memo, type FC } from "react";
 
 import Button from "@/shared/ui/components/Button";
 import useTopFilesBar from "../../lib/hooks/useTopFilesBar";
-import UplodaModal from "./UploadModal";
+import UplodaModal from "./UploadModal/UploadModal";
 import SearchField from "./SearchField";
 import Container from "@/shared/ui/components/Container";
 import TopFilesBarSkeleton from "./TopFilesBarSkeleton";

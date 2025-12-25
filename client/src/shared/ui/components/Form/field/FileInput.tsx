@@ -11,7 +11,8 @@ import useFieldContext from "./FieldContext";
 
 const fileInput = cva(
 	`block px-4 py-2 border-2 
-    border-dashed rounded-md text-(--text)`,
+    border-dashed rounded-md text-(--text)
+	cursor-pointer hover:border-(--primary) hover:bg-(--primary-accent)`,
 	{
 		variants: {
 			color: {
