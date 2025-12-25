@@ -10,8 +10,10 @@ const SortButton: FC<SortButtonProps> = ({
 	...props
 }) => {
 	const classes = `
-    w-full text-start hover:bg-(--bg-light)
-    py-1 px-2 text-nowrap ${isSelected ? "bg-(--bg-light)" : ""}
+    w-full text-start hover:bg-(--primary-light)
+    py-1 px-2 text-nowrap border-b-1
+	border-transparent transition-colors
+	 ${isSelected ? "border-b-(--primary)" : ""}
     `;
 
 	return (

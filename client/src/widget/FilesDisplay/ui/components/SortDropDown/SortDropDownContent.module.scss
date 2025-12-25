@@ -1,0 +1,15 @@
+.content {
+	position: absolute;
+	border-radius: 6px;
+	width: 100%;
+	min-width: fit-content;
+
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+	right: 0;
+
+	border: 1px solid var(--border);
+	backdrop-filter: blur(10px);
+	background: none;
+}

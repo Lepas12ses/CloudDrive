@@ -5,6 +5,7 @@ import Button from "@/shared/ui/components/Button";
 import Container from "@/shared/ui/components/Container";
 import { OPTIONAL_FILES_SEARCH_PARAMS_KEYS } from "@/shared/model/FilesSearchParams";
 import SortButton from "./SortButton";
+import classes from "./SortDropDownContent.module.scss";
 
 const SortDropDownContent: FC = () => {
 	const [sort, setSort] = useState<"name" | "date" | "size" | null>(null);
@@ -54,7 +55,7 @@ const SortDropDownContent: FC = () => {
 	}
 
 	return (
-		<Container className='absolute w-full min-w-fit flex flex-col gap-1 end-0'>
+		<Container variants={{ shadow: "m" }} className={`${classes.content}`}>
 			<div className='flex flex-col gap-0.5'>
 				<SortButton
 					isSelected={sort === "name"}
@@ -77,7 +78,7 @@ const SortDropDownContent: FC = () => {
 			</div>
 			{sort && (
 				<>
-					<hr className='border-(--bg-text)' />
+					<hr className='border-(--border)' />
 					<div className='flex flex-col gap-0.5'>
 						<SortButton
 							isSelected={order === "asc"}
