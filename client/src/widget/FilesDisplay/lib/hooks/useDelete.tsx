@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { useEffectEvent, useEffect } from "react";
+import { useEffectEvent, useEffect, useCallback } from "react";
 
 import queryClient from "@/shared/api/queryClient";
 import type { File } from "@/entity/File";
@@ -8,6 +8,26 @@ import LoadingSpinner from "@/shared/ui/components/LoadingSpinner/LoadingSpinner
 import useToast from "@/shared/lib/hooks/useToast";
 
 export default function useDelete(onFileDelete?: (file: File) => void) {
+	const toast = useToast();
+
+	const showDeleteSuccessToast = useCallback(() => {
+		toast.open(
+			<div className='flex gap-3 items-center'>
+				<p>Файл успешно удален</p>
+			</div>,
+			{ type: "success", dismissTime: 4000 }
+		);
+	}, [toast]);
+
+	const showErrorToast = useCallback(() => {
+		toast.open(
+			<div className='flex gap-3 items-center'>
+				<p>Не удалось удалить файл (</p>
+			</div>,
+			{ type: "error", dismissTime: 4000 }
+		);
+	}, [toast]);
+
 	const { isError, error, isPending, mutate } = useMutation(
 		{
 			mutationFn: (file: File) => deleteFile(file.id),
@@ -17,11 +37,14 @@ export default function useDelete(onFileDelete?: (file: File) => void) {
 				} else {
 					queryClient.invalidateQueries({ queryKey: ["files"] });
 				}
+				showDeleteSuccessToast();
+			},
+			onError() {
+				showErrorToast();
 			},
 		},
 		queryClient
 	);
-	const toast = useToast();
 
 	function proceed(file: File) {
 		mutate(file);
@@ -43,15 +66,6 @@ export default function useDelete(onFileDelete?: (file: File) => void) {
 		toast.close(id);
 	});
 
-	const showErrorToast = useEffectEvent(() => {
-		toast.open(
-			<div className='flex gap-3 items-center'>
-				<p>Не удалось удалить файл (</p>
-			</div>,
-			{ type: "error", dismissTime: 4000 }
-		);
-	});
-
 	useEffect(() => {
 		if (isPending) {
 			const id = showDeletingToast();
@@ -63,14 +77,6 @@ export default function useDelete(onFileDelete?: (file: File) => void) {
 		// TODO: Надо как-то подружить eslint с useEffectEvent
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isPending]);
-
-	useEffect(() => {
-		if (isError) {
-			showErrorToast();
-		}
-		// TODO: Надо как-то подружить eslint с useEffectEvent
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isError]);
 
 	return {
 		isError,
