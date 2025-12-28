@@ -21,11 +21,11 @@ class FileController {
 			const userId = parseInt(req.headers.userId as string);
 
 			const fileIdParam = req.query.fileId;
-			let fileId: number;
-			if (typeof fileIdParam === "string") fileId = parseInt(fileIdParam);
-			else {
-				next(ApiError.BadRequest("Неверный идентификатор файла"));
-			}
+
+			if (typeof fileIdParam !== "string")
+				return next(ApiError.BadRequest("Неверный идентификатор файла"));
+
+			const fileId = parseInt(fileIdParam);
 
 			const file = await fileService.downloadFile(fileId, userId);
 
@@ -39,11 +39,11 @@ class FileController {
 			const userId = parseInt(req.headers.userId as string);
 
 			const fileIdParam = req.query.fileId;
-			let fileId: number;
-			if (typeof fileIdParam === "string") fileId = parseInt(fileIdParam);
-			else {
+
+			if (typeof fileIdParam !== "string")
 				return next(ApiError.BadRequest("Неверный идентификатор файла"));
-			}
+
+			const fileId = parseInt(fileIdParam);
 
 			await fileService.removeFile(fileId, userId);
 
