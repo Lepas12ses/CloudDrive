@@ -67,7 +67,7 @@ class UserController {
 		try {
 			const { userId } = getHeadersData(req);
 
-			if (userId === undefined) next(ApiError.Unauthorized);
+			if (userId === undefined) return next(ApiError.Unauthorized);
 
 			const userProfile = await userService.profile(userId);
 
@@ -78,9 +78,9 @@ class UserController {
 	};
 	sessions: RequestHandler = async (req, res, next) => {
 		try {
-			const userId = parseInt(req.headers.userId as string);
+			const { userId } = getHeadersData(req);
 
-			if (userId === undefined) next(ApiError.Unauthorized);
+			if (userId === undefined) return next(ApiError.Unauthorized);
 
 			const sessions = await tokenService.getSessions(userId);
 

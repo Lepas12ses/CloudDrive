@@ -2,11 +2,15 @@ import { RequestHandler } from "express";
 import fileService from "#src/service/FilesService/FileService.js";
 import ApiError from "#src/exceptions/ApiError.js";
 import FilesSearchParams from "#src/service/FilesService/model/FilesSearchParams.js";
+import { getHeadersData } from "#src/shared/lib/helper/headersData.js";
 
 class FileController {
 	upload: RequestHandler = async (req, res, next) => {
 		try {
-			const userId = parseInt(req.headers.userId as string);
+			const { userId } = getHeadersData(req);
+
+			if (userId === undefined) return next(ApiError.Unauthorized());
+
 			const files = req.files as Express.Multer.File[];
 
 			const savedFiles = await fileService.saveFiles(userId, files);
@@ -18,7 +22,9 @@ class FileController {
 	};
 	downloadFile: RequestHandler = async (req, res, next) => {
 		try {
-			const userId = parseInt(req.headers.userId as string);
+			const { userId } = getHeadersData(req);
+
+			if (userId === undefined) return next(ApiError.Unauthorized());
 
 			const fileIdParam = req.query.fileId;
 
@@ -36,7 +42,9 @@ class FileController {
 	};
 	deleteFile: RequestHandler = async (req, res, next) => {
 		try {
-			const userId = parseInt(req.headers.userId as string);
+			const { userId } = getHeadersData(req);
+
+			if (userId === undefined) return next(ApiError.Unauthorized());
 
 			const fileIdParam = req.query.fileId;
 
@@ -64,7 +72,9 @@ class FileController {
 				order
 			);
 
-			const userId = parseInt(req.headers.userId as string);
+			const { userId } = getHeadersData(req);
+
+			if (userId === undefined) return next(ApiError.Unauthorized());
 
 			const files = await fileService.getFiles(userId, searchParams);
 

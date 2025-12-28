@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt";
 
-import UserDto from "../model/dto/UserDto.js";
 import ApiError from "../exceptions/ApiError.js";
 import User from "../model/schema/User.js";
 import tokenService from "./TokenService.js";
