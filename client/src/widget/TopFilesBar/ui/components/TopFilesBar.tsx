@@ -6,19 +6,20 @@ import UplodaModal from "./UploadModal/UploadModal";
 import SearchField from "./SearchField";
 import Container from "@/shared/ui/components/Container";
 import TopFilesBarSkeleton from "./TopFilesBarSkeleton";
+import useVisibility from "@/shared/lib/hooks/useVisibility";
 
 const TopFilesBarComponent: FC = memo(() => {
+	const { handleSearchChange, defaultSearch } = useTopFilesBar();
+
 	const {
-		isUploading,
-		onCloseUploading,
-		onOpenUpload,
-		handleSearchChange,
-		defaultSearch,
-	} = useTopFilesBar();
+		isVisible: isModalVisible,
+		show: showModal,
+		hide: hideModal,
+	} = useVisibility();
 
 	return (
 		<>
-			<UplodaModal open={isUploading} onClose={onCloseUploading} />
+			<UplodaModal open={isModalVisible} onClose={hideModal} />
 			<Container
 				variants={{ shadow: "s" }}
 				className='flex items-center justify-between gap-2 rounded-md'
@@ -30,7 +31,7 @@ const TopFilesBarComponent: FC = memo(() => {
 					defaultValue={defaultSearch}
 				/>
 
-				<Button onClick={onOpenUpload} className='rounded-full'>
+				<Button onClick={showModal} className='rounded-full'>
 					Загрузить
 				</Button>
 			</Container>
