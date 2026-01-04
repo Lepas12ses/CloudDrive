@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type FC } from "react";
+import { useCallback, useEffect, useRef, useState, type FC } from "react";
 
 import NavigationLink from "@/shared/ui/components/NavigationLink/NavigationLink";
 import classes from "./Navigation.module.scss";
@@ -8,6 +8,7 @@ import useClickOutside from "@/shared/lib/hooks/useClickOutside";
 const Navigation: FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const isScreenSmall = useBreakpoint(null, 639);
+	const menuRef = useRef<HTMLDivElement>(null);
 
 	const handleBurgerClick = useCallback(() => {
 		setIsMenuOpen(prev => !prev);
@@ -17,7 +18,7 @@ const Navigation: FC = () => {
 		setIsMenuOpen(false);
 	}, []);
 
-	const menuRef = useClickOutside<HTMLDivElement>(handleMenuClose);
+	useClickOutside(menuRef, handleMenuClose);
 
 	useEffect(() => {
 		if (!isScreenSmall) {
