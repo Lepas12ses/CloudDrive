@@ -1,10 +1,11 @@
-import { useCallback, useState, type FC } from "react";
+import { useCallback, useRef, useState, type FC } from "react";
 
 import HeaderButton from "../FilesTableHeader/HeaderButton";
 import SortDropDownContent from "./SortDropDownContent";
 import useClickOutside from "@/shared/lib/hooks/useClickOutside";
 
 const SortDropDown: FC = () => {
+	const dropdownRef = useRef<HTMLDivElement>(null);
 	const [isVisible, setIsVisible] = useState(false);
 
 	const handleClick = useCallback(() => {
@@ -15,11 +16,11 @@ const SortDropDown: FC = () => {
 		setIsVisible(false);
 	}, []);
 
-	const ref = useClickOutside<HTMLDivElement>(handleClose);
+	useClickOutside<HTMLDivElement>(dropdownRef, handleClose);
 
 	return (
 		<th>
-			<div ref={ref} className='relative'>
+			<div ref={dropdownRef} className='relative'>
 				<HeaderButton onClick={handleClick}>Сортировка</HeaderButton>
 				{isVisible && <SortDropDownContent />}
 			</div>

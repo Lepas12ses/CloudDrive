@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, type RefObject } from "react";
 import useMobile from "./useMobile";
 
-export default function useHover<T extends HTMLElement>() {
+export default function useHover<T extends HTMLElement>(
+	ref: RefObject<T | null>
+) {
 	const [isHover, setIsHover] = useState(false);
-	const ref = useRef<T>(null);
 	const isMobile = useMobile();
 
 	useEffect(() => {
@@ -28,10 +29,9 @@ export default function useHover<T extends HTMLElement>() {
 				item?.removeEventListener("mouseleave", onMouseLeave);
 			};
 		}
-	}, [isMobile]);
+	}, [isMobile, ref]);
 
 	return {
-		ref,
 		isHover,
 	};
 }

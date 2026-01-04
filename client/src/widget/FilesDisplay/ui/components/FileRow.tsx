@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { useRef, type FC } from "react";
 
 import type { File } from "@/entity/File";
 import convertFileSize from "@/shared/lib/helper/convertFileSize";
@@ -17,7 +17,8 @@ interface FileRowProps {
 
 const FileRow: FC<FileRowProps> = ({ file, onDownload, onDelete }) => {
 	const { image } = getFileImage(file);
-	const { ref: rowRef, isHover } = useHover<HTMLTableRowElement>();
+	const rowRef = useRef<HTMLTableRowElement>(null);
+	const { isHover } = useHover<HTMLTableRowElement>(rowRef);
 	const isMobile = useMobile();
 
 	return (
