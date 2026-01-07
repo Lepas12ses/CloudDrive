@@ -7,7 +7,7 @@ import useHover from "@/shared/lib/hooks/useHover";
 import trashIcon from "@/shared/assets/icons/trash.svg";
 import downloadIcon from "@/shared/assets/icons/download.svg";
 import useMobile from "@/shared/lib/hooks/useMobile";
-import getFileImage from "../../lib/helper/getFileImage";
+import FileImage from "./FileImage";
 
 interface FileRowProps {
 	file: File;
@@ -16,7 +16,6 @@ interface FileRowProps {
 }
 
 const FileRow: FC<FileRowProps> = ({ file, onDownload, onDelete }) => {
-	const { image } = getFileImage(file);
 	const rowRef = useRef<HTMLTableRowElement>(null);
 	const { isHover } = useHover<HTMLTableRowElement>(rowRef);
 	const isMobile = useMobile();
@@ -25,8 +24,8 @@ const FileRow: FC<FileRowProps> = ({ file, onDownload, onDelete }) => {
 		<>
 			<tr ref={rowRef} className='h-10 transition-colors hover:bg-(--bg-dark)'>
 				<td>
-					<div className='flex items-center gap-2 pointer-events-none pl-2'>
-						<img className='h-4' src={image.src} alt={image.alt} />
+					<div className='flex items-center gap-2 pointer-events-none pl-1'>
+						<FileImage fileName={file.name} />
 						<p>{file.name}</p>
 					</div>
 				</td>
