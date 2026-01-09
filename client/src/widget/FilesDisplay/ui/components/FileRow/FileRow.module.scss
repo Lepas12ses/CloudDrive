@@ -1,0 +1,28 @@
+.file-row-wrapper {
+	display: grid;
+	grid-template-columns: 2fr repeat(3, 1fr);
+
+	width: 100%;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	border: 1px solid transparent;
+
+	@media (width < 64rem) {
+		grid-template-columns: 2fr repeat(2, 1fr);
+	}
+
+	@media (width < 48rem) {
+		grid-template-columns: 2fr 1fr;
+	}
+
+	@media screen and (any-hover: hover) and (any-pointer: fine) {
+		&:hover {
+			background-color: var(--bg);
+		}
+	}
+}
+
+.row-skeleton {
+	height: 2rem;
+	border-radius: 6px;
+}

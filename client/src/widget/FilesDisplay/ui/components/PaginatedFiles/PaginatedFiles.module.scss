@@ -1,0 +1,16 @@
+.files-pages-wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	gap: 16px;
+}
+
+.files {
+	display: flex;
+	flex-direction: column;
+
+	&_skeleton {
+		gap: 0.25rem;
+	}
+}

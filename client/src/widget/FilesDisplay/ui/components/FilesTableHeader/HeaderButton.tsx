@@ -9,7 +9,9 @@ const HeaderButton: FC<HeaderButtonProps> = ({ children, onClick }) => {
 		<button
 			onClick={onClick}
 			className={`px-2 h-12 w-full flex justify-end
-						items-center rounded-md hover:bg-(--bg-dark) transition-colors`}
+						items-center rounded-md 
+						hover:bg-(--bg-dark) transition-colors
+						font-semibold`}
 		>
 			{children}
 		</button>

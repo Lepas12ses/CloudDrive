@@ -1,1 +1,1 @@
-export { default as FilesDisplay } from "./ui/components/FilesDisplay";
+export { default as FilesDisplay } from "./ui/components/FilesDisplay/FilesDisplay";

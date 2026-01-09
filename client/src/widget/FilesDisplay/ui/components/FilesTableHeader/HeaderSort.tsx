@@ -7,7 +7,7 @@ import {
 } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import arrowIcon from "@/shared/assets/icons/circle-arrow.svg";
+import Arrow from "@/shared/assets/icons/circle-arrow.svg?react";
 import { OPTIONAL_FILES_SEARCH_PARAMS_KEYS } from "@/shared/model/FilesSearchParams";
 
 interface HeaderSortProps extends PropsWithChildren {
@@ -68,30 +68,25 @@ const HeaderSort: FC<HeaderSortProps> = ({
 
 	switch (order) {
 		case "asc":
-			icon = <img src={arrowIcon} alt='Стрелочка направленная вверх' />;
+			icon = <Arrow />;
 			break;
 		case "desc":
-			icon = (
-				<img
-					className='rotate-180'
-					src={arrowIcon}
-					alt='Стрелочка направленная вниз'
-				/>
-			);
+			icon = <Arrow className='rotate-180' />;
 			break;
 	}
 
 	return (
-		<th className={className}>
-			<button
-				onClick={handleClick}
-				className={`px-2 h-12 w-full flex gap-1 
-							items-center rounded-md hover:bg-(--bg-dark) transition-colors`}
-			>
-				{children}
-				{icon}
-			</button>
-		</th>
+		<button
+			onClick={handleClick}
+			className={`flex gap-1 
+						items-center rounded-md 
+						hover:bg-(--bg-dark) transition-colors
+						font-semibold
+						${className}`}
+		>
+			{children}
+			{icon}
+		</button>
 	);
 };
 

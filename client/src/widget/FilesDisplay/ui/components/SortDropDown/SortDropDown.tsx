@@ -8,17 +8,15 @@ import useVisibility from "@/shared/lib/hooks/useVisibility";
 const SortDropDown: FC = () => {
 	const dropdownRef = useRef<HTMLDivElement>(null);
 
-	const { isVisible, show, hide } = useVisibility();
+	const { isVisible, hide, toggle } = useVisibility();
 
 	useClickOutside<HTMLDivElement>(dropdownRef, hide);
 
 	return (
-		<th>
-			<div ref={dropdownRef} className='relative'>
-				<HeaderButton onClick={show}>Сортировка</HeaderButton>
-				{isVisible && <SortDropDownContent />}
-			</div>
-		</th>
+		<div ref={dropdownRef} className='relative'>
+			<HeaderButton onClick={toggle}>Сортировка</HeaderButton>
+			{isVisible && <SortDropDownContent />}
+		</div>
 	);
 };
 

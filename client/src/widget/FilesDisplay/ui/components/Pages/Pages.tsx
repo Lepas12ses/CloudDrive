@@ -76,9 +76,10 @@ const PagesSkeleton: FC = () => {
 	);
 };
 
-const Pages = {
-	Component: PagesComponent,
-	Skeleton: PagesSkeleton,
+type PagesType = typeof PagesComponent & {
+	Skeleton: typeof PagesSkeleton;
 };
+const Pages = PagesComponent as PagesType;
+Pages.Skeleton = PagesSkeleton;
 
 export default Pages;
