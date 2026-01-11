@@ -1,5 +1,5 @@
 import type { AxiosError, AxiosRequestConfig } from "axios";
-import { useLayoutEffect } from "react";
+import { useCallback, useLayoutEffect, useRef } from "react";
 import axios from "axios";
 
 import instance from "@/shared/api/credentialsAxiosInstance";
@@ -7,29 +7,26 @@ import { authActions } from "@/shared/lib/store/reducers/auth";
 import useAppDispatch from "@/shared/lib/store/hooks/useAppDispatch";
 import checkAuth from "../../api/checkAuth";
 
-let isRefreshing = false;
-
 type OngoingRequest = {
 	resolve: (token: string) => void;
 	reject: () => void;
 };
 
-let ongoingRequestsQueue: OngoingRequest[] = [];
-
-const clearQueue = (token: string | null = null) => {
-	console.log(ongoingRequestsQueue);
-
-	if (token) {
-		ongoingRequestsQueue.forEach(promise => promise.resolve(token));
-	} else {
-		ongoingRequestsQueue.forEach(promise => promise.reject());
-	}
-
-	ongoingRequestsQueue = [];
-};
-
 export default function useRefreshInterceptor() {
 	const dispatch = useAppDispatch();
+
+	const isRefreshingRef = useRef(false);
+	const ongoingRequestsRef = useRef<OngoingRequest[]>([]);
+
+	const clearOngoingRequests = useCallback((token: string | null = null) => {
+		if (token) {
+			ongoingRequestsRef.current.forEach(promise => promise.resolve(token));
+		} else {
+			ongoingRequestsRef.current.forEach(promise => promise.reject());
+		}
+
+		ongoingRequestsRef.current = [];
+	}, []);
 
 	useLayoutEffect(() => {
 		const interceptor = instance.interceptors.response.use(
@@ -38,9 +35,9 @@ export default function useRefreshInterceptor() {
 				const originalRequest = err.config;
 
 				if (originalRequest && err.response?.status === 401) {
-					if (isRefreshing) {
+					if (isRefreshingRef.current) {
 						return new Promise<AxiosRequestConfig>((resolve, reject) => {
-							ongoingRequestsQueue.push({
+							ongoingRequestsRef.current.push({
 								resolve(token) {
 									originalRequest.headers.Authorization = `Bearer ${token}`;
 									resolve(axios.request(originalRequest));
@@ -51,22 +48,22 @@ export default function useRefreshInterceptor() {
 							});
 						});
 					} else {
-						isRefreshing = true;
+						isRefreshingRef.current = true;
 
 						try {
 							const response = await checkAuth();
 							dispatch(authActions.setToken(response.data.accessToken));
 							originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
 
-							clearQueue(response.data.accessToken);
+							clearOngoingRequests(response.data.accessToken);
 
 							return axios.request(originalRequest as AxiosRequestConfig);
 						} catch {
-							clearQueue();
+							clearOngoingRequests();
 
 							dispatch(authActions.setToken(null));
 						} finally {
-							isRefreshing = false;
+							isRefreshingRef.current = false;
 						}
 					}
 				}
@@ -76,7 +73,8 @@ export default function useRefreshInterceptor() {
 		);
 
 		return () => {
+			clearOngoingRequests();
 			instance.interceptors.response.eject(interceptor);
 		};
-	}, [dispatch]);
+	}, [clearOngoingRequests, dispatch]);
 }
