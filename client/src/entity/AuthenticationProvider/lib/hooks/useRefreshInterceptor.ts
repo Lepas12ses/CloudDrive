@@ -1,32 +1,18 @@
 import type { AxiosError, AxiosRequestConfig } from "axios";
-import { useCallback, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import axios from "axios";
 
 import instance from "@/shared/api/credentialsAxiosInstance";
 import { authActions } from "@/shared/lib/store/reducers/auth";
 import useAppDispatch from "@/shared/lib/store/hooks/useAppDispatch";
 import checkAuth from "../../api/checkAuth";
-
-type OngoingRequest = {
-	resolve: (token: string) => void;
-	reject: () => void;
-};
+import useOngoingRequests from "./useOngoingRequests";
 
 export default function useRefreshInterceptor() {
 	const dispatch = useAppDispatch();
 
 	const isRefreshingRef = useRef(false);
-	const ongoingRequestsRef = useRef<OngoingRequest[]>([]);
-
-	const clearOngoingRequests = useCallback((token: string | null = null) => {
-		if (token) {
-			ongoingRequestsRef.current.forEach(promise => promise.resolve(token));
-		} else {
-			ongoingRequestsRef.current.forEach(promise => promise.reject());
-		}
-
-		ongoingRequestsRef.current = [];
-	}, []);
+	const { clearOngoingRequests, addOngoingRequest } = useOngoingRequests();
 
 	useLayoutEffect(() => {
 		const interceptor = instance.interceptors.response.use(
@@ -37,7 +23,7 @@ export default function useRefreshInterceptor() {
 				if (originalRequest && err.response?.status === 401) {
 					if (isRefreshingRef.current) {
 						return new Promise<AxiosRequestConfig>((resolve, reject) => {
-							ongoingRequestsRef.current.push({
+							addOngoingRequest({
 								resolve(token) {
 									originalRequest.headers.Authorization = `Bearer ${token}`;
 									resolve(axios.request(originalRequest));
@@ -73,8 +59,7 @@ export default function useRefreshInterceptor() {
 		);
 
 		return () => {
-			clearOngoingRequests();
 			instance.interceptors.response.eject(interceptor);
 		};
-	}, [clearOngoingRequests, dispatch]);
+	}, [addOngoingRequest, clearOngoingRequests, dispatch]);
 }

@@ -22,7 +22,7 @@ const AuthenticationProvider: FC<AuthenticationProviderProps> = ({
 
 	if (isLoading) return fallback;
 
-	return <>{isLoading ? null : children}</>;
+	return children;
 };
 
 export default AuthenticationProvider;
