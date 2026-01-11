@@ -45,9 +45,8 @@ export default function useRefreshInterceptor() {
 
 							return axios.request(originalRequest as AxiosRequestConfig);
 						} catch {
-							clearOngoingRequests();
-
 							dispatch(authActions.setToken(null));
+							clearOngoingRequests();
 						} finally {
 							isRefreshingRef.current = false;
 						}
